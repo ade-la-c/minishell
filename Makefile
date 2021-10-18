@@ -6,7 +6,7 @@
 #    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/10/18 13:41:26 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/10/18 17:34:48 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC					= gcc
 
 RM					= rm -f
 
-CFLAGS				= -Wall -Werror -Wextra -I. #-g -fsanitize=address
+CFLAGS				= -Wall -Werror -Wextra -I. -g -fsanitize=address
 
 INC					= -I ${LIBFT} -I ${RDLINE}/include -I ./inc
 
