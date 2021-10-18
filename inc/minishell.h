@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/17 18:51:29 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:39:52 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@
 # include "../libft/libft.h"
 # include "./parsing.h"
 
-typedef struct t_toklst;
-
-typedef struct t_data;
+typedef struct s_toklst
+{
+	char			*content;
+	int				type;
+	struct s_toklst	*next;
+}	t_toklst;
 
 typedef struct s_data
 {
@@ -39,18 +42,13 @@ typedef struct s_data
 	char			**envp;
 }	t_data;
 
-typedef struct s_toklst
-{
-	char		*content;
-	int			type;
-	t_toklst	*next;
-}	t_toklst;
 
 //==========================UTILS==========================//
 
 t_toklst			*toklstnew(void *content, int type);
 void				toklstadd_back(t_toklst **toklst, t_toklst *new);
 void				exit_error(char *error);
+void				print_toklst(t_toklst *toklst);
 
 //=========================PARSING=========================//
 

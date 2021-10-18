@@ -6,13 +6,13 @@
 #    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/10/16 16:10:43 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/10/18 13:41:26 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				= minishell
 
-LIBFT				= ./inc/libft
+LIBFT				= ./libft
 
 RDLINE				= /Users/$(USER)/.brew/opt/readline
 

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/17 18:55:31 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/18 13:34:43 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_toklst	*toklstnew(void *content, int type)
 
 	ptr = (t_toklst *)malloc(sizeof(t_toklst));
 	if (!ptr)
-		return (NULL);
+		exit_error("malloc failed");
 	ptr->content = content;
 	ptr->type = type;
 	ptr->next = NULL;
@@ -44,4 +44,15 @@ void	exit_error(char *error)
 	ft_putstr(error);
 	ft_putchar('\n');
 	exit(0);
+}
+
+// provisoire
+
+void	print_toklst(t_toklst *toklst)
+{
+	while (toklst->next)
+	{
+		printf("%s\n", toklst->content);
+		toklst = toklst->next;
+	}
 }
