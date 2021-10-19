@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/18 17:52:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:50:20 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void	toklstadd_back(t_toklst **toklst, t_toklst *new)
 		*toklst = new;
 	else
 	{
-		while ((*toklst)->next)
+		while ((*toklst)->next != NULL)
+		{printf(".");
 			(*toklst) = (*toklst)->next;
+		}printf("\n");
 		(*toklst)->next = new;
 	}
 }
@@ -46,11 +48,13 @@ void	exit_error(char *error)
 
 // provisoire
 
-void	print_toklst(t_toklst *toklst)
+void	print_toklst(t_toklst *toklst, char *str)
 {
+	printf("{%s}", str);
 	while (toklst->next)
 	{
-		printf("%s\n", toklst->content);
+		printf("[%s]\n", toklst->content);
 		toklst = toklst->next;
 	}
+	printf("\n");
 }

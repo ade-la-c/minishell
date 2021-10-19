@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/18 17:02:39 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:45:02 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **envp)
 		if (!line)
 			exit_error("readline error");
 		add_history(line);
-		parsing(&data, line);
+		lexing(&data, line);
 		free(line);
 	}
 	free(line);

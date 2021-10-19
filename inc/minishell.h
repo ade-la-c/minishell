@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/18 17:44:08 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:45:31 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ struct s_toklst
 
 typedef struct s_data
 {
-	t_toklst		*toklst;
+	t_toklst		**toklst;
 	char			**envp;
 }	t_data;
 
@@ -50,10 +50,10 @@ typedef struct s_data
 t_toklst			*toklstnew(void *content, int type);
 void				toklstadd_back(t_toklst **toklst, t_toklst *new);
 void				exit_error(char *error);
-void				print_toklst(t_toklst *toklst);
+void				print_toklst(t_toklst *toklst, char *str);
 
 //=========================PARSING=========================//
 
-void				parsing(t_data *data, char *line);
+void				lexing(t_data *data, char *line);
 
 #endif
