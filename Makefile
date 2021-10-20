@@ -6,7 +6,7 @@
 #    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/10/19 20:35:52 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/10/20 18:52:15 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,10 @@ LIBFT				= ./libft
 
 RDLINE				= /Users/$(USER)/.brew/opt/readline
 
-SRCS				= srcs/main.c			\
-					srcs/utils/utils.c		\
-					srcs/parsing/lexing.c	\
+SRCS				= srcs/main.c				\
+					srcs/utils/utils.c			\
+					srcs/utils/toklst_utils.c	\
+					srcs/parsing/lexing.c		\
 
 OBJS				= $(SRCS:.c=.o)
 

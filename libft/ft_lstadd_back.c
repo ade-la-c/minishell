@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 17:30:44 by ade-la-c          #+#    #+#             */
-/*   Updated: 2020/12/22 16:26:52 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/20 13:22:50 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 	if (!(*alst))
 		*alst = new;
 	else
-		ft_lstlast(*alst)->next = new;
+	{
+		while ((*alst)->next)
+			alst = &(*alst)->next;
+		(*alst)->next = new;
+	}
 	return ;
 }

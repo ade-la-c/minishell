@@ -6,115 +6,92 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:56:04 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/19 20:51:44 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/20 19:46:56 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+static int	handle_more_less(t_toklst **tokel, char *line)
+{
+	if (line[0] && line[1] && line[0] == CHR_MORE
+		&& line[1] == CHR_MORE)
+	{
+		*tokel = toklstnew(ft_strdup(">>"), DMORE);
+		return (1);
+	}
+	else if (line[0] && line[0] == CHR_MORE)
+	{
+		*tokel = toklstnew(ft_strdup(">"), MORE);
+		return (0);
+	}
+	else if (line[0] && line[1] && line[0] == CHR_LESS
+		&& line[1] == CHR_LESS)
+	{
+		*tokel = toklstnew(ft_strdup("<<"), DLESS);
+		return (1);
+	}
+	else if (line[0] && line[0] == CHR_LESS)
+	{
+		*tokel = toklstnew(ft_strdup("<"), LESS);
+		return (0);
+	}
+	else
+		exit_error("handle more less");
+	return (0);
+}
+
+static int	handle_quotes(t_toklst **tokel, char *line, char c)
+{
+	int	i;
+	int	type;
+
+	i = 0;
+	if (c == CHR_DQUOTE)
+		type = DQUOTE_STR;
+	else
+		type = SQUOTE_STR;
+	while (line[i] && line[i] != c)
+		i++;
+	*tokel = toklstnew(ft_substr(line, 0, i), type);
+	return (i);
+}
+
+static int	handle_word(t_toklst **tokel, char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && !(is_esymbol(line[i])))
+		i++;
+	*tokel = toklstnew(ft_substr(line, 0, i), WORD);
+	return (i - 1);
+}
+
 void	lexing(t_data *data, char *line)
 {
-	t_toklst	*tokel;
-	t_toklst	**toklst;
 	int			i;
-	int			j;
+	t_toklst	*tokel;
 
-	toklst = malloc(sizeof(t_toklst *));
-	if (!toklst)
-		exit_error("malloc failed");
-	*toklst = NULL;
 	i = 0;
 	while (line && line[i])
 	{
-		j = 0;
-		if (line[i] == ' ')
+		if (line[i] == CHR_SPACE)
+			tokel = toklstnew(ft_strdup(" "), SPACE);
+		else if (line[i] == CHR_PIPE)
+			tokel = toklstnew(ft_strdup("|"), PIPE);
+		else if (line[i] == CHR_LESS || line[i] == CHR_MORE)
+			i += handle_more_less(&(tokel), &line[i]);
+		else if (line[i] == CHR_SQUOTE || line[i] == CHR_DQUOTE)
+		{
+			i += handle_quotes(&(tokel), &line[i + 1], line[i]);
 			i++;
-		while (line[i + j] && ft_isalnum(line[i + j]))
-			j++;
-		tokel = toklstnew(ft_substr(line, i, j), WORD);
-		if (!tokel)
-			exit_error("toklstnew crash");
-		toklstadd_back(toklst, tokel);
-		i += j;
+		}
+		else
+			i += handle_word(&(tokel), &line[i]);
+		toklstadd_back(&(data->toklst), tokel);
+		i++;
 	}
-		tokel = toklstnew(ft_substr(line, i, j), WORD);
-		if (!tokel)
-			exit_error("toklstnew crash");
-		toklstadd_back(toklst, tokel);
-	data->toklst = toklst;
-	print_toklst(*toklst, "printing");
 }
 
-// void	parsing(t_data *data, char *line)
-// {
-// 	int			i;
-// 	int			j;
-// 	t_toklst	*tokel;
-// 	t_toklst	**toklst;
-
-// 	i = 0;
-// 	j = 0;
-// 	toklst = malloc(sizeof(t_toklst *));
-// 	if (!toklst)
-// 		exit_error("malloc failed");
-// 	*toklst = NULL;
-// 	while (line && line[i])
-// 	{
-// 		j = 0;
-// 		if (ft_isalnum(line[i]) == 1)
-// 		{
-// 			while (ft_isalnum(line[i + j]))
-// 				j++;
-// 			tokel = toklstnew(ft_substr(line, i, j), WORD);
-// 			i += j;
-// 		}
-// 		else if (line[i] == CHR_SPACE)
-// 		{
-// 			tokel = toklstnew(ft_strdup(" "), SPACE);
-// 			i++;
-// 		}
-// 		else if (line[i] == CHR_DQUOTE)
-// 		{
-// 			i++;
-// 			while (line[i + j] && line[i + j] != CHR_DQUOTE)
-// 				j++;
-// 			tokel = toklstnew(ft_substr(line, i, j), DQUOTE_STR);
-// 			i += j;
-// 		}
-// 		else if (line[i] == CHR_SQUOTE)
-// 		{
-// 			i++;
-// 			while (line[i + j] && line[i + j] != CHR_SQUOTE)
-// 				j++;
-// 			tokel = toklstnew(ft_substr(line, i, j), SQUOTE_STR);
-// 			i += j;
-// 		}
-// 		else if (line[i] == CHR_LESS)
-// 		{
-// 			if (line && line[++i] == CHR_LESS)
-// 				tokel = toklstnew(ft_strdup("<<"), DLESS);
-// 			else
-// 				tokel = toklstnew(ft_strdup("<"), LESS);
-// 			i++;
-// 		}
-// 		else if (line[i] == CHR_MORE)
-// 		{
-// 			if (line && line[++i] == CHR_MORE)
-// 				tokel = toklstnew(ft_strdup(">>"), DMORE);
-// 			else
-// 				tokel = toklstnew(ft_strdup(">"), MORE);
-// 			i++;
-// 		}
-// 		else if (line[i] == CHR_PIPE)
-// 		{
-// 			tokel = toklstnew(ft_strdup("|"), PIPE);
-// 			i++;
-// 		}
-// 		else
-// 			exit_error("parsing");
-// 		printf("~ %s\n", tokel->content);
-// 		toklstadd_back(toklst, tokel);
-// 	}
-// 	data->toklst = *toklst;
-// 	print_toklst(data->toklst, "printing");
-// }
+	// print_toklst(data->toklst, "printing");
