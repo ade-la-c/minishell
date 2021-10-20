@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/20 20:57:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/20 20:58:50 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int ac, char **av, char **envp)
 	data_init(data);
 	while (1)
 	{
-		line = readline("petit_shellito> ");//printf("%s\n", line);
+		line = readline("petit_shellito> ");
 		if (!line || !ft_strcmp(line, "\n"))
 			exit_error("readline error");
 		add_history(line);
