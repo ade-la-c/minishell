@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/20 20:56:48 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/23 13:48:52 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,17 @@ struct s_toklst
 	t_toklst		*next;
 };
 
+typedef struct s_token
+{
+	char			*content;
+	int				type;
+}	t_token;
+
 typedef struct s_data
 {
 	t_toklst		*toklst;
+	t_token			*tokens;
+	int				toklen;
 	t_list			*envlst;
 	char			**envp;
 }	t_data;
@@ -60,5 +68,7 @@ void				print_toklst(t_toklst *toklst, char *str);
 //=========================PARSING=========================//
 
 void				lexing(t_data *data, char *line);
+void				parsing(t_data *data, char *line);
+void				print_tokens(t_data *data, t_token *tokens);
 
 #endif

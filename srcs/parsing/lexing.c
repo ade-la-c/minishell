@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:56:04 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/20 19:46:56 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/23 13:11:07 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ static int	handle_quotes(t_toklst **tokel, char *line, char c)
 		type = DQUOTE_STR;
 	else
 		type = SQUOTE_STR;
-	while (line[i] && line[i] != c)
+	while (line && line[i] && line[i] != c)
 		i++;
+	if (!line[i])
+		exit_error("quotes must be closed");
 	*tokel = toklstnew(ft_substr(line, 0, i), type);
 	return (i);
 }

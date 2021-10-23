@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/20 20:58:50 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/23 13:50:04 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ static void	get_envp(t_data *data, char **envp)
 		ft_lstadd_back(&(data->envlst), el);
 		i++;
 	}
-	print_lst(data->envlst, "envlst");
 }
+
+	// print_lst(data->envlst, "envlst");
 
 static void	data_init(t_data *data)
 {
@@ -61,6 +62,8 @@ void	ft_free(t_data *data)
 
 	i = 0;
 	toklstclear(&(data->toklst), free);
+	ft_lstclear(&(data->envlst), free);
+	free(data->tokens);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -68,9 +71,9 @@ int	main(int ac, char **av, char **envp)
 	char	*line;
 	t_data	*data;
 
-	(void)ac;
 	(void)av;
-	(void)envp;
+	if (ac != 1)
+		exit_error("Error : minishell takes no arguments");
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		exit_error("malloc error");
@@ -82,7 +85,7 @@ int	main(int ac, char **av, char **envp)
 			exit_error("readline error");
 		add_history(line);
 		get_envp(data, envp);
-		lexing(data, line);
+		parsing(data, line);
 		ft_free(data);
 	}
 	ft_free(data);

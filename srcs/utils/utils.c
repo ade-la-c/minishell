@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/20 20:43:42 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/23 13:48:39 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,19 @@ void	print_toklst(t_toklst *toklst, char *str)
 		toklst = toklst->next;
 	}
 	printf("[%s]", toklst->content);
+	printf("\n");
+}
+
+void	print_tokens(t_data *data, t_token *tokens)
+{
+	int	i = 0;
+	if (!tokens)
+		return ;
+	printf("printing : ");
+	while (i < data->toklen)
+	{
+		printf("[%s](%d)", tokens[i].content, tokens[i].type);
+		i++;
+	}
 	printf("\n");
 }
