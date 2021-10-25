@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 16:05:42 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/23 15:12:38 by ade-la-c         ###   ########.fr       */
+/*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
+/*   Updated: 2021/10/25 16:24:05 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,47 @@ t_token	*lsttotoken(t_data *data, t_toklst *toklst)
 		tokens[i].type = data->toklst->type;
 		data->toklst = data->toklst->next;
 	}
+	toklstclear(&(data->toklst), free);
 	return (tokens);
 }
 
-void	parsing(t_data *data, char *line)
+static void	wordexpansion(t_data *data)
 {
-	int		i;
-	t_token	*newtokens;
+	t_toklst	*tmptok;
+	t_list		*tmplist;
+	char		**strs;
+	int			i;
+
+	tmptok = data->toklst;
+	tmplist = data->envlst;
+	i = 0;
+	while (data->toklst->next)
+	{
+		if (data->toklst->type == WORD || data->toklst->type == DQUOTE_STR)
+		{
+			while (data->envlst->next)
+			{
+				strs = (char **)data->envlst->content;
+				if (!ft_strncmp(strs[0], (ft_strchr(data->toklst->content, '$') + 1), ft_strlen(strs[0])))
+					printf("Success\n");
+				data->envlst = data->envlst->next;
+			}
+		}
+		data->toklst = data->toklst->next;
+	}
+	data->toklst = tmptok;
+	data->envlst = tmplist;
+}
+
+void	parsing(t_data *d, char *line)
+{
+	int			i;
+	int			j;
+	// t_toklst	*tokel;
 
 	i = 0;
-	lexing(data, line);
-	data->tokens = lsttotoken(data, data->toklst);
-	while (data->tokens && data->tokens[i])
-	{
-		if (data->tokens[i].type == SPACE)
-			i++;
-	}
+	j = 0;
+	lexing(d, line);
+	wordexpansion(d);
+	d->toks = lsttotoken(d, d->toklst);
 }

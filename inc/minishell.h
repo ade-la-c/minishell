@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/23 13:48:52 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/25 11:28:06 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_token
 typedef struct s_data
 {
 	t_toklst		*toklst;
-	t_token			*tokens;
+	t_token			*toks;
 	int				toklen;
 	t_list			*envlst;
 	char			**envp;

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/23 13:50:04 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/25 13:07:14 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_free(t_data *data)
 	i = 0;
 	toklstclear(&(data->toklst), free);
 	ft_lstclear(&(data->envlst), free);
-	free(data->tokens);
+	free(data->toks);
 }
 
 int	main(int ac, char **av, char **envp)
