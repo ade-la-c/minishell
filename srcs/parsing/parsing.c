@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/25 16:24:05 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/27 12:21:01 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ t_token	*lsttotoken(t_data *data, t_toklst *toklst)
 	return (tokens);
 }
 
+static void	expandword(t_data *data, char **content)
+{
+	int	i;
+	
+}
+
 static void	wordexpansion(t_data *data)
 {
 	t_toklst	*tmptok;
@@ -49,19 +55,22 @@ static void	wordexpansion(t_data *data)
 	tmptok = data->toklst;
 	tmplist = data->envlst;
 	i = 0;
-	while (data->toklst->next)
+	if (!(data->toklst))
+		return ;
+	while (i < data->toklen)
 	{
 		if (data->toklst->type == WORD || data->toklst->type == DQUOTE_STR)
 		{
-			while (data->envlst->next)
-			{
-				strs = (char **)data->envlst->content;
-				if (!ft_strncmp(strs[0], (ft_strchr(data->toklst->content, '$') + 1), ft_strlen(strs[0])))
-					printf("Success\n");
-				data->envlst = data->envlst->next;
-			}
+			expandword(data, &(data->toklst->content));
+			// while (data->envlst->next)
+			// {
+			// 	strs = (char **)data->envlst->content;printf("~ %s - %s\n", ft_strchr(data->toklst->content, '$') + 1, strs[0]);
+			// 	if (!ft_strncmp(strs[0], (ft_strchr(data->toklst->content, '$') + 1), ft_strlen(strs[0])))
+			// 		printf("Success\n");
+			// 	data->envlst = data->envlst->next;
+			// }
 		}
-		data->toklst = data->toklst->next;
+		i++;
 	}
 	data->toklst = tmptok;
 	data->envlst = tmplist;
