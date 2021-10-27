@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/27 12:21:01 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/27 19:25:22 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,41 +39,160 @@ t_token	*lsttotoken(t_data *data, t_toklst *toklst)
 	return (tokens);
 }
 
-static void	expandword(t_data *data, char **content)
+/*
+
+static char	*writeexpansion(char *content, int size, char **strs)
 {
-	int	i;
-	
+	char	*newcontent;
+	int		i;
+	int		j;
+
+	newcontent = malloc(sizeof(char) * size);
+	if (!newcontent)
+		exit_error("malloc failed");
+	i = 0;
+	j = 0;
+	while (content[i] && content[i] != '$')
+		newcontent[j++] = content[i++];
+	i += ft_strlen(strs[0]) + 1;
+	while (*strs[1])
+		newcontent[j++] = *strs[1]++;
+	while (content[i])
+		newcontent[j++] = content[i++];
+				printf("%s\n", newcontent);
+	return (newcontent);
+}
+
+static int	expandword(char **content, int pos, t_list *envlst)
+{
+	int		len;
+	int		i;
+	char	**strs;
+	char	*newcontent;
+
+	len = ft_lstsize(envlst);
+	i = -1;
+	while (++i < len)
+	{
+		strs = (char **)envlst->content;
+		if (!ft_strncmp(content[pos], strs[0], ft_strlen(strs[0])))
+		{
+			newcontent = writeexpansion(*content, (ft_strlen(*content)
+			- ft_strlen(strs[0]) + ft_strlen(strs[1])), strs);
+			return (ft_strlen(strs[1]));
+		}
+		envlst = envlst->next;
+	}
+	return (1);
 }
 
 static void	wordexpansion(t_data *data)
 {
 	t_toklst	*tmptok;
-	t_list		*tmplist;
-	char		**strs;
 	int			i;
+	int			j;
 
 	tmptok = data->toklst;
-	tmplist = data->envlst;
 	i = 0;
 	if (!(data->toklst))
 		return ;
 	while (i < data->toklen)
 	{
+		j = 0;
 		if (data->toklst->type == WORD || data->toklst->type == DQUOTE_STR)
 		{
-			expandword(data, &(data->toklst->content));
-			// while (data->envlst->next)
-			// {
-			// 	strs = (char **)data->envlst->content;printf("~ %s - %s\n", ft_strchr(data->toklst->content, '$') + 1, strs[0]);
-			// 	if (!ft_strncmp(strs[0], (ft_strchr(data->toklst->content, '$') + 1), ft_strlen(strs[0])))
-			// 		printf("Success\n");
-			// 	data->envlst = data->envlst->next;
-			// }
+			while (data->toklst->content[j])
+			{
+				if (data->toklst->content[j] == '$')
+					j += expandword(&(data->toklst->content), j, data->envlst);
+				else
+					j++;
+			}
 		}
 		i++;
 	}
 	data->toklst = tmptok;
-	data->envlst = tmplist;
+}
+
+// */
+
+static char	*writeexpansion(char *str, char *expanded, int start, int end)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	i = -1;
+	new = malloc(sizeof(char) *
+	(ft_strlen(str) - (end - start) + ft_strlen(expanded) + 1));
+	if (!new)
+		exit_error("malloc failed");
+	while (++i < start)
+		new[i] = str[i];
+	j = 0;
+	while (j < (int)ft_strlen(expanded))
+		new[i++] = str[j++];
+	j = end;
+	while (str[j])
+		new[i++] = str[j++];
+		free(str);
+	return (new);
+}
+
+static int	expandword(t_toklst **toklst, t_list *envlst, int dollarpos)
+{
+	int		i;
+	int		envlen;
+	char	**strs;
+	char	*token;
+	char	*new;
+
+	i = -1;
+	envlen = ft_lstsize(envlst);
+	token = (*toklst)->content;
+	while (++i < envlen)
+	{
+		strs = (char **)envlst->content;
+		printf("~ %s ~\n", strs[0]);
+		if (!ft_strncmp(&token[dollarpos + 1], strs[0], ft_strlen(strs[0])))
+		{
+			printf("succes\n");			//!code to fix, printfs to move
+			new = writeexpansion(token, strs[1], dollarpos,
+			dollarpos + ft_strlen(strs[0]));
+			free(token);
+			(*toklst)->content = new;
+			return (ft_strlen(envlst->content));
+		}
+		envlst = envlst->next;
+	}
+	return (0);
+}
+
+static void	wordexpansion(t_data *data)
+{
+	t_toklst	*tmptok;
+	int			i;
+	int			j;
+
+	if (!(data->toklst))
+		return ;
+	tmptok = data->toklst;
+	i = 1;
+	while (i < data->toklen)
+	{
+		if (data->toklst->type == WORD || data->toklst->type == DQUOTE_STR)
+		{
+			j = 0;
+			while (data->toklst->content[++j])
+				if (data->toklst->content[j] == '$')
+				{
+					j += expandword(&(data->toklst), data->envlst, j + 1);
+				}
+		}
+		data->toklst = data->toklst->next;
+		i++;
+	}
+	data->toklst = tmptok;
 }
 
 void	parsing(t_data *d, char *line)
@@ -86,5 +205,6 @@ void	parsing(t_data *d, char *line)
 	j = 0;
 	lexing(d, line);
 	wordexpansion(d);
+	print_toklst(d->toklst, "printing ou quoi");
 	d->toks = lsttotoken(d, d->toklst);
 }
