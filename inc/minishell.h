@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/25 11:28:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/30 15:29:55 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@
 # include "../libft/libft.h"
 # include "./parsing.h"
 
-typedef struct s_toklst	t_toklst;
+// typedef struct s_toklst	t_toklst;
 
-struct s_toklst
-{
-	char			*content;
-	int				type;
-	t_toklst		*next;
-};
+// struct s_toklst
+// {
+// 	char			*content;
+// 	int				type;
+// 	t_toklst		*next;
+// };
 
 typedef struct s_token
 {
@@ -46,7 +46,7 @@ typedef struct s_token
 
 typedef struct s_data
 {
-	t_toklst		*toklst;
+	t_list			*toklst;
 	t_token			*toks;
 	int				toklen;
 	t_list			*envlst;
@@ -55,15 +55,15 @@ typedef struct s_data
 
 //==========================UTILS==========================//
 
-t_toklst			*toklstnew(void *content, int type);
-void				toklstadd_back(t_toklst **toklst, t_toklst *new);
-void				toklstclear(t_toklst **toklst, void (*del)(void *));
-void				toklstdelone(t_toklst *toklst, void (*del)(void *));
+// t_toklst			*toklstnew(void *content, int type);
+// void				toklstadd_back(t_toklst **toklst, t_toklst *new);
+// void				toklstclear(t_toklst **toklst, void (*del)(void *));
+// void				toklstdelone(t_toklst *toklst, void (*del)(void *));
 void				exit_error(char *error);
 int					is_esymbol(char c);
 
 void				print_lst(t_list *lst, char *str);
-void				print_toklst(t_toklst *toklst, char *str);
+void				print_toklst(t_list *toklst, char *str);
 
 //=========================PARSING=========================//
 
