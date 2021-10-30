@@ -6,7 +6,7 @@
 #    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/10/23 12:01:29 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/10/30 18:17:06 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS				= srcs/main.c				\
 					srcs/utils/toklst_utils.c	\
 					srcs/parsing/parsing.c		\
 					srcs/parsing/lexing.c		\
+					srcs/parsing/expansion.c	\
 
 OBJS				= $(SRCS:.c=.o)
 

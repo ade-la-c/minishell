@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/30 15:29:55 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/30 17:44:09 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ typedef struct s_data
 
 //==========================UTILS==========================//
 
-// t_toklst			*toklstnew(void *content, int type);
-// void				toklstadd_back(t_toklst **toklst, t_toklst *new);
-// void				toklstclear(t_toklst **toklst, void (*del)(void *));
-// void				toklstdelone(t_toklst *toklst, void (*del)(void *));
 void				exit_error(char *error);
 int					is_esymbol(char c);
 
@@ -68,6 +64,7 @@ void				print_toklst(t_list *toklst, char *str);
 //=========================PARSING=========================//
 
 void				lexing(t_data *data, char *line);
+void				wordexpansion(t_data *data);
 void				parsing(t_data *data, char *line);
 void				print_tokens(t_data *data, t_token *tokens);
 
