@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/27 19:25:22 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/10/30 15:25:43 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,19 +123,19 @@ static char	*writeexpansion(char *str, char *expanded, int start, int end)
 	char	*new;
 
 	i = -1;
-	new = malloc(sizeof(char) *
-	(ft_strlen(str) - (end - start) + ft_strlen(expanded) + 1));
+	new = ft_calloc(sizeof(char),
+	((int)ft_strlen(str) - (end - start) + (int)ft_strlen(expanded) + 1));
 	if (!new)
 		exit_error("malloc failed");
 	while (++i < start)
 		new[i] = str[i];
 	j = 0;
 	while (j < (int)ft_strlen(expanded))
-		new[i++] = str[j++];
+		new[i++] = expanded[j++];
 	j = end;
 	while (str[j])
 		new[i++] = str[j++];
-		free(str);
+	free(str);
 	return (new);
 }
 
@@ -158,10 +158,9 @@ static int	expandword(t_toklst **toklst, t_list *envlst, int dollarpos)
 		{
 			printf("succes\n");			//!code to fix, printfs to move
 			new = writeexpansion(token, strs[1], dollarpos,
-			dollarpos + ft_strlen(strs[0]));
-			free(token);
+			dollarpos + (int)ft_strlen(strs[0]));
 			(*toklst)->content = new;
-			return (ft_strlen(envlst->content));
+			return ((int)ft_strlen(strs[1]));
 		}
 		envlst = envlst->next;
 	}
@@ -177,16 +176,16 @@ static void	wordexpansion(t_data *data)
 	if (!(data->toklst))
 		return ;
 	tmptok = data->toklst;
-	i = 1;
-	while (i < data->toklen)
+	i = 0;
+	while (i < data->toklen && data->toklst)
 	{
 		if (data->toklst->type == WORD || data->toklst->type == DQUOTE_STR)
 		{
-			j = 0;
-			while (data->toklst->content[++j])
+			j = -1;
+			while (++j < (int)ft_strlen(data->toklst->content))
 				if (data->toklst->content[j] == '$')
 				{
-					j += expandword(&(data->toklst), data->envlst, j + 1);
+					j += expandword(&(data->toklst), data->envlst, j);
 				}
 		}
 		data->toklst = data->toklst->next;
