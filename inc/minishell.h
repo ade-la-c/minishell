@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/01 14:14:52 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/01 20:08:36 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@
 # include "../libft/libft.h"
 # include "./parsing.h"
 
-// typedef struct s_toklst	t_toklst;
-
-// struct s_toklst
-// {
-// 	char			*content;
-// 	int				type;
-// 	t_toklst		*next;
-// };
-
 typedef struct s_token
 {
 	char			*content;
@@ -58,9 +49,12 @@ typedef struct s_data
 void				exit_error(char *error);
 int					is_esymbol(char c);
 int					is_number(char *str, int n);
+t_list				*new_token(char *content, int type);
+void				ft_removeelement(t_list **list, int type);
 
 void				print_lst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);
+void				print_tokens(t_data *data, t_token *tokens);
 
 //=========================PARSING=========================//
 

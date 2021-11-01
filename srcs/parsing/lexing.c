@@ -6,25 +6,11 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:31:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/01 14:30:22 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/01 17:03:29 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-static t_list	*new_token(char *content, int type)
-{
-	t_token	*token;
-	t_list	*el;
-
-	token = ft_calloc(sizeof(t_token), 1);
-	if (!token)
-		exit_error("malloc failed");
-	token->content = content;
-	token->type = type;
-	el = ft_lstnew((void *)token);
-	return (el);
-}
 
 static int	handle_more_less(t_list **el, char *line)
 {

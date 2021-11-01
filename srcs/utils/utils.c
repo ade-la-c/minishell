@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/01 14:32:58 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/01 20:13:55 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,53 @@ int		is_number(char *str, int n)
 	return (1);
 }
 
+t_list	*new_token(char *content, int type)
+{
+	t_token	*token;
+	t_list	*el;
+
+	token = ft_calloc(sizeof(t_token), 1);
+	if (!token)
+		exit_error("malloc failed");
+	token->content = content;
+	token->type = type;
+	el = ft_lstnew((void *)token);
+	return (el);
+}
+
 int	is_esymbol(char c)
 {
 	if (c == CHR_SPACE || c == CHR_PIPE || c == CHR_SQUOTE
 		|| c == CHR_DQUOTE || c == CHR_LESS || c == CHR_MORE)
 		return (1);
 	return (0);
+}
+
+void	ft_removeelement(t_list **list, int type)
+{
+	t_list	*temp;
+	t_list	*prev;
+	t_token	*token;
+
+	temp = *list;
+	prev = NULL;
+	token = (t_token *)temp->content;
+	if (temp != NULL && token->type == type)
+	{
+		*list = temp->next;
+		// free(temp);
+		return ;
+	}
+	while (temp != NULL && token->type != type)
+	{
+		token = (t_token *)temp->content;
+		prev = temp;
+		temp = temp->next;
+	}
+	if (!temp)
+		return ;
+	prev->next = temp->next;
+	// free(temp);
 }
 
 // provisoire
@@ -65,7 +106,7 @@ void	print_toklst(t_list *toklst, char *str)
 	if (!toklst)
 		return ;
 	printf("{%s", str);
-	while (toklst->next)
+	while (toklst && toklst->next)
 	{
 		token = (t_token *)toklst->content;
 		printf("[%s]", token->content);
