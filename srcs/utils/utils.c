@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/30 16:26:34 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/01 14:32:58 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ void	exit_error(char *error)
 	ft_putstr(error);
 	ft_putchar('\n');
 	exit(0);
+}
+
+int		is_number(char *str, int n)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i] && i < n)
+		if (!ft_isdigit(str[i]))
+			return (0);
+	return (1);
 }
 
 int	is_esymbol(char c)
@@ -53,7 +64,7 @@ void	print_toklst(t_list *toklst, char *str)
 	t_token		*token;
 	if (!toklst)
 		return ;
-	printf("{%s}", str);
+	printf("{%s", str);
 	while (toklst->next)
 	{
 		token = (t_token *)toklst->content;
@@ -62,7 +73,7 @@ void	print_toklst(t_list *toklst, char *str)
 	}
 	token = (t_token *)toklst->content;
 	printf("[%s]", token->content);
-	printf("\n");
+	printf("}\n");
 }
 
 void	print_tokens(t_data *data, t_token *tokens)

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:31:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/30 16:40:55 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/01 14:30:22 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ static int	handle_more_less(t_list **el, char *line)
 		*el = new_token(ft_strdup("<"), LESS);
 		return (0);
 	}
-	else
-		exit_error("handle more less");
 	return (0);
 }
 
@@ -70,7 +68,7 @@ static int	handle_quotes(t_list **el, char *line, char c)
 	if (!line[i])
 		exit_error("quotes must be closed");
 	*el = new_token(ft_substr(line, 0, i), type);
-	return (i);
+	return (i + 1);
 }
 
 static int	handle_word(t_list **el, char *line)
@@ -99,10 +97,7 @@ void	lexing(t_data *data, char *line)
 		else if (line[i] == CHR_LESS || line[i] == CHR_MORE)
 			i += handle_more_less(&(el), &line[i]);
 		else if (line[i] == CHR_SQUOTE || line[i] == CHR_DQUOTE)
-		{
 			i += handle_quotes(&(el), &line[i + 1], line[i]);
-			i++;
-		}
 		else
 			i += handle_word(&(el), &line[i]);
 		ft_lstadd_back(&(data->toklst), el);

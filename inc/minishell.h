@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/30 17:44:09 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/01 14:14:52 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_data
 
 void				exit_error(char *error);
 int					is_esymbol(char c);
+int					is_number(char *str, int n);
 
 void				print_lst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);

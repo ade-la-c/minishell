@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 17:26:22 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/18 13:31:27 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/01 14:32:03 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define SPACE		16
 # define DQUOTE_STR	17
 # define SQUOTE_STR	18
-# define IO_NUMBER	19
 
 enum e_symbols
 {
