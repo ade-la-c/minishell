@@ -1,0 +1,8 @@
+RESTE A FAIRE DANS LE PARSING :
+
+->	fix "$" qui doit se display, "$USERr" qui doit rien display,
+	et "$USER e" (ou ' ' peut etre tout sauf alpha num & '_')
+
+->	scinder strings & words
+
+->	supprimer spaces

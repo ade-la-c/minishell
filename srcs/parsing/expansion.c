@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/02 19:11:42 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:33:33 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	expandword(t_token **token, t_list *envlst, int dollarpos)
 			return ((int)ft_strlen(strs[1]));
 		}
 		envlst = envlst->next;
-	}printf("~ %d %d\n", dollarpos, nextdollar);
+	}//printf("~ %d %d\n", dollarpos, nextdollar);
 	tok = writeexpansion(tok, "", dollarpos,
 	nextdollar - 1);
 	(*token)->content = tok;
