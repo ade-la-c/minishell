@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:31:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/01 17:03:29 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/02 12:47:06 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,11 @@ void	lexing(t_data *data, char *line)
 	while (line && line[i])
 	{
 		if (line[i] == CHR_SPACE)
+		{
+			while (line[i + 1] == CHR_SPACE)
+				i++;
 			el = new_token(ft_strdup(" "), SPACE);
+		}
 		else if (line[i] == CHR_PIPE)
 			el = new_token(ft_strdup("|"), SPACE);
 		else if (line[i] == CHR_LESS || line[i] == CHR_MORE)

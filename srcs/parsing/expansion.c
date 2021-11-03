@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/30 17:43:34 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/02 19:11:42 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*writeexpansion(char *str, char *expanded, int start, int end)
 
 	i = -1;
 	new = ft_calloc(sizeof(char),
-			(ft_strlen(str) - (end - start) + ft_strlen(expanded) + 1));
+			(ft_strlen(str) - (end - start) + ft_strlen(expanded)));
 	if (!new)
 		exit_error("malloc failed");
 	while (++i < start)
@@ -38,27 +38,34 @@ static char	*writeexpansion(char *str, char *expanded, int start, int end)
 static int	expandword(t_token **token, t_list *envlst, int dollarpos)
 {
 	int		i;
+	int		nextdollar;
 	int		envlen;
 	char	**strs;
 	char	*tok;
-	char	*new;
 
 	i = -1;
+	nextdollar = 1;
 	envlen = ft_lstsize(envlst);
 	tok = (*token)->content;
+	while (tok[dollarpos + nextdollar] && tok[dollarpos + nextdollar] != '$')
+		nextdollar++;
+	nextdollar += dollarpos;
 	while (++i < envlen)
 	{
 		strs = (char **)envlst->content;
 		if (!ft_strncmp(&tok[dollarpos + 1], strs[0], ft_strlen(strs[0])))
 		{
-			new = writeexpansion(tok, strs[1], dollarpos,
+			tok = writeexpansion(tok, strs[1], dollarpos,
 					dollarpos + (int)ft_strlen(strs[0]));
-			(*token)->content = new;
+			(*token)->content = tok;
 			return ((int)ft_strlen(strs[1]));
 		}
 		envlst = envlst->next;
-	}
-	return (1);
+	}printf("~ %d %d\n", dollarpos, nextdollar);
+	tok = writeexpansion(tok, "", dollarpos,
+	nextdollar - 1);
+	(*token)->content = tok;
+	return (0);
 }
 
 void	wordexpansion(t_data *data)

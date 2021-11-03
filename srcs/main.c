@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/10/30 16:51:14 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/02 12:46:19 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_free(t_data *data)
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
+	char	*tmp;
 	t_data	*data;
 
 	(void)av;
@@ -80,10 +81,12 @@ int	main(int ac, char **av, char **envp)
 	data_init(data);
 	while (1)
 	{
-		line = readline("petit_shellito> ");
-		if (!line || !ft_strcmp(line, "\n"))
+		tmp = readline("petit_shellito> ");
+		if (!tmp || !ft_strcmp(tmp, "\n"))
 			exit_error("readline error");
-		add_history(line);
+		add_history(tmp);
+		line = ft_strtrim(tmp, " ");
+		free(tmp);
 		get_envp(data, envp);
 		parsing(data, line);
 		ft_free(data);
