@@ -6,13 +6,13 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/02 12:46:19 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/04 15:38:15 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-static char	**get_env(char *env)
+static char	**getenvp2(char *env)
 {
 	char	**strs;
 	int		i;
@@ -30,7 +30,7 @@ static char	**get_env(char *env)
 	return (strs);
 }
 
-static void	get_envp(t_data *data, char **envp)
+static void	getenvp(t_data *data, char **envp)
 {
 	int		i;
 	char	**env;
@@ -39,13 +39,14 @@ static void	get_envp(t_data *data, char **envp)
 	i = 0;
 	while (envp && envp[i])
 	{
-		env = get_env(envp[i]);
+		env = getenvp2(envp[i]);
 		el = ft_lstnew(env);
 		if (!el)
 			exit_error("get_envp");
 		ft_lstadd_back(&(data->envlst), el);
 		i++;
 	}
+	data->envlen = ft_lstsize(data->envlst);
 }
 
 	// print_lst(data->envlst, "envlst");
@@ -87,7 +88,7 @@ int	main(int ac, char **av, char **envp)
 		add_history(tmp);
 		line = ft_strtrim(tmp, " ");
 		free(tmp);
-		get_envp(data, envp);
+		getenvp(data, envp);
 		parsing(data, line);
 		ft_free(data);
 	}

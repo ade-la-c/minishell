@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/01 20:08:36 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/04 15:39:05 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	t_token			*toks;
 	int				toklen;
 	t_list			*envlst;
+	int				envlen;
 	char			**envp;
 }	t_data;
 
@@ -51,6 +52,7 @@ int					is_esymbol(char c);
 int					is_number(char *str, int n);
 t_list				*new_token(char *content, int type);
 void				ft_removeelement(t_list **list, int type);
+char				**get_env(t_list *envlst, char *str, int len);
 
 void				print_lst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);

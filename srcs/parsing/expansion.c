@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/03 15:33:33 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/04 18:40:08 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,41 @@ static char	*writeexpansion(char *str, char *expanded, int start, int end)
 		exit_error("malloc failed");
 	while (++i < start)
 		new[i] = str[i];
-	j = 0;
+	j = 0;printf("expanded : %s\n", expanded);
 	while (j < (int)ft_strlen(expanded))
 		new[i++] = expanded[j++];
-	j = end + 1;
+	j = end;
 	while (str[j])
 		new[i++] = str[j++];
 	free(str);
 	return (new);
 }
 
-static int	expandword(t_token **token, t_list *envlst, int dollarpos)
+/*
+
+static int	expandword(t_token **token, t_list *envlst, int dollarpos, int envlen)
 {
 	int		i;
 	int		nextdollar;
-	int		envlen;
+	int		varlimit;
 	char	**strs;
 	char	*tok;
 
 	i = -1;
-	nextdollar = 1;
-	envlen = ft_lstsize(envlst);
+	nextdollar = 0;
+	varlimit = 0;
 	tok = (*token)->content;
-	while (tok[dollarpos + nextdollar] && tok[dollarpos + nextdollar] != '$')
-		nextdollar++;
-	nextdollar += dollarpos;
+	while (++nextdollar && tok[dollarpos + nextdollar] && tok[dollarpos + nextdollar] != '$')
+		if (ft_isalnum(tok[dollarpos + nextdollar]) || tok[dollarpos + nextdollar] == '_')
+			varlimit++;
+	nextdollar += dollarpos;printf("%d\n", varlimit);
 	while (++i < envlen)
 	{
 		strs = (char **)envlst->content;
-		if (!ft_strncmp(&tok[dollarpos + 1], strs[0], ft_strlen(strs[0])))
-		{
+		if (!tok[dollarpos + 1])
+			return (1);
+		if (!ft_strncmp(&tok[dollarpos + 1], strs[0], varlimit))
+		{printf("nextdollar : %d\n", nextdollar);
 			tok = writeexpansion(tok, strs[1], dollarpos,
 					dollarpos + (int)ft_strlen(strs[0]));
 			(*token)->content = tok;
@@ -65,6 +70,45 @@ static int	expandword(t_token **token, t_list *envlst, int dollarpos)
 	tok = writeexpansion(tok, "", dollarpos,
 	nextdollar - 1);
 	(*token)->content = tok;
+	return (1);
+}
+
+// */
+
+static int	expandword(t_token **token, t_list *envlst, int dolpos)
+{
+	int		nextdol;
+	int		limit;
+	char	**strs;
+	char	*tok;
+	nextdol = 1;
+	limit = 1;
+	tok = (*token)->content;
+printf("::> %s\n", &tok[dolpos]);
+	while (tok[dolpos + nextdol] && tok[dolpos + nextdol] != '$')
+		nextdol++;
+		nextdol += dolpos;
+	while (tok[dolpos + limit] &&
+		(ft_isalnum(tok[dolpos + limit]) || tok[dolpos + limit] == '_'))
+		limit++;
+	limit += dolpos;
+// printf("L : %d[%c], N$ : %d[%c]\n", limit, tok[limit], nextdol, tok[nextdol]);
+	if (tok[dolpos + 1])
+	{
+		strs = get_env(envlst, &tok[dolpos + 1], limit);
+		if (!strs)
+		{
+			if (limit == dolpos + 1)
+				return (0);
+			tok = writeexpansion(tok, "", dolpos, limit);
+			(*token)->content = tok;
+			return (0);
+		}
+		printf("key : %s\n", strs[0]);
+		tok = writeexpansion(tok, strs[1], dolpos, dolpos + ft_strlen(strs[0]));
+		(*token)->content = tok;
+		return (ft_strlen(strs[1]));
+	}
 	return (0);
 }
 
@@ -87,7 +131,7 @@ void	wordexpansion(t_data *data)
 			j = -1;
 			while (++j < (int)ft_strlen(token->content))
 				if (token->content[j] == '$')
-					j += expandword(&(token), data->envlst, j) - 1;
+					j += expandword(&(token), data->envlst, j);
 		}
 		data->toklst = data->toklst->next;
 		i++;

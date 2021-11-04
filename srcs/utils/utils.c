@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/03 14:33:45 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/04 17:05:45 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,26 @@ int	is_esymbol(char c)
 	return (0);
 }
 
+char	**get_env(t_list *envlst, char *str, int len)
+{
+	char	**strs;
+	int		i;
+	int		envlen;
+	i = -1;
+	if (len == 0)
+		return (NULL);
+	envlen = ft_lstsize(envlst);
+	while (++i < envlen && envlst)
+	{
+		strs = (char **)envlst->content;
+		// printf("%s = %s\n", strs[0], strs[1]);
+		if (!ft_strncmp(str, strs[0], len))
+			return (strs);
+		envlst = envlst->next;
+	}
+	return (NULL);
+}
+
 void	ft_removeelement(t_list **list, int type)
 {
 	t_list	*temp;
@@ -65,7 +85,7 @@ void	ft_removeelement(t_list **list, int type)
 	if (temp != NULL && token->type == type)
 	{
 		*list = temp->next;
-		// free(temp);
+		free(temp);
 		return ;
 	}
 	while (temp != NULL && token->type != type)
@@ -77,7 +97,7 @@ void	ft_removeelement(t_list **list, int type)
 	if (!temp)
 		return ;
 	prev->next = temp->next;
-	// free(temp);
+	free(temp);
 }
 
 // provisoire
@@ -106,16 +126,16 @@ void	print_toklst(t_list *toklst, char *str)
 	if (!toklst)
 		return ;
 	printf("{%s", str);
-	while (toklst && toklst->next)
+	while (toklst->next)
 	{
 		token = (t_token *)toklst->content;
 		printf("[%s]", token->content);
-		printf("(%d)", token->type);
+		// printf("(%d)", token->type);
 		toklst = toklst->next;
 	}
 	token = (t_token *)toklst->content;
 	printf("[%s]", token->content);
-	printf("(%d)", token->type);
+	// printf("(%d)", token->type);
 	printf("}\n");
 }
 
