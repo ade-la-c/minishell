@@ -6,5 +6,3 @@ RESTE A FAIRE DANS LE PARSING :
 ->	scinder strings & words
 
 ->	supprimer spaces
-
-->	iterer dans la envlist dans une fonction utils a part..

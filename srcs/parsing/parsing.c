@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/04 18:57:03 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/05 18:28:43 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	parsetokens(t_data *data)
 			ft_removeelement(&(head), SPACE);
 			data->toklen = ft_lstsize(data->toklst);
 		}
-		data->toklst = data->toklst->next;//printf("oui\n");
+		data->toklst = data->toklst->next;
 	}
 	data->toklst = head2;
 }
@@ -71,4 +71,3 @@ void	parsing(t_data *d, char *line)
 	// parsetokens(d);
 	// d->toks = lsttotoken(d, d->toklst);
 }
-
