@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/05 17:38:12 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/06 14:45:05 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,23 @@ char	**get_env(t_list *envlst, char *str, int len)
 	char	**strs;
 	int		i;
 	int		envlen;
+	char	*key;
+
 	i = -1;
 	if (len == 0)
 		return (NULL);
+	key = ft_substr(str, 0, len);
+	if (!key)
+		exit_error("malloc failed");
 	envlen = ft_lstsize(envlst);
 	while (++i < envlen && envlst)
 	{
 		strs = (char **)envlst->content;
-		// printf("%s = %s\n", strs[0], strs[1]);
-		if (!ft_strncmp(str, strs[0], len))
+		if (!ft_strcmp(key, strs[0]))
+		{
+			free(key);
 			return (strs);
+		}
 		envlst = envlst->next;
 	}
 	return (NULL);
