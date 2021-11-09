@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/09 14:32:58 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:40:31 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,48 +31,44 @@ t_token	*lsttotoken(t_data *data, t_list *toklst)
 		tokens[i].type = token->type;
 		toklst = toklst->next;
 	}
-	// ft_lstclear(&(data->toklst), free);
+	data->toklen = ft_lstsize(data->toklst);
+	ft_lstclear(&(data->toklst), free);
 	return (tokens);
 }
 
 // /*
 
-static void	tokenparser(t_data *data)
+static void	welding(t_data *d)
 {
 	int		i;
-	t_list	*tmp;
-	t_token	*token;
+	t_list	*el;
+	char	*buffer;
 
 	i = 0;
-	if (!data->toklst)
-		return ;
-	tmp = data->toklst;
-	while (i < data->toklen && data->toklst)
+	while (i < d->toklen)
 	{
-		token = (t_token *)data->toklst->content;
-		if (token->type == PIPE)
-		{
-			remove_element(&(tmp), data->toklst->content);
-			data->toklen--;
-			data->toklst = data->toklst->next;
+		if ((!ft_strlen(d->toks[i].content) || d->toks[i].type == SPACE) && i++)
 			continue ;
+		else if (d->toks[i].type == WORD || d->toks[i].type == DQUOTE_STR
+			|| d->toks[i].type == SQUOTE_STR)
+		{
+			buffer = ft_strdup(d->toks[i++].content);
+			while (d->toks[i].type == WORD || d->toks[i].type == DQUOTE_STR
+				|| d->toks[i].type == SQUOTE_STR)
+				buffer = ft_strjoin(buffer, d->toks[i++].content);
+			el = new_token(buffer, WORD);
 		}
 		else
 		{
-			data->toklst = data->toklst->next;
+			el = new_token(d->toks[i].content, d->toks[i].type);
 			i++;
-		printf("hello\n");
 		}
+		ft_lstadd_back(&(d->toklst), el);
 	}
-	data->toklst = tmp;
+	d->toklen = ft_lstsize(d->toklst);
 }
 
 // */
-
-// static void	token_parser(t_data *data)
-// {
-
-// }
 
 void	parsing(t_data *d, char *line)
 {
@@ -83,7 +79,8 @@ void	parsing(t_data *d, char *line)
 	j = 0;
 	lexing(d, line);
 	wordexpansion(d);
-	tokenparser(d);
+	d->toks = lsttotoken(d, d->toklst);
+	welding(d);
+	// print_tokens(d, d->toks);
 	print_toklst(d->toklst, "printing : ");
-	// d->toks = lsttotoken(d, d->toklst);
 }
