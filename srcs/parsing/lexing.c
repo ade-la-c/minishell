@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:31:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/02 12:47:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/07 21:30:03 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	lexing(t_data *data, char *line)
 			el = new_token(ft_strdup(" "), SPACE);
 		}
 		else if (line[i] == CHR_PIPE)
-			el = new_token(ft_strdup("|"), SPACE);
+			el = new_token(ft_strdup("|"), PIPE);
 		else if (line[i] == CHR_LESS || line[i] == CHR_MORE)
 			i += handle_more_less(&(el), &line[i]);
 		else if (line[i] == CHR_SQUOTE || line[i] == CHR_DQUOTE)

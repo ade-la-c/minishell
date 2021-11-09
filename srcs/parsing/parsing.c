@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/05 19:07:02 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:32:58 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,43 @@ t_token	*lsttotoken(t_data *data, t_list *toklst)
 	return (tokens);
 }
 
-/*
+// /*
 
-void	parsetokens(t_data *data)
+static void	tokenparser(t_data *data)
 {
-	int	i;
-	t_list	*head;
-	t_list	*head2;
+	int		i;
+	t_list	*tmp;
 	t_token	*token;
 
-	i = -1;
-	head = data->toklst;
-	head2 = data->toklst;
-	while (++i < data->toklen && data->toklst->next)
+	i = 0;
+	if (!data->toklst)
+		return ;
+	tmp = data->toklst;
+	while (i < data->toklen && data->toklst)
 	{
 		token = (t_token *)data->toklst->content;
-		if (token->type == SPACE)
+		if (token->type == PIPE)
 		{
-			ft_removeelement(&(head), SPACE);
-			data->toklen = ft_lstsize(data->toklst);
+			remove_element(&(tmp), data->toklst->content);
+			data->toklen--;
+			data->toklst = data->toklst->next;
+			continue ;
 		}
-		data->toklst = data->toklst->next;
+		else
+		{
+			data->toklst = data->toklst->next;
+			i++;
+		printf("hello\n");
+		}
 	}
-	data->toklst = head2;
+	data->toklst = tmp;
 }
 
 // */
 
-// static void	tokenfilter(t_data *data)
+// static void	token_parser(t_data *data)
 // {
-	
+
 // }
 
 void	parsing(t_data *d, char *line)
@@ -76,7 +83,7 @@ void	parsing(t_data *d, char *line)
 	j = 0;
 	lexing(d, line);
 	wordexpansion(d);
+	tokenparser(d);
 	print_toklst(d->toklst, "printing : ");
-	// tokenfilter(d);
 	// d->toks = lsttotoken(d, d->toklst);
 }

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/06 14:45:05 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/07 21:32:11 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,31 @@ char	**get_env(t_list *envlst, char *str, int len)
 	return (NULL);
 }
 
+int		remove_element(t_list **list, void *todelete)
+{
+	t_list	*tmp;
+	t_list	*prev;
+
+	tmp = *list;
+	if (tmp != NULL && tmp->content == todelete)
+	{
+		(*list) = tmp->next;printf("%p\n", &tmp);
+		// free(tmp);
+		return (0);
+	}
+	while (tmp != NULL && tmp->content != todelete)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+		return (1);
+	prev->next = tmp->next;printf("%p\n", &tmp);
+	// free(tmp);
+	return (0);
+}
+
+/*
 void	ft_removeelement(t_list **list, int type)
 {
 	t_list	*temp;
@@ -106,7 +131,7 @@ void	ft_removeelement(t_list **list, int type)
 	prev->next = temp->next;
 	free(temp);
 }
-
+// */
 // provisoire
 
 void	print_lst(t_list *lst, char *str)
