@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/09 19:40:31 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/10 13:48:02 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	welding(t_data *d)
 	i = 0;
 	while (i < d->toklen)
 	{
-		if ((!ft_strlen(d->toks[i].content) || d->toks[i].type == SPACE) && i++)
+		if ((!ft_strlen(d->toks[i].content) || d->toks[i].type == SPACE) && ++i)
 			continue ;
 		else if (d->toks[i].type == WORD || d->toks[i].type == DQUOTE_STR
 			|| d->toks[i].type == SQUOTE_STR)
@@ -65,7 +65,6 @@ static void	welding(t_data *d)
 		}
 		ft_lstadd_back(&(d->toklst), el);
 	}
-	d->toklen = ft_lstsize(d->toklst);
 }
 
 // */

@@ -6,3 +6,5 @@ RESTE A FAIRE DANS LE PARSING :
 ->	scinder strings & words
 
 ->	supprimer spaces
+
+--------
