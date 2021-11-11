@@ -8,3 +8,14 @@ RESTE A FAIRE DANS LE PARSING :
 ->	supprimer spaces
 
 --------
+
+->	parser les pipes : ecrire l'output du prog avant et l'input du prog apres
+
+->	gerer les redirections (apres les pipes) (fdin ou fdout, pas les 2)
+
+->	checker la docu des redirections (et des pipes?)
+
+->	faire les redirections (sauf <<)
+
+error handler : Quand t’a une redirection tu prends tjrs le token suivant avec,
+				donc si c’est une pipe ou si il y en a pas c’est une erreur

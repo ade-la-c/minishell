@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/11 15:36:13 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/11 17:23:46 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_data
 	t_list			*envlst;
 	int				envlen;
 	t_list			*proglst;
+	t_prog			*progs;
 	int				proglen;
 	char			**envp;
 }	t_data;
@@ -66,6 +67,7 @@ char				**get_env(t_list *envlst, char *str, int len);
 void				print_lst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);
 void				print_tokens(t_data *data, t_token *tokens);
+void				print_proglst(t_list *lst, char *str);
 
 //=========================PARSING=========================//
 

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/10 15:33:26 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/11 15:55:59 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_free(t_data *data)
 	i = 0;
 	ft_lstclear(&(data->toklst), free);
 	ft_lstclear(&(data->envlst), free);
+	ft_lstclear(&(data->proglst), free);
 	// free(data->toks);
 }
 
