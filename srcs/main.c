@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/04 15:38:15 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:33:26 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	data_init(t_data *data)
 {
 	data->toklst = NULL;
 	data->envlst = NULL;
+	data->proglst = NULL;
 }
 
 void	ft_free(t_data *data)
@@ -73,8 +74,7 @@ int	main(int ac, char **av, char **envp)
 	char	*tmp;
 	t_data	*data;
 
-	(void)av;
-	if (ac != 1)
+	if (ac != 1 || av[1])
 		exit_error("Error : minishell takes no arguments");
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)

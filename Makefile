@@ -6,7 +6,7 @@
 #    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/01 13:47:43 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/11/10 14:50:05 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ RDLINE				= /Users/$(USER)/.brew/opt/readline
 SRCS				= srcs/main.c				\
 					srcs/utils/utils.c			\
 					srcs/parsing/parsing.c		\
-					srcs/parsing/lexing.c		\
+					srcs/parsing/tokenizer.c	\
 					srcs/parsing/expansion.c	\
+					srcs/parsing/lexing.c		\
 
 OBJS				= $(SRCS:.c=.o)
 

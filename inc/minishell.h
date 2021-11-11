@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/07 20:30:00 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/11 15:36:13 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ typedef struct s_token
 	int				type;
 }	t_token;
 
+typedef struct s_prog
+{
+	char			**av;
+	int				fdin;
+	int				fdout;
+}	t_prog;
+
 typedef struct s_data
 {
 	t_list			*toklst;
@@ -42,6 +49,8 @@ typedef struct s_data
 	int				toklen;
 	t_list			*envlst;
 	int				envlen;
+	t_list			*proglst;
+	int				proglen;
 	char			**envp;
 }	t_data;
 
@@ -60,9 +69,9 @@ void				print_tokens(t_data *data, t_token *tokens);
 
 //=========================PARSING=========================//
 
-void				lexing(t_data *data, char *line);
-void				wordexpansion(t_data *data);
 void				parsing(t_data *data, char *line);
-void				print_tokens(t_data *data, t_token *tokens);
+void				tokenizer(t_data *data, char *line);
+void				wordexpansion(t_data *data);
+void				lexing(t_data *data);
 
 #endif

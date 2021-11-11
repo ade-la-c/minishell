@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/09 16:28:05 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/11 14:27:40 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	**get_env(t_list *envlst, char *str, int len)
 	return (NULL);
 }
 
+/*.
+
 int		remove_element(t_list **list, void *todelete)
 {
 	t_list	*tmp;
@@ -89,7 +91,7 @@ int		remove_element(t_list **list, void *todelete)
 	if (tmp != NULL && tmp->content == todelete)
 	{
 		(*list) = tmp->next;printf("%p\n", &tmp);
-		// free(tmp);
+		free(tmp);
 		return (0);
 	}
 	while (tmp != NULL && tmp->content != todelete)
@@ -100,36 +102,8 @@ int		remove_element(t_list **list, void *todelete)
 	if (tmp == NULL)
 		return (1);
 	prev->next = tmp->next;printf("%p\n", &tmp);
-	// free(tmp);
+	free(tmp);
 	return (0);
-}
-
-/*
-void	ft_removeelement(t_list **list, int type)
-{
-	t_list	*temp;
-	t_list	*prev;
-	t_token	*token;
-
-	temp = *list;
-	prev = NULL;
-	token = (t_token *)temp->content;
-	if (temp != NULL && token->type == type)
-	{
-		*list = temp->next;
-		free(temp);
-		return ;
-	}
-	while (temp != NULL && token->type != type)
-	{
-		token = (t_token *)temp->content;
-		prev = temp;
-		temp = temp->next;
-	}
-	if (!temp)
-		return ;
-	prev->next = temp->next;
-	free(temp);
 }
 // */
 // provisoire
