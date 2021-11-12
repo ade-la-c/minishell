@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/11 17:28:38 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:23:18 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static void	checktokens(t_data *d)
 	int	i;
 
 	i = 0;
+	if (d->toks[0].type == PIPE || (d->toklen > 1 && d->toks[d->toklen - 1].type == PIPE))
+		exit_error("pipes must be between valid arguments");
 	while (i < d->toklen)
 	{
 		if (d->toks[i].type == DLESS || d->toks[i].type == DMORE
@@ -90,6 +92,8 @@ void	parsing(t_data *data, char *line)
 	int	i;
 
 	i = 0;
+	if (!ft_strcmp(line, ""))
+		return ;
 	tokenizer(data, line);
 	wordexpansion(data);
 	data->toks = lsttotoken(data, data->toklst);

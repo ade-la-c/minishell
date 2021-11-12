@@ -1,5 +1,3 @@
-RESTE A FAIRE DANS LE PARSING :
-
 ->	fix "$" qui doit se display, "$USERr" qui doit rien display,
 	et "$USER e" (ou ' ' peut etre tout sauf alpha num & '_')
 
@@ -7,15 +5,22 @@ RESTE A FAIRE DANS LE PARSING :
 
 ->	supprimer spaces
 
---------
-
-->	parser les pipes : ecrire l'output du prog avant et l'input du prog apres
-
-->	gerer les redirections (apres les pipes) (fdin ou fdout, pas les 2)
-
-->	checker la docu des redirections (et des pipes?)
+->	O_APPEND dans open pour >>
+->	O_TRUNC " pour >
 
 ->	faire les redirections (sauf <<)
+->	check redir & reidr + 1 et remove des argv
 
-error handler : Quand t’a une redirection tu prends tjrs le token suivant avec,
+->	error handler : Quand t’a une redirection tu prends tjrs le token suivant avec,
 				donc si c’est une pipe ou si il y en a pas c’est une erreur
+
+--------
+
+RESTE A FAIRE DANS LE PARSING :
+
+
+
+
+->	check pipes a la fin
+
+->	parser les pipes : ecrire l'output du prog avant et l'input du prog apres
