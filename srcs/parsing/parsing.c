@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/12 15:23:18 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:08:31 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,20 @@ static void	welding(t_data *d)
 	i = 0;
 	while (i < d->toklen)
 	{
-		if (d->toks[i].type == WORD || d->toks[i].type == DQUOTE_STR
-			|| d->toks[i].type == SQUOTE_STR)
+		if (d->toks[i].type >= WORD && d->toks[i].type <= SQUOTE_STR)
 		{
+			if (d->toks[i].type == WORD && !ft_strcmp(d->toks[i].content, "$")
+				&& i + 1 <= d->toklen)
+				i++;
 			buffer = ft_strdup(d->toks[i++].content);
-			while ((d->toks[i].type == WORD || d->toks[i].type == DQUOTE_STR
-				|| d->toks[i].type == SQUOTE_STR) && d->toklen)
-				buffer = ft_strjoin(buffer, d->toks[i++].content);
+			while ((d->toks[i].type >= WORD && d->toks[i].type <= SQUOTE_STR)
+				&& d->toklen)
+			{
+				if (d->toks[i].type == WORD && !ft_strcmp(d->toks[i].content, "$")
+					&& i + 1 <= d->toklen)
+					i++;
+				buffer = strjoinfree(buffer, d->toks[i++].content, 1);
+			}
 			el = new_token(buffer, WORD);
 		}
 		else if (d->toks[i].type == SPACE && ++i)
@@ -73,15 +80,14 @@ static void	checktokens(t_data *d)
 	int	i;
 
 	i = 0;
-	if (d->toks[0].type == PIPE || (d->toklen > 1 && d->toks[d->toklen - 1].type == PIPE))
+	if (d->toks[0].type == PIPE ||
+		(d->toklen > 1 && d->toks[d->toklen - 1].type == PIPE))
 		exit_error("pipes must be between valid arguments");
 	while (i < d->toklen)
 	{
-		if (d->toks[i].type == DLESS || d->toks[i].type == DMORE
-			|| d->toks[i].type == LESS || d->toks[i].type == MORE)
-			if (++i < d->toklen && (d->toks[i].type == DLESS
-				|| d->toks[i].type == DMORE || d->toks[i].type == LESS
-				|| d->toks[i].type == MORE))
+		if (d->toks[i].type <= DLESS && d->toks[i].type >= MORE)
+			if (++i < d->toklen && (d->toks[i].type <= DLESS
+				&& d->toks[i].type >= MORE))
 				exit_error("too many redirections");
 		i++;
 	}

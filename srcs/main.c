@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/12 15:22:15 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/15 16:30:34 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		tmp = readline("petit_shellito> ");
-		if (!tmp || !ft_strcmp(tmp, "\n"))
+		if (!tmp)
 			exit_error("readline error");
 		add_history(tmp);
 		line = ft_strtrim(tmp, " ");

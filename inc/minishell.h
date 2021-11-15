@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/11 17:23:46 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:07:46 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int					is_number(char *str, int n);
 t_list				*new_token(char *content, int type);
 int					remove_element(t_list **list, void *todelete);
 char				**get_env(t_list *envlst, char *str, int len);
+char				*strjoinfree(char *s1, char *s2, int x);
 
 void				print_lst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);

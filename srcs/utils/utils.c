@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/11 17:12:14 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:07:29 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,18 @@ char	**get_env(t_list *envlst, char *str, int len)
 		envlst = envlst->next;
 	}
 	return (NULL);
+}
+
+char	*strjoinfree(char *s1, char *s2, int x)
+{
+	char	*ret;
+
+	ret = ft_strjoin(s1, s2);
+	if (x == 1 || x == 3)
+		free(s1);
+	if (x == 2 || x == 3)
+		free(s2);
+	return (ret);
 }
 
 /*.
