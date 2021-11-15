@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/15 18:01:10 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/15 18:29:21 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,17 @@ static int	handleredirections(t_data *d, t_prog *p, int i)
 	{
 		value = O_WRONLY | O_TRUNC | O_CREAT;
 		p->fdout = open(d->toks[i].content, value, 0777);
-		if (p->fdout < 0)
-			exit_error("redirection error");
 	}
 	else if (d->toks[i++].type == LESS)
-	{
 		p->fdin = open(d->toks[i].content, O_RDONLY);
-		if (p->fdin < 0)
-			exit_error("redirection error");
-	}
 	else if (d->toks[i++].type == DMORE)
 	{
 		value = O_WRONLY | O_APPEND | O_CREAT;
 		p->fdout = open(d->toks[i].content, value, 0777);
-		if (p->fdout < 0)
-			exit_error("redirection error");
 	}
-	//TODO else if (d->toks[i].type == DLESS)
+	// TODO else if (d->toks[i].type == DLESS)
+	if (p->fdin < 0 || p->fdout < 0)
+		exit_error("redirection error");
 	return (2);
 }
 
@@ -89,7 +83,6 @@ static void	tokentoprog(t_data *d)
 			prog = NULL;
 		}
 	}
-	d->proglen = ft_lstsize(d->proglst);
 }
 
 	// print_proglst(d->proglst, "imprimiendo");
@@ -143,6 +136,7 @@ void	lexing(t_data *d)
 
 	i = 0;
 	tokentoprog(d);
+	d->proglen = ft_lstsize(d->proglst);
 	d->progs = lsttoprog(d, d->proglst);
 	// handlepipes(d);
 }
