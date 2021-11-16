@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/16 22:33:38 by root             ###   ########.fr       */
+/*   Updated: 2021/11/17 00:31:36 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,22 @@ static void	data_init(t_data *data)
 	data->proglst = NULL;
 }
 
-void	ft_free(t_data *data)
+void	ft_free(t_data *data, int boolean)
 {
-	// int	i;
+	int		i;
+	char	**strs;
 
-	// i = 0;
+	i = -1;
 	ft_lstclear(&(data->toklst), free);
-	ft_lstclear(&(data->envlst), free);
 	ft_lstclear(&(data->proglst), free);
+	while (++i < data->envlen && boolean == 1)
+	{printf("%d\n", i);
+		strs = (char **)data->envlst->content;
+		free(strs[0]);
+		free(strs[1]);
+		data->envlst = data->envlst->next;
+	}
+	ft_lstclear(&(data->envlst), free);
 	// free(data->toks);
 }
 
@@ -91,9 +99,9 @@ int	main(int ac, char **av, char **envp)
 		line = ft_strtrim(tmp, " ");
 		free(tmp);
 		parsing(data, line);
-		ft_free(data);
+		ft_free(data, 0);
 	}
-	ft_free(data);
+	ft_free(data, 1);
 	free(line);
 	return (0);
 }

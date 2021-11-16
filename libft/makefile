@@ -6,7 +6,7 @@
 #    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/23 14:15:40 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/16 22:09:10 by root             ###   ########.fr        #
+#    Updated: 2021/11/16 22:52:59 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,10 +54,7 @@ SRCS	= ft_strlen.c \
 		ft_strcmp.c \
 		ft_sort_int_tab.c \
 		gnl/get_next_line.c \
-
-OBJS	= ${SRCS:.c=.o}
-
-BSRC	= ft_lstnew.c \
+		ft_lstnew.c \
 		ft_lstadd_front.c \
 		ft_lstsize.c \
 		ft_lstlast.c \
@@ -66,8 +63,12 @@ BSRC	= ft_lstnew.c \
 		ft_lstclear.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
+
+OBJS	= ${SRCS:.c=.o}
+
+# BSRC	=
 		
-BOBJ	= ${BSRC:.c=.o}
+# BOBJ	= ${BSRC:.c=.o}
 
 NAME	= libft.a
 
@@ -82,13 +83,14 @@ CFLAGS	= -Wall -Werror -Wextra
 ${NAME}:	${OBJS}
 			ar rc ${NAME} $?
 
-bonus:		${OBJS} ${BOBJ}
-			ar rc ${NAME} ${OBJS} $?
+# bonus:		${OBJS} ${BOBJ}
+# 			ar rc ${NAME} $?
 
 all:		${NAME}
 
 clean:
-			${RM} ${OBJS} ${BOBJ}
+			${RM} ${OBJS} 
+# ${BOBJ}
 
 fclean:		clean
 			${RM} ${NAME}

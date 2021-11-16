@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/16 21:49:53 by root             ###   ########.fr       */
+/*   Updated: 2021/11/17 00:30:03 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,17 @@ static t_prog	*init_prog(t_data *d, int index)
 
 static int	handleredirections(t_data *d, t_prog *p, int i)
 {
-	int	value;
 
 	if (d->toks[i + 1].type != WORD)
 		exit_error("redirection needs a valid argument");
 	if (d->toks[i++].type == MORE)
-	{
-		value = O_WRONLY | O_TRUNC | O_CREAT;
-		p->fdout = open(d->toks[i].content, value, 0777);
-	}
+		p->fdout = open(d->toks[i].content,
+				O_WRONLY | O_TRUNC | O_CREAT, 0777);
 	else if (d->toks[i++].type == LESS)
 		p->fdin = open(d->toks[i].content, O_RDONLY);
 	else if (d->toks[i++].type == DMORE)
-	{
-		value = O_WRONLY | O_APPEND | O_CREAT;
-		p->fdout = open(d->toks[i].content, value, 0777);
-	}
+		p->fdout = open(d->toks[i].content,
+				O_WRONLY | O_APPEND | O_CREAT, 0777);
 	// TODO else if (d->toks[i].type == DLESS)
 	if (p->fdin < 0 || p->fdout < 0)
 		exit_error("redirection error");

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/10 14:50:05 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/11/16 22:44:22 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CC					= gcc
 
 RM					= rm -f
 
-CFLAGS				= -Wall -Werror -Wextra -I. -g -fsanitize=address
+CFLAGS				= -Wall -Werror -Wextra -I. #-g -fsanitize=address
 
 INC					= -I ${LIBFT} -I ${RDLINE}/include -I ./inc
 
@@ -49,7 +49,8 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 					@echo "$(CL_GREEN)-> COMPILING LIBFT$(CL_RESET)"
 					@echo "$(CL_GREY)"
-					$(MAKE) -C $(LIBFT) bonus
+					$(MAKE) -C $(LIBFT) 
+# bonus
 					@echo "$(CL_RESET)"
 					@echo "$(CL_GREEN)-> COMPILING MINISHELL$(CL_RESET)"
 					@echo "$(CL_GREY)"
