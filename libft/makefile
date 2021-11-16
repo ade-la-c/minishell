@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/23 14:15:40 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/09/16 11:35:12 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/11/16 22:09:10 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,10 +80,10 @@ CFLAGS	= -Wall -Werror -Wextra
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
-			ar rc ${NAME} ${OBJS}
+			ar rc ${NAME} $?
 
 bonus:		${OBJS} ${BOBJ}
-			ar rc ${NAME} ${OBJS} ${BOBJ}
+			ar rc ${NAME} ${OBJS} $?
 
 all:		${NAME}
 

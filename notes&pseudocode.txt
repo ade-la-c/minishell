@@ -3,7 +3,7 @@
 
 ->	scinder strings & words
 
-->	supprimer spaces
+->	supprimer MYSPACEs
 
 ->	O_APPEND dans open pour >>
 ->	O_TRUNC " pour >

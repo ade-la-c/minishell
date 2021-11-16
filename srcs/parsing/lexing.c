@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/15 18:29:21 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/16 21:49:53 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,9 @@ void	handlepipes(t_data *d)
 
 void	lexing(t_data *d)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	tokentoprog(d);
 	d->proglen = ft_lstsize(d->proglst);
 	d->progs = lsttoprog(d, d->proglst);

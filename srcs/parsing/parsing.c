@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/15 17:08:31 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/16 21:47:58 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	welding(t_data *d)
 			}
 			el = new_token(buffer, WORD);
 		}
-		else if (d->toks[i].type == SPACE && ++i)
+		else if (d->toks[i].type == MYSPACE && ++i)
 			continue ;
 		else
 		{

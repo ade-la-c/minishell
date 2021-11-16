@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/15 16:30:34 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/16 22:33:38 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static void	data_init(t_data *data)
 
 void	ft_free(t_data *data)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	ft_lstclear(&(data->toklst), free);
 	ft_lstclear(&(data->envlst), free);
 	ft_lstclear(&(data->proglst), free);
@@ -81,6 +81,7 @@ int	main(int ac, char **av, char **envp)
 	if (!data)
 		exit_error("malloc error");
 	data_init(data);
+	getenvp(data, envp);
 	while (1)
 	{
 		tmp = readline("petit_shellito> ");
@@ -89,7 +90,6 @@ int	main(int ac, char **av, char **envp)
 		add_history(tmp);
 		line = ft_strtrim(tmp, " ");
 		free(tmp);
-		getenvp(data, envp);
 		parsing(data, line);
 		ft_free(data);
 	}

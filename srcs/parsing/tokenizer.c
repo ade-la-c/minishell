@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:31:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/10 14:50:15 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/16 21:47:58 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	tokenizer(t_data *data, char *line)
 		{
 			while (line[i + 1] == CHR_SPACE)
 				i++;
-			el = new_token(ft_strdup(" "), SPACE);
+			el = new_token(ft_strdup(" "), MYSPACE);
 		}
 		else if (line[i] == CHR_PIPE)
 			el = new_token(ft_strdup("|"), PIPE);

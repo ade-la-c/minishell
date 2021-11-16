@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/06 14:44:55 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/16 21:49:19 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static char	*writeexpansion(char *str, char *expanded, int start, int end)
 static int	expandword(t_token **token, t_list *envlst, int dpos)
 {
 	int		lim;
-	int		i;
+	// int		i;
 	char	**strs;
 	char	*tok;
 
 	lim = 1;
-	i = 0;
+	// i = 0;
 	tok = (*token)->content;
 	while (tok[dpos + lim] != '$'
 		&& (tok[dpos + lim] == '_' || ft_isalnum(tok[dpos + lim])))
