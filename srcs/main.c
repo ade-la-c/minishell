@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 01:09:32 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/17 19:16:01 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,6 @@ static void	data_init(t_data *data)
 	data->proglst = NULL;
 }
 
-void	ft_free(t_data *data, int x)
-{
-	int		i;
-	char	**strs;
-
-	i = 0;
-	printf("envlen : %d\n", data->envlen);
-	while (i < data->envlen && data->envlst && x == 1)
-	{
-		printf("i : %d\n", i);
-		strs = (char **)data->envlst->content;
-		free(strs[0]);
-		free(strs[1]);
-		data->envlst = data->envlst->next;
-		i++;
-	}
-	data->envlen = ft_lstsize(data->envlst);
-	ft_lstclear(&(data->toklst), free);
-	ft_lstclear(&(data->proglst), free);
-	ft_lstclear(&(data->envlst), free);
-	// free(data->toks);
-}
-
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
@@ -98,14 +75,15 @@ int	main(int ac, char **av, char **envp)
 	{
 		tmp = readline("petit_shellito> ");
 		if (!tmp)
-			exit_error("readline error");
+			env_free(data->envlst);
 		add_history(tmp);
 		line = ft_strtrim(tmp, " ");
 		free(tmp);
 		parsing(data, line);
-		ft_free(data, 0);
+		transfer_to_cmd(data);
+		ft_free(data);
 	}
-	ft_free(data, 1);
+	ft_free(data);
 	free(line);
 	return (0);
 }

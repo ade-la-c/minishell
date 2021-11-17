@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 00:30:09 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/17 18:56:47 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,16 @@ static void	checktokens(t_data *d)
 	while (i < d->toklen)
 	{
 		if (d->toks[i].type <= DLESS && d->toks[i].type >= MORE)
+		{
 			if (++i < d->toklen && (d->toks[i].type <= DLESS
 				&& d->toks[i].type >= MORE))
 				exit_error("too many redirections");
+		}
+		else if (d->toks[i].type == PIPE)
+		{
+			if (++i < d->toklen && d->toks[i].type == PIPE)
+				exit_error("too many pipes");
+		}
 		i++;
 	}
 }
@@ -112,7 +119,7 @@ void	parsing(t_data *data, char *line)
 	data->toks = lsttotoken(data, data->toklst);
 	checktokens(data);
 	lexing(data);
-	// print_toklst(data->toklst, "printing : ");
+	print_toklst(data->toklst, "printing : ");
 }
 
 	// print_tokens(d, d->toks);

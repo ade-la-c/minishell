@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/18 18:43:25 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 16:31:06 by ade-la-c         ###   ########.fr       */
+/*   Created: 2021/11/17 17:10:54 by ade-la-c          #+#    #+#             */
+/*   Updated: 2021/11/17 18:52:40 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	ft_str_isdigit(char *str)
 {
-	t_list	*tmp;
+	int	i;
 
-	if (!lst || !del)
-		return ;
-	while (*lst)
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i])
 	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		(*lst) = tmp;
+		if (str[i] < '0' || str[i] > '9')
+			return (1);
+		i++;
 	}
-	*lst = NULL;
+	return (0);
 }

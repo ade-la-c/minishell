@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 00:30:03 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/17 17:15:39 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,26 +105,6 @@ static t_prog	*lsttoprog(t_data *data, t_list *proglst)
 	return (progs);
 }
 
-/*.
-
-void	handlepipes(t_data *d)
-{
-	int		i;
-	t_prog	*prog;
-	t_prog	*nextprog;
-	int		pipefd[2];
-
-	i = 0;
-	while (i < d->proglen)
-	{
-		if (ft_strlen(*(d->progs[i].av)))
-		
-		i++;
-	}
-}
-
-// */
-
 void	lexing(t_data *d)
 {
 	// int	i;
@@ -133,5 +113,6 @@ void	lexing(t_data *d)
 	tokentoprog(d);
 	d->proglen = ft_lstsize(d->proglst);
 	d->progs = lsttoprog(d, d->proglst);
+	// progtocmd(d);
 	// handlepipes(d);
 }

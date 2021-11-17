@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/16 21:43:55 by root             ###   ########.fr       */
+/*   Updated: 2021/11/17 19:12:59 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,18 @@
 # include <dirent.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <errno.h>
 
 # include <readline/readline.h>
 # include <readline/history.h>
 
 # include "../libft/libft.h"
-# include "./parsing.h"
+# include "parsing.h"
+# include "cmd.h"
+# include "builtin.h"
+# include "utils.h"
+
+extern int  g_err;
 
 typedef struct s_token
 {
@@ -65,6 +71,9 @@ int					remove_element(t_list **list, void *todelete);
 char				**get_env(t_list *envlst, char *str, int len);
 char				*strjoinfree(char *s1, char *s2, int x);
 
+void				ft_free(t_data *data);
+void				env_free(t_list *envlst);
+
 void				print_lst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);
 void				print_tokens(t_data *data, t_token *tokens);
@@ -76,5 +85,8 @@ void				parsing(t_data *data, char *line);
 void				tokenizer(t_data *data, char *line);
 void				wordexpansion(t_data *data);
 void				lexing(t_data *data);
+
+void				transfer_to_cmd(t_data *data);
+
 
 #endif

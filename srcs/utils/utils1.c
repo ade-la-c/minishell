@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/18 18:43:25 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 16:31:06 by ade-la-c         ###   ########.fr       */
+/*   Created: 2021/11/17 18:51:01 by ade-la-c          #+#    #+#             */
+/*   Updated: 2021/11/17 19:34:43 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	ft_strclen(const char *str, char c)
 {
-	t_list	*tmp;
+	int	i;
 
-	if (!lst || !del)
-		return ;
-	while (*lst)
+	i = 0;
+	while (str[i])
 	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		(*lst) = tmp;
+		if (str[i] == (char)c)
+			return (i);
+		i++;
 	}
-	*lst = NULL;
+	if (str[i] == (char)c)
+		return (i);
+	return (-1);
+}
+
+int    wait_forks(pid_t *pid, int nb_pipe)
+{
+    int    i;
+
+    i = 0;
+    while (i++ < nb_pipe)
+        waitpid(pid[i], NULL, 0);
+    free(pid);
+    return (i);
 }

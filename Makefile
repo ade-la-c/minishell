@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/16 22:44:22 by root             ###   ########.fr        #
+#    Updated: 2021/11/17 19:36:20 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,29 @@ RDLINE				= /Users/$(USER)/.brew/opt/readline
 
 SRCS				= srcs/main.c				\
 					srcs/utils/utils.c			\
+					srcs/utils/utils1.c			\
+					srcs/utils/utils2.c			\
+					srcs/utils/utils3.c			\
+					srcs/utils/free.c			\
+					srcs/utils/env_utils.c		\
+					srcs/utils/env_utils2.c		\
+					srcs/utils/env_utils3.c		\
+					srcs/utils/split_slash.c	\
 					srcs/parsing/parsing.c		\
 					srcs/parsing/tokenizer.c	\
 					srcs/parsing/expansion.c	\
 					srcs/parsing/lexing.c		\
+					srcs/builtin/cd.c			\
+					srcs/builtin/echo.c			\
+					srcs/builtin/env.c			\
+					srcs/builtin/execpath.c		\
+					srcs/builtin/exit.c			\
+					srcs/builtin/export.c		\
+					srcs/builtin/pwd.c			\
+					srcs/builtin/unset.c		\
+					srcs/cmd/cmd.c				\
+					srcs/cmd/ft_error.c			\
+					srcs/cmd/pipe.c				\
 
 OBJS				= $(SRCS:.c=.o)
 
@@ -29,7 +48,7 @@ CC					= gcc
 
 RM					= rm -f
 
-CFLAGS				= -Wall -Werror -Wextra -I. #-g -fsanitize=address
+CFLAGS				= -Wall -Werror -Wextra -I. -g -fsanitize=address
 
 INC					= -I ${LIBFT} -I ${RDLINE}/include -I ./inc
 

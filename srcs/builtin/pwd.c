@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/18 18:43:25 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 16:31:06 by ade-la-c         ###   ########.fr       */
+/*   Created: 2021/11/17 17:37:51 by ade-la-c          #+#    #+#             */
+/*   Updated: 2021/11/17 18:20:08 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	builtin_pwd(int i, t_cmd *cmd, int pipe)
 {
-	t_list	*tmp;
+	char	*buff;
 
-	if (!lst || !del)
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		(*lst) = tmp;
-	}
-	*lst = NULL;
+	buff = NULL;
+	buff = getcwd(buff, PATH_MAX_SHELL);
+	g_err = 0;
+	write (cmd[i].fdout, buff, ft_strlen(buff));
+	write (cmd[i].fdout, "\n", 1);
+	free(buff);
+	if (pipe == 1)
+		exit(1);
 }
