@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 17:15:39 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/17 19:59:37 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	lexing(t_data *d)
 	// i = 0;
 	tokentoprog(d);
 	d->proglen = ft_lstsize(d->proglst);
+	printf("proglen (p): %d", d->proglen);
 	d->progs = lsttoprog(d, d->proglst);
 	// progtocmd(d);
 	// handlepipes(d);

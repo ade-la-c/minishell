@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 19:16:01 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/17 20:07:06 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	data_init(t_data *data)
 	data->toklst = NULL;
 	data->envlst = NULL;
 	data->proglst = NULL;
+	data->proglen = 0;
 }
 
 int	main(int ac, char **av, char **envp)
@@ -79,6 +80,8 @@ int	main(int ac, char **av, char **envp)
 		add_history(tmp);
 		line = ft_strtrim(tmp, " ");
 		free(tmp);
+		if (!ft_strcmp(line, ""))
+			continue ;
 		parsing(data, line);
 		transfer_to_cmd(data);
 		ft_free(data);

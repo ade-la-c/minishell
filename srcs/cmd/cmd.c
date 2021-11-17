@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 19:42:17 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/17 20:11:05 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	parse_cmd_array(t_cmd *cmd, t_env_l *env, int nb_cmd)
 		nb_pipe = 0;
 		if (cmd[i].pipe == 1)
 		{
-			while (cmd[i + nb_pipe].pipe == 1)
-				nb_pipe++;
+			while (cmd[i + nb_pipe].pipe == 1){printf("iter\n");
+				nb_pipe++;}
 			if (nb_pipe == 1 && cmd[i + 1].builtin != NULL)
 				i = single_pipe(i, cmd, env);
 			else if (nb_pipe > 1)
@@ -72,11 +72,6 @@ static t_env_l	*envptoenvl(t_data *data)
 	if (!env)
 		exit_error("malloc failed");
 	env->list = data->envp;
-	while (++i < data->envlen)
-	{
-		env->token[i] = (char **)data->envlst[i].content;
-		data->envlst = data->envlst->next;
-	}
 	return (env);
 }
 
@@ -98,8 +93,10 @@ void    transfer_to_cmd(t_data *data)
             cmd[i].arg[j] = data->progs[i].av[j];
         cmd[i].fdin = data->progs[i].fdin;
         cmd[i].fdout = data->progs[i].fdout;
-        cmd[i].pipe = 1;
+		cmd[i].pipe = 1;
         i++;
     }
+	cmd[i - 1].pipe = 0;
     parse_cmd_array(cmd, envptoenvl(data), i);
+	free_cmd(cmd);
 }
