@@ -24,3 +24,5 @@ RESTE A FAIRE DANS LE PARSING :
 ->	check pipes a la fin
 
 ->	parser les pipes : ecrire l'output du prog avant et l'input du prog apres
+
+->	parser l'envp en dehors de la readline while ? (quand la free ?)
