@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 20:06:35 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:10:05 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	parsing(t_data *data, char *line)
 	data->toks = lsttotoken(data, data->toklst);
 	checktokens(data);
 	lexing(data);
-	print_toklst(data->toklst, "printing : ");
+	// print_toklst(data->toklst, "printing : ");
 }
 
 	// print_tokens(d, d->toks);

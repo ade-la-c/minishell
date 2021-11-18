@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 20:11:05 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:07:36 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,7 @@ void	parse_cmd_array(t_cmd *cmd, t_env_l *env, int nb_cmd)
 	}
 }
 
-static t_env_l	*envptoenvl(t_data *data)
-{
-	int		i;
-	t_env_l	*env;
-
-	i = -1;
-	env = malloc(sizeof(t_env_l) * data->envlen);
-	if (!env)
-		exit_error("malloc failed");
-	env->list = data->envp;
-	return (env);
-}
-
-void    transfer_to_cmd(t_data *data)
+void    transfer_to_cmd(t_data *data, t_env_l *env)
 {
     t_cmd    *cmd;
     int        i;
@@ -97,6 +84,6 @@ void    transfer_to_cmd(t_data *data)
         i++;
     }
 	cmd[i - 1].pipe = 0;
-    parse_cmd_array(cmd, envptoenvl(data), i);
+    parse_cmd_array(cmd, env, i);
 	free_cmd(cmd);
 }

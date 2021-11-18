@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 19:12:59 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:05:59 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void				tokenizer(t_data *data, char *line);
 void				wordexpansion(t_data *data);
 void				lexing(t_data *data);
 
-void				transfer_to_cmd(t_data *data);
+void				transfer_to_cmd(t_data *data, t_env_l *env);
 
 
 #endif

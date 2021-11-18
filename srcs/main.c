@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 20:07:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:08:58 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,30 @@ static void	data_init(t_data *data)
 	data->proglen = 0;
 }
 
+static t_env_l	*envptoenvl(t_data *data, char **envp)
+{
+	int		i;
+	t_env_l	*env;
+
+	i = 0;
+	env = malloc(sizeof(t_env_l));
+	if (!env)
+		exit_error("malloc failed");
+	env->list = malloc(sizeof(char *) * (data->envlen + 1));
+	if (!env->list)
+		exit_error("malloc failed");
+	while (i < data->envlen)
+	{
+		env->list[i] = ft_strdup(envp[i]);
+		if (!env->list[i])
+			exit_error("malloc failed");
+		env->list[i] = envp[i];
+		i++;
+	}
+	env->list[i] = NULL;
+	return (env);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
@@ -83,7 +107,7 @@ int	main(int ac, char **av, char **envp)
 		if (!ft_strcmp(line, ""))
 			continue ;
 		parsing(data, line);
-		transfer_to_cmd(data);
+		transfer_to_cmd(data, envptoenvl(data, envp));
 		ft_free(data);
 	}
 	ft_free(data);
