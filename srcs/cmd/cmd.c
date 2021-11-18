@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/18 15:07:36 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/18 18:33:48 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,40 @@ void	parse_cmd_array(t_cmd *cmd, t_env_l *env, int nb_cmd)
 	}
 }
 
-void    transfer_to_cmd(t_data *data, t_env_l *env)
+void	transfer_to_cmd(t_data *data, t_env_l *env)
 {
-    t_cmd    *cmd;
-    int        i;
-    int        j;
+	t_cmd	*cmd;
+	int		i;
+	int		j;
+	int		k;
+	int		l;
 
-    i = 0;
-    j = 0;
-    cmd = malloc(sizeof(t_cmd) * (data->proglen));
-    if (!cmd)
+	i = 0;
+	cmd = malloc(sizeof(t_cmd) * (data->proglen));
+	if (!cmd)
 		exit_error("malloc failed");
 	while (i < data->proglen)
-    {
-        cmd[i].builtin = data->progs[i].av[0];
-        while(data->progs[i].av[++j])
-            cmd[i].arg[j] = data->progs[i].av[j];
-        cmd[i].fdin = data->progs[i].fdin;
-        cmd[i].fdout = data->progs[i].fdout;
+	{
+		l = 0;
+		while (data->progs[i].av[l])
+			l++;
+		cmd[i].arg = malloc(sizeof(char *) * l);
+		if (!cmd[i].arg)
+			exit_error("malloc failed");
+		cmd[i].builtin = ft_strdup(data->progs[i].av[0]);
+		j = 1;
+		k = 0;
+		while (data->progs[i].av[j])
+		{
+			cmd[i].arg[k++] = ft_strdup(data->progs[i].av[j++]);
+			// printf("av[%d] %s\n", j, cmd[i].arg[k - 1]);
+		}
+		cmd[i].fdin = data->progs[i].fdin;
+		cmd[i].fdout = data->progs[i].fdout;
 		cmd[i].pipe = 1;
-        i++;
-    }
+		i++;
+	}
 	cmd[i - 1].pipe = 0;
-    parse_cmd_array(cmd, env, i);
+	parse_cmd_array(cmd, env, i);
 	free_cmd(cmd);
 }
