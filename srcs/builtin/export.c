@@ -6,7 +6,7 @@
 /*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:41 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 02:56:33 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/19 14:57:13 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 				g_err = 1;
 		}
 	}
-	else if (count_arg(cmd[i]) == 1)
+	else if (count_arg(cmd[i]) == 0)
 		display_env_ascii(cmd[i], env);
 	if (pipe == 1)
 		exit(1);

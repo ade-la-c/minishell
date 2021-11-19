@@ -6,7 +6,7 @@
 /*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 02:27:02 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/19 15:26:24 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 		cmd[i].pipe = 1;
 		i++;
 	}
+//	printf("%s", cmd[i].arg[1]);
 	cmd[i - 1].pipe = 0;
 	parse_cmd_array(cmd, env, i);
 	//free_cmd(cmd);

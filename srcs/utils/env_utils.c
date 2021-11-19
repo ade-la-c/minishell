@@ -6,7 +6,7 @@
 /*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:29 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 02:44:42 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/19 15:02:12 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ void	add_env_var(t_env_l *env, int len, char *add)
 	envdup_plus(tmp, env->list, add);
 	while (env->list[i])
 	{
-	//	free(env->list[i]);
+		//free(env->list[i]);
 		i++;
 	}
 	free(env->list);
 	env->list = malloc(sizeof(char *) * (len + 2));
 	envdup(env->list, tmp);
 	free_env(len + 2, tmp);
-	free_token(env);
+//	free_token(env);
 	init_token(env);
 }
