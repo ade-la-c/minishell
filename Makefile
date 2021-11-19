@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tristan <tristan@student.42.fr>            +#+  +:+       +#+         #
+#    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/19 02:45:57 by tristan          ###   ########.fr        #
+#    Updated: 2021/11/19 18:04:18 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ LIBFT				= ./libft
 RDLINE				= /Users/$(USER)/.brew/opt/readline
 
 SRCS				= srcs/main.c				\
+					srcs/env.c					\
 					srcs/utils/utils.c			\
 					srcs/utils/utils1.c			\
 					srcs/utils/utils2.c			\
@@ -48,7 +49,7 @@ CC					= gcc
 
 RM					= rm -f
 
-CFLAGS				= -Wall -Werror -Wextra -I. -g -fsanitize=address
+CFLAGS				= -Wall -Werror -Wextra -I. #-g -fsanitize=address
 
 INC					= -I ${LIBFT} -I ${RDLINE}/include -I ./inc
 

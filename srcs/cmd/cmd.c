@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 17:59:20 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/19 18:59:05 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 	}
 	cmd[i - 1].pipe = 0;
 	parse_cmd_array(cmd, env, i);
+	data->envp = envltoenvp(env);
 	//free_cmd(cmd);
 }
