@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:10:54 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 18:52:40 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/19 02:51:23 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_str_isdigit(char *str)
 	int	i;
 
 	i = 0;
+	if(!str)
+		return (0);
 	if (str[i] == '-')
 		i++;
 	while (str[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:29 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 18:54:33 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/19 02:44:42 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	add_env_var(t_env_l *env, int len, char *add)
 	envdup_plus(tmp, env->list, add);
 	while (env->list[i])
 	{
-		free(env->list[i]);
+	//	free(env->list[i]);
 		i++;
 	}
 	free(env->list);

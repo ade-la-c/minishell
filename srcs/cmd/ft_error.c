@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 19:46:16 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/19 02:43:03 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,14 @@ void	error_errno(t_cmd *cmd, int error_code, int exit_bool, t_env_l *env)
 {
 	char	*error_msg;
 
+	(void)cmd;
+	(void)env;
+	(void)exit_bool;
 	error_msg = strerror(error_code);
 	write (2, error_msg, ft_strlen(error_msg));
 	write(2, "\n", 1);
-	if (cmd)
-		free_cmd(cmd);
-	if (exit_bool == 1)
-		exit_free_env(env, error_code);
+//	if (cmd)
+//		free_cmd(cmd);
+//	if (exit_bool == 1)
+//		exit_free_env(env, error_code);
 }

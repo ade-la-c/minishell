@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/18 18:33:48 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/19 02:27:02 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	parse_cmd_array(t_cmd *cmd, t_env_l *env, int nb_cmd)
 		nb_pipe = 0;
 		if (cmd[i].pipe == 1)
 		{
-			while (cmd[i + nb_pipe].pipe == 1){printf("iter\n");
-				nb_pipe++;}
+			while (cmd[i + nb_pipe].pipe == 1)
+				nb_pipe++;
 			if (nb_pipe == 1 && cmd[i + 1].builtin != NULL)
 				i = single_pipe(i, cmd, env);
 			else if (nb_pipe > 1)
@@ -86,10 +86,8 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 		j = 1;
 		k = 0;
 		while (data->progs[i].av[j])
-		{
 			cmd[i].arg[k++] = ft_strdup(data->progs[i].av[j++]);
-			// printf("av[%d] %s\n", j, cmd[i].arg[k - 1]);
-		}
+		cmd[i].arg[k] = NULL;
 		cmd[i].fdin = data->progs[i].fdin;
 		cmd[i].fdout = data->progs[i].fdout;
 		cmd[i].pipe = 1;
@@ -97,5 +95,5 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 	}
 	cmd[i - 1].pipe = 0;
 	parse_cmd_array(cmd, env, i);
-	free_cmd(cmd);
+	//free_cmd(cmd);
 }

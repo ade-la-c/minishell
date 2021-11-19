@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:59 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 18:14:09 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/19 02:40:08 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	display_echo(t_cmd cmd)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	if (check_option(cmd.arg, &i) == 1)
 	{
 		while (cmd.arg[i])
@@ -81,7 +81,7 @@ static void	display_echo(t_cmd cmd)
 	}
 	else
 	{
-		while (cmd.arg[i] != NULL)
+		while (cmd.arg[i])
 		{
 			write(cmd.fdout, cmd.arg[i], ft_strlen(cmd.arg[i]));
 			if (cmd.arg[i + 1])
@@ -95,9 +95,10 @@ static void	display_echo(t_cmd cmd)
 void	builtin_echo(int i, t_cmd *cmd, int pipe)
 {
 	g_err = 0;
+	
 	if (pipe == 0)
 	{
-		if (cmd[i].arg[1] == NULL)
+		if (cmd[i].arg[0] == NULL)
 		{
 			write(cmd->fdout, "\n", 1);
 			return ;
@@ -108,7 +109,7 @@ void	builtin_echo(int i, t_cmd *cmd, int pipe)
 	{
 		if (cmd[i].fdout != 1)
 			write(1, "", 0);
-		if (cmd[i].arg[1] == NULL)
+		if (cmd[i].arg[0] == NULL)
 		{
 			write(cmd->fdout, "\n", 1);
 			exit(1);
