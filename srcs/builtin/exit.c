@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:31 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 02:38:38 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/19 17:29:05 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ void	builtin_exit(int i, t_cmd *cmd, int pipe, t_env_l *env)
 		g_err = 1;
 		return ;
 	}
-	if (ft_str_isdigit(cmd[i].arg[0]) == 1)
+	if (ft_str_isdigit(cmd[i].arg[1]) == 1)
 	{
 		printf("%s\n", cmd[i].builtin);
 		error_errno(cmd, ENOEXEC, 1, env);
 	}
 	if (pipe == 0)
 		printf("%s\n", cmd[i].builtin);
-	if (cmd[i].arg[0][0] == '-')
-		exit_free_env(env, 255 - (ft_atoi(cmd[i].arg[0]) * -1) + 1);
+	if (cmd[i].arg[1][0] == '-')
+		exit_free_env(env, 255 - (ft_atoi(cmd[i].arg[1]) * -1) + 1);
 	else
-		exit_free_env(env, ft_atoi(cmd[i].arg[0]));
+		exit_free_env(env, ft_atoi(cmd[i].arg[1]));
 }

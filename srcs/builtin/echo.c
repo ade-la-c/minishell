@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:59 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 02:40:08 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/19 17:17:48 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	display_echo(t_cmd cmd)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	if (check_option(cmd.arg, &i) == 1)
 	{
 		while (cmd.arg[i])
@@ -98,7 +98,7 @@ void	builtin_echo(int i, t_cmd *cmd, int pipe)
 	
 	if (pipe == 0)
 	{
-		if (cmd[i].arg[0] == NULL)
+		if (cmd[i].arg[1] == NULL)
 		{
 			write(cmd->fdout, "\n", 1);
 			return ;
@@ -109,7 +109,7 @@ void	builtin_echo(int i, t_cmd *cmd, int pipe)
 	{
 		if (cmd[i].fdout != 1)
 			write(1, "", 0);
-		if (cmd[i].arg[0] == NULL)
+		if (cmd[i].arg[1] == NULL)
 		{
 			write(cmd->fdout, "\n", 1);
 			exit(1);

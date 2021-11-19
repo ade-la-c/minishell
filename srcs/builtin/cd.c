@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:49 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 02:39:29 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/19 17:15:45 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 
 	pwd = NULL;
 	path = NULL;
-	res = check_file(cmd[i].arg[0]);
-	if (cmd[i].arg[0] == NULL)
+	res = check_file(cmd[i].arg[1]);
+	if (cmd[i].arg[1] == NULL)
 		chdir(ft_getenv("HOME", env->list));
-	else if (ft_strncmp(cmd[i].arg[0], "/", ft_strlen(cmd[i].arg[0]) + 1) == 0)
+	else if (ft_strncmp(cmd[i].arg[1], "/", ft_strlen(cmd[i].arg[1]) + 1) == 0)
 		chdir("/");
-	else if (ft_strncmp(cmd[i].arg[0], "..", 2)
-		== 0 && cmd[i].arg[0][2] == '\0')
+	else if (ft_strncmp(cmd[i].arg[1], "..", 2)
+		== 0 && cmd[i].arg[1][2] == '\0')
 	{
 		pwd = getcwd(pwd, PATH_MAX_SHELL);
 		path = go_back(pwd);

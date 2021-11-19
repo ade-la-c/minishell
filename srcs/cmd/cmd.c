@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 15:26:24 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/19 17:36:34 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 	t_cmd	*cmd;
 	int		i;
 	int		j;
-	int		k;
 	int		l;
 
 	i = 0;
@@ -79,21 +78,19 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 		l = 0;
 		while (data->progs[i].av[l])
 			l++;
-		cmd[i].arg = malloc(sizeof(char *) * l);
+		cmd[i].arg = malloc(sizeof(char *) * (l + 1));
 		if (!cmd[i].arg)
 			exit_error("malloc failed");
 		cmd[i].builtin = ft_strdup(data->progs[i].av[0]);
-		j = 1;
-		k = 0;
-		while (data->progs[i].av[j])
-			cmd[i].arg[k++] = ft_strdup(data->progs[i].av[j++]);
-		cmd[i].arg[k] = NULL;
+		j = -1;
+		while (data->progs[i].av[++j])
+			cmd[i].arg[j] = ft_strdup(data->progs[i].av[j]);
+		cmd[i].arg[j] = NULL;
 		cmd[i].fdin = data->progs[i].fdin;
 		cmd[i].fdout = data->progs[i].fdout;
 		cmd[i].pipe = 1;
 		i++;
 	}
-//	printf("%s", cmd[i].arg[1]);
 	cmd[i - 1].pipe = 0;
 	parse_cmd_array(cmd, env, i);
 	//free_cmd(cmd);
