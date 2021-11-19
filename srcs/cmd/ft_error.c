@@ -6,7 +6,7 @@
 /*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 17:30:22 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:51:36 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void	error_errno(t_cmd *cmd, int error_code, int exit_bool, t_env_l *env)
 	write(2, "\n", 1);
 //	if (cmd)
 //		free_cmd(cmd);
-//	if (exit_bool == 1)
-//		exit_free_env(env, error_code);
+	if (exit_bool == 1)
+		exit_free_env(env, error_code);
 }
