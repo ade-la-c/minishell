@@ -6,7 +6,7 @@
 #    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/19 18:04:18 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/11/20 16:44:55 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,8 +69,7 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 					@echo "$(CL_GREEN)-> COMPILING LIBFT$(CL_RESET)"
 					@echo "$(CL_GREY)"
-					$(MAKE) -C $(LIBFT) 
-# bonus
+					$(MAKE) -C $(LIBFT)
 					@echo "$(CL_RESET)"
 					@echo "$(CL_GREEN)-> COMPILING MINISHELL$(CL_RESET)"
 					@echo "$(CL_GREY)"

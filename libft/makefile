@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/23 14:15:40 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/16 22:52:59 by root             ###   ########.fr        #
+#    Updated: 2021/11/20 16:45:30 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,10 +66,6 @@ SRCS	= ft_strlen.c \
 
 OBJS	= ${SRCS:.c=.o}
 
-# BSRC	=
-		
-# BOBJ	= ${BSRC:.c=.o}
-
 NAME	= libft.a
 
 CC		= cc
@@ -83,14 +79,10 @@ CFLAGS	= -Wall -Werror -Wextra
 ${NAME}:	${OBJS}
 			ar rc ${NAME} $?
 
-# bonus:		${OBJS} ${BOBJ}
-# 			ar rc ${NAME} $?
-
 all:		${NAME}
 
 clean:
 			${RM} ${OBJS} 
-# ${BOBJ}
 
 fclean:		clean
 			${RM} ${NAME}

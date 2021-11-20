@@ -6,14 +6,11 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 19:03:07 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:22:11 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-
-	// print_lst(data->envlst, "envlst");
 
 static void	data_init(t_data *data, char **envp)
 {
