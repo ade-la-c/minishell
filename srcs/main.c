@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 14:24:16 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 16:49:19 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ static void	data_init(t_data *data, char **envp)
 	data->proglen = 0;
 	ft_envpdup(data, envp);
 }
-
-// static void	sigint_handler(int sig)
-// {
-// 	(void)sig;
-// 	// write(STDOUT_FILENO, "hell\n", 5);
-// 	glb = 1;
-// }
-
+// /*.
+static void	sigint_handler(int sig)
+{
+	(void)sig;
+	// write(STDOUT_FILENO, "hell\n", 5);
+	glb = 1;
+	rl_on_new_line();
+	rl_redisplay();
+}
+// */
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
@@ -43,9 +45,14 @@ int	main(int ac, char **av, char **envp)
 		exit_error("malloc error");
 	data_init(data, envp);
 	getenvp(data, envp);
-	// signal(SIGINT, &sigint_handler);
+	signal(SIGINT, &sigint_handler);
 	while (1)
 	{
+		if (glb == 1)
+		{
+			glb = 0;
+			continue ;
+		}
 		tmp = readline("petit_shellito> ");
 		if (!tmp)
 			env_free(data->envlst);

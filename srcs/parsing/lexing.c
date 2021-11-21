@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/20 18:17:38 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:00:48 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ static void	tokentoprog(t_data *d)
 	}
 }
 
-	// print_proglst(d->proglst, "imprimiendo");
-
 static t_prog	*lsttoprog(t_data *data, t_list *proglst)
 {
 	t_prog	*prog;
@@ -110,6 +108,7 @@ void	lexing(t_data *d)
 	tokentoprog(d);
 	d->proglen = ft_lstsize(d->proglst);
 	d->progs = lsttoprog(d, d->proglst);
+	// free_toks(d, d->toks);
 	// progtocmd(d);
 	// handlepipes(d);
 }

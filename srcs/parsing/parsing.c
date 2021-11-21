@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 14:24:44 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:58:21 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_token	*lsttotoken(t_data *data, t_list *toklst)
 
 	if (!toklst || !(data->toklst))
 		return (NULL);
-	tokens = malloc(sizeof(t_token) * ++data->toklen);
+	tokens = malloc(sizeof(t_token) * (++data->toklen - 1));
 	if (!tokens)
 		exit_error("malloc error");
 	i = -1;
@@ -32,6 +32,7 @@ t_token	*lsttotoken(t_data *data, t_list *toklst)
 		toklst = toklst->next;
 	}
 	data->toklen = ft_lstsize(data->toklst);
+	ft_lstclear(&(data->toklst), free_tokel);
 	return (tokens);
 }
 
@@ -63,7 +64,10 @@ static void	welding(t_data *d)
 			el = new_token(buffer, WORD);
 		}
 		else if (d->toks[i].type == MYSPACE && ++i)
+		{
+			// free(d->toks[i - 1].content);
 			continue ;
+		}
 		else
 		{
 			el = new_token(ft_strdup(d->toks[i].content), d->toks[i].type);
@@ -89,12 +93,12 @@ static void	checktokens(t_data *d)
 		{
 			if (++i < d->toklen && (d->toks[i].type <= DLESS
 				&& d->toks[i].type >= MORE))
-				exit_error("too many redirections");
+				exit_error("syntax error near unexpected token");
 		}
 		else if (d->toks[i].type == PIPE)
 		{
 			if (++i < d->toklen && d->toks[i].type == PIPE)
-				exit_error("too many pipes");
+				exit_error("syntax error near unexpected token");
 		}
 		i++;
 	}
@@ -108,7 +112,6 @@ void	parsing(t_data *data, char *line)
 	tokenizer(data, line);
 	wordexpansion(data);
 	data->toks = lsttotoken(data, data->toklst);
-	ft_lstclear(&(data->toklst), free);
 	welding(data);
 	data->toklen = ft_lstsize(data->toklst);
 	while (i < data->toklen)

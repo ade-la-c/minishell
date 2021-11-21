@@ -14,15 +14,14 @@
 ->	error handler : Quand t’a une redirection tu prends tjrs le token suivant avec,
 				donc si c’est une pipe ou si il y en a pas c’est une erreur
 
+->	parser l'envp en dehors de la readline while ? (quand la free ?)
+
 --------
 
 RESTE A FAIRE DANS LE PARSING :
 
-
-
-
-->	check pipes a la fin
+->	fix pipes
 
 ->	parser les pipes : ecrire l'output du prog avant et l'input du prog apres
 
-->	parser l'envp en dehors de la readline while ? (quand la free ?)
+->	gerer les frees

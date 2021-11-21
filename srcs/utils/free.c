@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:19:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 14:24:58 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:00:02 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	free_tokel(void *ptr)
 	token = (t_token *)el->content;
 	if (!token)
 		return ;
-	free(el->content);
-	free(ptr);
+	// free(token->content);
+	free(el);
 }
 
 // */
@@ -47,6 +47,7 @@ void	ft_free(t_data *data)
 {
 	ft_lstclear(&(data->toklst), free_tokel);
 	ft_lstclear(&(data->proglst), free_prog);
+	free(data->progs);
 	// free(data->toks);
 }
 
@@ -67,4 +68,15 @@ void	env_free(t_list *envlst)
 	ft_lstclear(&(envlst), free);
 	printf("exit\n");
 	exit(0);
+}
+
+void	free_toks(t_data *data, t_token *toks)
+{
+	int		i;
+
+	i = -1;
+	while (++i < data->toklen)
+	{
+		free(toks[i].content);
+	}
 }

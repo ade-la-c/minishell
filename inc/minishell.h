@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/20 19:17:09 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 18:52:29 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ char				**getenvp2(char *env);
 
 //==========================FREEING==========================//
 
-// void				free_tokel(void *ptr);
+void				free_tokel(void *ptr);
 void				free_prog(void *ptr);
+void				free_toks(t_data *data, t_token *toks);
 
 
 #endif

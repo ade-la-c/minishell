@@ -6,7 +6,7 @@
 #    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/20 18:59:39 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/11/21 16:42:20 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,11 @@ CC					= gcc
 
 RM					= rm -f
 
-CFLAGS				= -Wall -Werror -Wextra -I. #-g -fsanitize=address
+CFLAGS				= -Wall -Werror -Wextra -I ${RDLINE}/include #-g -fsanitize=address
 
-INC					= -I ${LIBFT} -I ${RDLINE}/include -I ./inc
+INC					= -I ${LIBFT} -I ${RDLINE}/include ./inc -lreadline
 
-LIB					= -L ${LIBFT} -lft -L ${RDLINE}/lib -lreadline
+LIB					= -L ${LIBFT} -lft -L ${RDLINE}/lib/ -lreadline
 
 CL_GREY				= \033[38;2;128;128;128m
 
