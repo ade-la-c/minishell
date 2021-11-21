@@ -6,13 +6,13 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 16:49:19 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:45:27 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	glb = 0;
+int	g_glb = 0;
 
 static void	data_init(t_data *data, char **envp)
 {
@@ -23,15 +23,17 @@ static void	data_init(t_data *data, char **envp)
 	ft_envpdup(data, envp);
 }
 // /*.
+
 static void	sigint_handler(int sig)
 {
 	(void)sig;
 	// write(STDOUT_FILENO, "hell\n", 5);
-	glb = 1;
+	g_glb = 1;
 	rl_on_new_line();
 	rl_redisplay();
 }
 // */
+
 int	main(int ac, char **av, char **envp)
 {
 	char	*line;
@@ -48,9 +50,9 @@ int	main(int ac, char **av, char **envp)
 	signal(SIGINT, &sigint_handler);
 	while (1)
 	{
-		if (glb == 1)
+		if (g_glb == 1)
 		{
-			glb = 0;
+			g_glb = 0;
 			continue ;
 		}
 		tmp = readline("petit_shellito> ");
@@ -69,6 +71,5 @@ int	main(int ac, char **av, char **envp)
 	ft_free(data);
 	free(line);
 	// system("leaks minishell");
-	exit(1);
-	// return (0);
+	return (0);
 }

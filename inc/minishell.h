@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 18:52:29 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:31:06 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include "builtin.h"
 # include "utils.h"
 
-extern int  g_err;
+extern int	g_err;
 
 typedef struct s_token
 {
@@ -98,6 +98,5 @@ char				**getenvp2(char *env);
 void				free_tokel(void *ptr);
 void				free_prog(void *ptr);
 void				free_toks(t_data *data, t_token *toks);
-
 
 #endif

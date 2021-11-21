@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:19:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:00:02 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:21:02 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	env_free(t_list *envlst)
 	free(strs[0]);
 	free(strs[1]);
 	ft_lstclear(&(envlst), free);
+	free(envlst);
 	printf("exit\n");
 	exit(0);
 }

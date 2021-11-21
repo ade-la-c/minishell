@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:39 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 02:50:41 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/21 19:48:31 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ void	display_env(t_cmd cmd, char **var_names
 
 void    swap_env(char **content1, char **content2, char **name1, char **name2)
 {
-    char    *save;
+	char	*save;
 
-    save = *content1;
-    *content1 = *content2;
-    *content2 = save;
-    save = *name1;
-    *name1 = *name2;
-    *name2 = save;
+	save = *content1;
+	*content1 = *content2;
+	*content2 = save;
+	save = *name1;
+	*name1 = *name2;
+	*name2 = save;
 }

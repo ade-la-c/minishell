@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:59 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 17:17:48 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:45:59 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ static void	display_echo(t_cmd cmd)
 void	builtin_echo(int i, t_cmd *cmd, int pipe)
 {
 	g_err = 0;
-	
 	if (pipe == 0)
 	{
 		if (cmd[i].arg[1] == NULL)

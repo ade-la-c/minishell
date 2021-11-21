@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:37:50 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/20 18:31:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:32:21 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ void	ft_envpdup(t_data *data, char **envp)
 	if (!data->envp)
 		exit_error("malloc failed");
 	i = -1;
-	while (envp[++i]){
+	while (envp[++i])
 		data->envp[i] = ft_strdup(envp[i]);
-	}
 	data->envp[i] = NULL;
 }
 

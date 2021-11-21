@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 00:29:47 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:50:50 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	exit_error(char *error)
 	exit(0);
 }
 
-int		is_number(char *str, int n)
+int	is_number(char *str, int n)
 {
 	int	i;
 
@@ -141,6 +141,7 @@ void	print_lst(t_list *lst, char *str)
 void	print_toklst(t_list *toklst, char *str)
 {
 	t_token		*token;
+
 	if (!toklst)
 		return ;
 	printf("{%s", str);
