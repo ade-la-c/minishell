@@ -6,7 +6,7 @@
 #    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/20 16:44:55 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/11/20 18:59:39 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ SRCS				= srcs/main.c				\
 					srcs/env.c					\
 					srcs/utils/utils.c			\
 					srcs/utils/utils1.c			\
-					srcs/utils/utils2.c			\
-					srcs/utils/utils3.c			\
 					srcs/utils/free.c			\
 					srcs/utils/env_utils.c		\
 					srcs/utils/env_utils2.c		\

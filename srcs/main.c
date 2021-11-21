@@ -6,11 +6,13 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 19:22:11 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 14:24:16 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	glb = 0;
 
 static void	data_init(t_data *data, char **envp)
 {
@@ -20,6 +22,13 @@ static void	data_init(t_data *data, char **envp)
 	data->proglen = 0;
 	ft_envpdup(data, envp);
 }
+
+// static void	sigint_handler(int sig)
+// {
+// 	(void)sig;
+// 	// write(STDOUT_FILENO, "hell\n", 5);
+// 	glb = 1;
+// }
 
 int	main(int ac, char **av, char **envp)
 {
@@ -34,6 +43,7 @@ int	main(int ac, char **av, char **envp)
 		exit_error("malloc error");
 	data_init(data, envp);
 	getenvp(data, envp);
+	// signal(SIGINT, &sigint_handler);
 	while (1)
 	{
 		tmp = readline("petit_shellito> ");
@@ -47,8 +57,11 @@ int	main(int ac, char **av, char **envp)
 		parsing(data, line);
 		transfer_to_cmd(data, envptoenvl(data));
 		ft_free(data);
+		free(line);
 	}
 	ft_free(data);
 	free(line);
-	return (0);
+	// system("leaks minishell");
+	exit(1);
+	// return (0);
 }

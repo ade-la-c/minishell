@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:37:50 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 19:07:29 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:31:06 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**envltoenvp(t_env_l *env)
 	i = 0;
 	while (env->list[i])
 		i++;
-	envp = malloc(sizeof(char *) * i + 1);
+	envp = malloc(sizeof(char *) * (i + 1));
 	if (!envp)
 		exit_error("malloc failed");
 	i = -1;

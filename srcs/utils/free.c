@@ -6,27 +6,47 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:19:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 19:40:37 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 14:24:58 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_free(t_data *data)
+// /*.
+void	free_tokel(void *ptr)
+{
+	t_token	*token;
+	t_list	*el;
+
+	el = (t_list *)ptr;
+	token = (t_token *)el->content;
+	if (!token)
+		return ;
+	free(el->content);
+	free(ptr);
+}
+
+// */
+
+void	free_prog(void *ptr)
 {
 	int		i;
-	t_token	*token;
+	t_prog	*prog;
 
-	i = -1;
-	while (++i < data->toklen)
-	{
-		token = (t_token *)data->toklst->content;
-		free(token->content);
-		data->toklst = data->toklst->next;
-		i++;
-	}
-	ft_lstclear(&(data->toklst), free);
-	ft_lstclear(&(data->proglst), free);
+	i = 0;
+	if (ptr == NULL)
+		return ;
+	prog = (t_prog *)ptr;
+	while (prog->av[i])
+		free(prog->av[i++]);
+	free(prog->av);
+	free(ptr);
+}
+
+void	ft_free(t_data *data)
+{
+	ft_lstclear(&(data->toklst), free_tokel);
+	ft_lstclear(&(data->proglst), free_prog);
 	// free(data->toks);
 }
 

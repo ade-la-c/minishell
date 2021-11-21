@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/20 16:42:14 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:17:38 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,6 @@ static t_prog	*lsttoprog(t_data *data, t_list *proglst)
 
 void	lexing(t_data *d)
 {
-	// int	i;
-
-	// i = 0;
 	tokentoprog(d);
 	d->proglen = ft_lstsize(d->proglst);
 	d->progs = lsttoprog(d, d->proglst);

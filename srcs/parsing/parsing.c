@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/18 15:10:05 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/21 14:24:44 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	welding(t_data *d)
 				i++;
 			buffer = ft_strdup(d->toks[i++].content);
 			while ((d->toks[i].type >= WORD && d->toks[i].type <= SQUOTE_STR)
-				&& d->toklen)
+				&& i < d->toklen)
 			{
 				if (d->toks[i].type == WORD && !ft_strcmp(d->toks[i].content, "$")
 					&& i + 1 <= d->toklen)
@@ -117,7 +117,7 @@ void	parsing(t_data *data, char *line)
 	data->toks = lsttotoken(data, data->toklst);
 	checktokens(data);
 	lexing(data);
-	// print_toklst(data->toklst, "printing : ");
 }
 
+	// print_toklst(data->toklst, "printing : ");
 	// print_tokens(d, d->toks);

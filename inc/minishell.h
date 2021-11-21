@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 18:58:08 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/20 19:17:09 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ char				**envltoenvp(t_env_l *env);
 void				ft_envpdup(t_data *data, char **envp);
 void				getenvp(t_data *data, char **envp);
 char				**getenvp2(char *env);
+
+//==========================FREEING==========================//
+
+// void				free_tokel(void *ptr);
+void				free_prog(void *ptr);
 
 
 #endif
