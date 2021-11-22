@@ -6,11 +6,33 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:04 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 18:20:22 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:48:10 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+static int	check_s(char *str)
+{
+	int i;
+	
+	i = 0;
+	if(!str)
+		return (0);
+	while (str[i])
+	{
+		if (ft_isalnum(str[i]) == 0)
+		{
+			if (str[i] == '_')
+				i++;
+			else
+				return (1);
+			i--;
+		}
+		i++;
+	}
+	return (0);
+}
 
 char	**get_env_names(char **env_list)
 {
@@ -40,6 +62,8 @@ int	var_exist(t_cmd cmd, int w_arg, char **env_list)
 
 	i = 0;
 	env_names = get_env_names(env_list);
+	if (check_s(cmd.arg[w_arg]))
+		printf("unset: '%s': not a valid identifier\n", cmd.arg[w_arg]);
 	while (env_names[i])
 	{
 		if (ft_strcmp(cmd.arg[w_arg], env_names[i]) == 0)
@@ -50,7 +74,6 @@ int	var_exist(t_cmd cmd, int w_arg, char **env_list)
 		i++;
 	}
 	free_env(nb_env(env_names), env_names);
-	g_err = 1;
 	return (-1);
 }
 
@@ -90,8 +113,6 @@ void	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
 			to_del = var_exist(cmd[i], index, env->list);
 			if (to_del >= 0)
 				del_env_var(env, len, to_del);
-			else
-				g_err = 1;
 			index++;
 		}
 	}

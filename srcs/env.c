@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:37:50 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:32:21 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:51:30 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ t_env_l	*envptoenvl(t_data *data)
 	env = malloc(sizeof(t_env_l));
 	if (!env)
 		exit_error("malloc failed");
-	env->list = malloc(sizeof(char *) * (data->envlen + 1));
+	while (data->envp[i])
+		i++;
+	env->list = malloc(sizeof(char *) * (i + 1));
 	if (!env->list)
 		exit_error("malloc failed");
+	i = 0;
 	while (data->envp[i])
 	{
 		env->list[i] = ft_strdup(data->envp[i]);
@@ -61,7 +64,7 @@ char	**envltoenvp(t_env_l *env)
 	i = 0;
 	while (env->list[i])
 		i++;
-	envp = malloc(sizeof(char *) * (i + 1));
+	envp = malloc(sizeof(char *) * (i + 2));
 	if (!envp)
 		exit_error("malloc failed");
 	i = -1;
@@ -85,7 +88,7 @@ char	**getenvp2(char *env)
 	i = 0;
 	if (!env)
 		return (NULL);
-	strs = malloc(sizeof(char *) * 2);
+	strs = malloc(sizeof(char *) * (2));
 	if (!strs)
 		exit_error("malloc failed");
 	while (env[i] && env[i] != '=')

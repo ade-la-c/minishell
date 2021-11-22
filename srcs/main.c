@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:45:27 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:19:59 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,40 +22,30 @@ static void	data_init(t_data *data, char **envp)
 	data->proglen = 0;
 	ft_envpdup(data, envp);
 }
-// /*.
 
 static void	sigint_handler(int sig)
 {
 	(void)sig;
 	// write(STDOUT_FILENO, "hell\n", 5);
-	g_glb = 1;
-	rl_on_new_line();
-	rl_redisplay();
+	write(STDOUT_FILENO, "\n", 1);
+	if (g_glb == 0)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
-// */
 
-int	main(int ac, char **av, char **envp)
+void	readline_loop(t_data *data)
 {
 	char	*line;
 	char	*tmp;
-	t_data	*data;
 
-	if (ac != 1 || av[1])
-		exit_error("Error : minishell takes no arguments");
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
-		exit_error("malloc error");
-	data_init(data, envp);
-	getenvp(data, envp);
-	signal(SIGINT, &sigint_handler);
 	while (1)
 	{
-		if (g_glb == 1)
-		{
-			g_glb = 0;
-			continue ;
-		}
+		g_glb = 0;
 		tmp = readline("petit_shellito> ");
+		g_glb = 1;
 		if (!tmp)
 			env_free(data->envlst);
 		add_history(tmp);
@@ -70,6 +60,22 @@ int	main(int ac, char **av, char **envp)
 	}
 	ft_free(data);
 	free(line);
-	// system("leaks minishell");
+	env_free(data->envlst);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_data	*data;
+
+	if (ac != 1 || av[1])
+		exit_error("Error : minishell takes no arguments");
+	data = (t_data *)malloc(sizeof(t_data));
+	if (!data)
+		exit_error("malloc error");
+	data_init(data, envp);
+	getenvp(data, envp);
+	signal(SIGINT, &sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
+	readline_loop(data);
 	return (0);
 }

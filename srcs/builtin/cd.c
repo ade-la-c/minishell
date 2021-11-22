@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:49 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 17:15:45 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:29:55 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ int	check_file(char *path)
 	return (res);
 }
 
-void	cd_error(int error_code)
+void	cd_error(int error_code, t_cmd *cmd)
 {
 	char	*error_msg;
 
 	error_msg = strerror(error_code);
-	write (2, error_msg, ft_strlen(error_msg));
-	write(2, "\n", 1);
+	printf("cd: %s: %s\n", cmd->arg[1], error_msg);
 }
 
 void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
@@ -55,12 +54,19 @@ void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 	char	*pwd;
 	char	*path;
 	int		res;
+	int		check;
 
 	pwd = NULL;
 	path = NULL;
+	check = 0;
 	res = check_file(cmd[i].arg[1]);
 	if (cmd[i].arg[1] == NULL)
-		chdir(ft_getenv("HOME", env->list));
+	{
+		check = chdir(ft_getenv("HOME", env->list));
+		if (check == -1)
+			printf("cd: HOME not set\n");
+		check = 0;
+	}
 	else if (ft_strncmp(cmd[i].arg[1], "/", ft_strlen(cmd[i].arg[1]) + 1) == 0)
 		chdir("/");
 	else if (ft_strncmp(cmd[i].arg[1], "..", 2)
@@ -72,9 +78,11 @@ void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 		free(path);
 	}
 	else if (res > 0)
-		cd_error(res);
+		cd_error(res, cmd);
 	else
-		chdir(cmd[i].arg[1]);
+		check = chdir(cmd[i].arg[1]);
+	if (check == -1)
+		printf("cd: %s: %s\n", cmd->arg[1], strerror(errno));
 	if (pipe == 1)
 		exit(1);
 }

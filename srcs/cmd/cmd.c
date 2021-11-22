@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 18:18:44 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:49:43 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 	int		l;
 
 	i = 0;
-	cmd = malloc(sizeof(t_cmd) * (data->proglen));
+	cmd = malloc(sizeof(t_cmd) * (data->proglen + 1));
 	if (!cmd)
 		exit_error("malloc failed");
 	while (i < data->proglen)
@@ -91,6 +91,7 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 		cmd[i].pipe = 1;
 		i++;
 	}
+	cmd[i].builtin = NULL;
 	cmd[i - 1].pipe = 0;
 	parse_cmd_array(cmd, env, i);
 	data->envp = envltoenvp(env);
