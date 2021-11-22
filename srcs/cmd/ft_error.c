@@ -6,7 +6,7 @@
 /*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 17:51:36 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/22 18:10:19 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ void	error_errno(t_cmd *cmd, int error_code, int exit_bool, t_env_l *env)
 	(void)env;
 	(void)exit_bool;
 	error_msg = strerror(error_code);
-	write (2, error_msg, ft_strlen(error_msg));
-	write(2, "\n", 1);
+	write(2, cmd->arg[0], ft_strlen(cmd->arg[0]));
+    write(2, ": ", 2);
+    write(2, error_msg, ft_strlen(error_msg));
+    write(2, "\n", 1);
 //	if (cmd)
 //		free_cmd(cmd);
 	if (exit_bool == 1)

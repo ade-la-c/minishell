@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:51:01 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 17:26:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 18:07:56 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ int	wait_forks(pid_t *pid, int nb_pipe)
 	int	i;
 
 	i = 0;
-	while (i++ < nb_pipe)
+	while (i < nb_pipe - 1)
+	{
 		waitpid(pid[i], NULL, 0);
+		i++;
+	}
 	free(pid);
 	return (i);
 }
