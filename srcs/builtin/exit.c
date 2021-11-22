@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:31 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 15:40:26 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:27:54 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ void	builtin_exit(int i, t_cmd *cmd, int pipe, t_env_l *env)
 		printf("%s\n", cmd[i].builtin);
 		exit_free_env(env, 0);
 	}
-	if (size > 2 && ft_str_isdigit(cmd[i].arg[1]) == 0)
+	if (size > 2 && ft_str_isdigit(cmd[i].arg[1]) == 1)
 	{
 		write (2, "exit\nToo many arguments\n", 25);
 		return ;
 	}
 	if (pipe == 0)
 		printf("%s\n", cmd[i].builtin);
-	if (ft_str_isdigit(cmd[i].arg[1]) == 1)
+	if (ft_str_isdigit(cmd[i].arg[1]) == 0 || cmd[i].arg[1][0] == '\0')
+	{
 		printf("exit: %s: Numeric argument required\n", cmd[i].arg[1]);
+		exit_free_env(env, ft_atoi(cmd[i].arg[1]));
+	}
 	if (cmd[i].arg[1][0] == '-')
 		exit_free_env(env, 255 - (ft_atoi(cmd[i].arg[1]) * -1) + 1);
 	else

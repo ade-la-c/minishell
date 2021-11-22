@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:29 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 15:02:12 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/22 17:58:36 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	change_env_var(t_env_l *env, int len, int exist, char *change)
 	int		i;
 
 	i = 0;
-	tmp = malloc(sizeof(char *) * len + 1);
+	tmp = malloc(sizeof(char *) * (len + 1));
 	envdup_n_change(tmp, env->list, change, exist);
 	while (env->list[i])
 	{
@@ -80,10 +80,10 @@ void	change_env_var(t_env_l *env, int len, int exist, char *change)
 		i++;
 	}
 	free(env->list);
-	env->list = malloc(sizeof(char *) * len + 1);
+	env->list = malloc(sizeof(char *) * (len + 1));
 	envdup(env->list, tmp);
 	free_env(len, tmp);
-	free_token(env);
+	// free_token(env);
 	init_token(env);
 }
 
@@ -94,6 +94,8 @@ void	add_env_var(t_env_l *env, int len, char *add)
 
 	i = 0;
 	tmp = malloc(sizeof(char *) * (len + 2));
+	if (!tmp)
+		exit_error("malloc failed");
 	envdup_plus(tmp, env->list, add);
 	while (env->list[i])
 	{
@@ -102,6 +104,8 @@ void	add_env_var(t_env_l *env, int len, char *add)
 	}
 	free(env->list);
 	env->list = malloc(sizeof(char *) * (len + 2));
+	if (!env->list)
+		exit_error("malloc failed");
 	envdup(env->list, tmp);
 	free_env(len + 2, tmp);
 //	free_token(env);

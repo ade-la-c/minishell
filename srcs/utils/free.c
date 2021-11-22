@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:19:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:21:02 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:46:48 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	free_prog(void *ptr)
 
 void	ft_free(t_data *data)
 {
-	ft_lstclear(&(data->toklst), free_tokel);
+	ft_lstclear(&(data->toklst), free);
 	ft_lstclear(&(data->proglst), free_prog);
 	free(data->progs);
 	// free(data->toks);
@@ -71,6 +71,7 @@ void	env_free(t_list *envlst)
 	exit(0);
 }
 
+/*.
 void	free_toks(t_data *data, t_token *toks)
 {
 	int		i;
@@ -81,3 +82,4 @@ void	free_toks(t_data *data, t_token *toks)
 		free(toks[i].content);
 	}
 }
+// */

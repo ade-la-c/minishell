@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:00:48 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:51:07 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	tokentoprog(t_data *d)
 		j = 0;
 		if (!prog)
 			prog = init_prog(d, i);
-		while (d->toks[i].type != PIPE && i < d->toklen)
+		while (i < d->toklen && d->toks[i].type != PIPE)
 		{
 			if (d->toks[i].type >= MORE && d->toks[i].type <= DLESS)
 				i += handleredirections(d, prog, i);
@@ -108,7 +108,5 @@ void	lexing(t_data *d)
 	tokentoprog(d);
 	d->proglen = ft_lstsize(d->proglst);
 	d->progs = lsttoprog(d, d->proglst);
-	// free_toks(d, d->toks);
-	// progtocmd(d);
-	// handlepipes(d);
+	// ft_lstclear(&(d->toklst), free_tokel);
 }

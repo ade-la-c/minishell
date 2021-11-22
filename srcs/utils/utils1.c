@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:51:01 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:50:05 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:26:06 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ int	ft_str_isdigit(char *str)
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (!str[i])
 		return (0);
 	if (str[i] == '-')
 		i++;
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (1);
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 void	free_split_join(char **split, char *join)

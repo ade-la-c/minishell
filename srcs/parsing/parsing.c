@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:48:00 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:50:26 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ t_token	*lsttotoken(t_data *data, t_list *toklst)
 		token = (t_token *)toklst->content;
 		tokens[i].content = token->content;
 		tokens[i].type = token->type;
+		// printf("%p - %p\n", toklst->content, token->content);
 		toklst = toklst->next;
 	}
 	data->toklen = ft_lstsize(data->toklst);
-	ft_lstclear(&(data->toklst), free_tokel);
 	return (tokens);
 }
 
@@ -53,8 +53,8 @@ static void	welding(t_data *d)
 				&& i + 1 <= d->toklen)
 				i++;
 			buffer = ft_strdup(d->toks[i++].content);
-			while ((d->toks[i].type >= WORD && d->toks[i].type <= SQUOTE_STR)
-				&& i < d->toklen)
+			while (i < d->toklen
+				&& (d->toks[i].type >= WORD && d->toks[i].type <= SQUOTE_STR))
 			{
 				if (d->toks[i].type == WORD && !ft_strcmp(d->toks[i].content, "$")
 					&& i + 1 <= d->toklen)
@@ -109,6 +109,7 @@ void	parsing(t_data *data, char *line)
 	tokenizer(data, line);
 	wordexpansion(data);
 	data->toks = lsttotoken(data, data->toklst);
+	ft_lstclear(&(data->toklst), free);
 	welding(data);
 	data->toklen = ft_lstsize(data->toklst);
 	while (i < data->toklen)

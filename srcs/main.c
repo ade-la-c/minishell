@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 15:19:59 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:42:49 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	data_init(t_data *data, char **envp)
 static void	sigint_handler(int sig)
 {
 	(void)sig;
-	// write(STDOUT_FILENO, "hell\n", 5);
 	write(STDOUT_FILENO, "\n", 1);
 	if (g_glb == 0)
 	{
@@ -60,7 +59,7 @@ void	readline_loop(t_data *data)
 	}
 	ft_free(data);
 	free(line);
-	env_free(data->envlst);
+	// env_free(data->envlst);
 }
 
 int	main(int ac, char **av, char **envp)
