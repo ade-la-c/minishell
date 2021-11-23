@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:04 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 15:48:10 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 03:56:27 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	check_s(char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	if(!str)
+	if (!str)
 		return (0);
 	while (str[i])
 	{

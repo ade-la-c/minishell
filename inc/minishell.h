@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 02:44:11 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 03:54:59 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_prog
 typedef struct s_data
 {
 	t_list			*toklst;
-	t_list			*toklst2;
 	t_token			*toks;
 	int				toklen;
 	t_list			*envlst;
@@ -75,8 +74,7 @@ char				*strjoinfree(char *s1, char *s2, int x);
 // int					msh_parser_get_retval(void);
 // void				msh_parser_set_retval(int retval);
 
-
-void				print_lst(t_list *lst, char *str);
+void				print_envlst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);
 void				print_tokens(t_data *data, t_token *tokens);
 void				print_proglst(t_list *lst, char *str);
@@ -91,8 +89,8 @@ void				lexing(t_data *data);
 void				transfer_to_cmd(t_data *data, t_env_l *env);
 t_env_l				*envptoenvl(t_data *data);
 char				**envltoenvp(t_env_l *env);
-void				ft_envpdup(t_data *data, char **envp);
-void				getenvp(t_data *data, char **envp);
+void				ft_envpdup(t_data *data, char **envp, int bool);
+void				getenvp(t_data *data);
 char				**getenvp2(char *env);
 
 //==========================FREEING==========================//

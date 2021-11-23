@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:29 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 17:58:36 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 04:00:28 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	free_token(t_env_l *env)
 	}
 	free(env->token);
 }
-
 
 void	envdup(char **env_list, char **tmp)
 {

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 02:38:04 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 04:06:56 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,5 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 	parse_cmd_array(cmd, env, i);
 	data->envp = envltoenvp(env);
 	free(env); //? a mettre dans free_to_cmd
-	//free_cmd(cmd);
+	free_cmd(cmd);
 }

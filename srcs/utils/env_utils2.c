@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:39 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:48:31 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 04:00:17 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	display_env(t_cmd cmd, char **var_names
 	}
 }
 
-void    swap_env(char **content1, char **content2, char **name1, char **name2)
+void	swap_env(char **content1, char **content2, char **name1, char **name2)
 {
 	char	*save;
 

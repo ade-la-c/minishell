@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 02:44:05 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 03:55:25 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ int	g_glb = 0;
 static void	data_init(t_data *data, char **envp)
 {
 	data->toklst = NULL;
-	data->toklst2 = NULL;
 	data->toklen = 0;
 	data->envlst = NULL;
 	data->envlen = 0;
 	data->proglst = NULL;
 	data->proglen = 0;
-	ft_envpdup(data, envp);
+	ft_envpdup(data, envp, 0);
 }
 
 static void	sigint_handler(int sig)
@@ -46,6 +45,7 @@ void	readline_loop(t_data *data)
 
 	while (1)
 	{
+		getenvp(data);
 		g_glb = 0;
 		tmp = readline("petit_shellito> ");
 		g_glb = 1;
@@ -73,7 +73,6 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 1 || av[1])
 		exit_error("Error : minishell takes no arguments");
 	data_init(&data, envp);
-	getenvp(&data, envp);
 	signal(SIGINT, &sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 	readline_loop(&data);

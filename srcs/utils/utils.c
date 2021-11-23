@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:50:50 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 03:50:19 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,35 +92,9 @@ char	*strjoinfree(char *s1, char *s2, int x)
 	return (ret);
 }
 
-/*.
-
-int		remove_element(t_list **list, void *todelete)
-{
-	t_list	*tmp;
-	t_list	*prev;
-
-	tmp = *list;
-	if (tmp != NULL && tmp->content == todelete)
-	{
-		(*list) = tmp->next;printf("%p\n", &tmp);
-		free(tmp);
-		return (0);
-	}
-	while (tmp != NULL && tmp->content != todelete)
-	{
-		prev = tmp;
-		tmp = tmp->next;
-	}
-	if (tmp == NULL)
-		return (1);
-	prev->next = tmp->next;printf("%p\n", &tmp);
-	free(tmp);
-	return (0);
-}
-// */
 // provisoire
 
-void	print_lst(t_list *lst, char *str)
+void	print_envlst(t_list *lst, char *str)
 {
 	char	**strs;
 

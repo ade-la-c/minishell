@@ -6,13 +6,13 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:37:50 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 15:51:30 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 03:48:39 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_envpdup(t_data *data, char **envp)
+void	ft_envpdup(t_data *data, char **envp, int bool)
 {
 	int	i;
 
@@ -24,7 +24,11 @@ void	ft_envpdup(t_data *data, char **envp)
 		exit_error("malloc failed");
 	i = -1;
 	while (envp[++i])
+	{
 		data->envp[i] = ft_strdup(envp[i]);
+		if (bool)
+			free(envp[i]);
+	}
 	data->envp[i] = NULL;
 }
 
@@ -98,16 +102,16 @@ char	**getenvp2(char *env)
 	return (strs);
 }
 
-void	getenvp(t_data *data, char **envp)
+void	getenvp(t_data *data)
 {
 	int		i;
 	char	**env;
 	t_list	*el;
 
 	i = 0;
-	while (envp && envp[i])
+	while (data->envp && data->envp[i])
 	{
-		env = getenvp2(envp[i]);
+		env = getenvp2(data->envp[i]);
 		el = ft_lstnew(env);
 		if (!el)
 			exit_error("get_envp");
