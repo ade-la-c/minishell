@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:19:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 02:45:02 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 21:00:28 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,43 @@ void	free_prog(void *ptr)
 	free(prog);
 }
 
+void	free_envel(void *content)
+{
+	char	**strs;
+	t_list	el;
+
+	el.content = (t_list *)content;
+	strs = (char **)el.content;
+	free(strs[0]);
+	free(strs[1]);
+	free(strs);
+	// free(content);
+}
+
 void	ft_free(t_data *data)
 {
 	ft_lstclear(&(data->toklst), free_tokel);
 	ft_lstclear(&(data->proglst), free_prog);
+	ft_lstclear(&(data->envlst), free_envel);
 	free(data->progs);
 	// free(data->toks);
 }
 
 void	env_free(t_list *envlst)
 {
-	char	**strs;
+	// char	**strs;
 
-	while (envlst->next)
-	{
-		strs = (char **)envlst->content;
-		free(strs[0]);
-		free(strs[1]);
-		envlst = envlst->next;
-	}
-	strs = (char **)envlst->content;
-	free(strs[0]);
-	free(strs[1]);
-	ft_lstclear(&(envlst), free);
+	// while (envlst->next)
+	// {
+	// 	strs = (char **)envlst->content;
+	// 	free(strs[0]);
+	// 	free(strs[1]);
+	// 	envlst = envlst->next;
+	// }
+	// strs = (char **)envlst->content;
+	// free(strs[0]);
+	// free(strs[1]);
+	ft_lstclear(&(envlst), free_envel);
 	free(envlst);
 	printf("exit\n");
 	exit(0);

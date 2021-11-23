@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:24:20 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:53:27 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	expandword(char **tok, t_list *envlst, int dpos)
 	int		lim;
 	char	**strs;
 	char	*token;
+	char	*retstr;
 
 	lim = 1;
 	token = *tok;
@@ -49,7 +50,9 @@ static int	expandword(char **tok, t_list *envlst, int dpos)
 	lim += dpos;
 	if (token[dpos + 1] == '?')
 	{
-		token = writeexpansion(token, ft_itoa(msh_parser_get_retval()), dpos, lim);
+		retstr = ft_itoa(msh_parser_get_retval());
+		token = writeexpansion(token, retstr, dpos, lim);
+		free(retstr);
 		*tok = token;
 		return (1);
 	}

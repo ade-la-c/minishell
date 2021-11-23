@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:13:33 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 21:03:27 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	readline_loop(t_data *data)
 
 	while (1)
 	{
-		getenvp(data);
 		g_glb = 0;
 		tmp = readline("petit_shellito> ");
 		g_glb = 1;
@@ -56,8 +55,10 @@ void	readline_loop(t_data *data)
 		free(tmp);
 		if (!ft_strcmp(line, ""))
 			continue ;
+		getenvp(data);
 		parsing(data, line);
 		transfer_to_cmd(data, envptoenvl(data));
+		printf("envlen %d\n", data->envlen);
 		ft_free(data);
 		free(line);
 	}

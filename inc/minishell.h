@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:12:56 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:44:59 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ void				free_tokel(void *ptr);
 void				free_prog(void *ptr);
 void				free_toks(t_data *data, t_token *toks);
 void				free_null(void *ptr);
+void				free_envel(void *content);
 
 #endif
