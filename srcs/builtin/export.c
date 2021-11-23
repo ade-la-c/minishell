@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:41 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 15:46:34 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 04:54:50 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int	var_already_exist(t_cmd cmd, char **env_list, int a_i, int i)
 		{
 			if (ft_strcmp(tmp, env_names[i]) == 0)
 			{
-				//free_env(nb_env(env_names), env_names);
+				free_env(nb_env(env_names), env_names);
 				free(tmp);
 				return (i);
 			}
 			i++;
 		}
 		free(tmp);
-		//free_env(nb_env(env_names), env_names);
+		free_env(nb_env(env_names), env_names);
 	}
 	return (-1);
 }

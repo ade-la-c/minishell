@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 04:06:56 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 04:50:26 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 	if (!cmd)
 		exit_error("malloc failed");
 	while (i < data->proglen)
-	{				//! un des 2 malloc de cette fct leak, (a ZERA de free)
+	{
 		l = 0;
 		while (data->progs[i].av[l])
 			l++;
