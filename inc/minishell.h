@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:31:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 02:44:11 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_prog
 typedef struct s_data
 {
 	t_list			*toklst;
+	t_list			*toklst2;
 	t_token			*toks;
 	int				toklen;
 	t_list			*envlst;
@@ -71,8 +72,9 @@ int					remove_element(t_list **list, void *todelete);
 char				**get_env(t_list *envlst, char *str, int len);
 char				*strjoinfree(char *s1, char *s2, int x);
 
-void				ft_free(t_data *data);
-void				env_free(t_list *envlst);
+// int					msh_parser_get_retval(void);
+// void				msh_parser_set_retval(int retval);
+
 
 void				print_lst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);
@@ -95,8 +97,11 @@ char				**getenvp2(char *env);
 
 //==========================FREEING==========================//
 
+void				ft_free(t_data *data);
+void				env_free(t_list *envlst);
 void				free_tokel(void *ptr);
 void				free_prog(void *ptr);
 void				free_toks(t_data *data, t_token *toks);
+void				free_null(void *ptr);
 
 #endif

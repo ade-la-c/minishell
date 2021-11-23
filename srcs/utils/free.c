@@ -6,24 +6,25 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:19:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 17:46:48 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 02:45:02 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 // /*.
-void	free_tokel(void *ptr)
+void	free_tokel(void *content)
 {
 	t_token	*token;
-	t_list	*el;
+	t_list	el;
 
-	el = (t_list *)ptr;
-	token = (t_token *)el->content;
-	if (!token)
+	if (content == NULL)
 		return ;
-	// free(token->content);
-	free(el);
+	el.content = (t_list *)content;
+	token = (t_token *)el.content;
+	// printf("content : %s type : %d\n", token->content, token->type);
+	free(token->content);
+	free(el.content);
 }
 
 // */
@@ -40,12 +41,12 @@ void	free_prog(void *ptr)
 	while (prog->av[i])
 		free(prog->av[i++]);
 	free(prog->av);
-	free(ptr);
+	free(prog);
 }
 
 void	ft_free(t_data *data)
 {
-	ft_lstclear(&(data->toklst), free);
+	ft_lstclear(&(data->toklst), free_tokel);
 	ft_lstclear(&(data->proglst), free_prog);
 	free(data->progs);
 	// free(data->toks);
@@ -71,7 +72,7 @@ void	env_free(t_list *envlst)
 	exit(0);
 }
 
-/*.
+// /*.
 void	free_toks(t_data *data, t_token *toks)
 {
 	int		i;
@@ -81,5 +82,7 @@ void	free_toks(t_data *data, t_token *toks)
 	{
 		free(toks[i].content);
 	}
+	free(toks);
 }
+
 // */

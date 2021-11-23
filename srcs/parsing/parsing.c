@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 17:50:26 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 02:31:14 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ t_token	*lsttotoken(t_data *data, t_list *toklst)
 
 	if (!toklst || !(data->toklst))
 		return (NULL);
-	tokens = malloc(sizeof(t_token) * (++data->toklen - 1));
+	tokens = malloc(sizeof(t_token) * data->toklen);
 	if (!tokens)
 		exit_error("malloc error");
 	i = -1;
 	while (++i < data->toklen && toklst)
 	{
 		token = (t_token *)toklst->content;
-		tokens[i].content = token->content;
+		tokens[i].content = ft_strdup(token->content);
 		tokens[i].type = token->type;
-		// printf("%p - %p\n", toklst->content, token->content);
 		toklst = toklst->next;
 	}
-	data->toklen = ft_lstsize(data->toklst);
+	// data->toklen = ft_lstsize(data->toklst);
+	data->toklen = i;
 	return (tokens);
 }
 
@@ -59,12 +59,14 @@ static void	welding(t_data *d)
 				if (d->toks[i].type == WORD && !ft_strcmp(d->toks[i].content, "$")
 					&& i + 1 <= d->toklen)
 					i++;
-				buffer = strjoinfree(buffer, d->toks[i++].content, 1);
+				buffer = strjoinfree(buffer, d->toks[i++].content, 1); //? pas sur que ça casse
 			}
 			el = new_token(buffer, WORD);
 		}
 		else if (d->toks[i].type == MYSPACE && ++i)
+		{
 			continue ;
+		}
 		else
 		{
 			el = new_token(ft_strdup(d->toks[i].content), d->toks[i].type);
@@ -109,16 +111,14 @@ void	parsing(t_data *data, char *line)
 	tokenizer(data, line);
 	wordexpansion(data);
 	data->toks = lsttotoken(data, data->toklst);
-	ft_lstclear(&(data->toklst), free);
-	welding(data);
 	data->toklen = ft_lstsize(data->toklst);
-	while (i < data->toklen)
-		free(data->toks[i++].content);
-	free(data->toks);
+	ft_lstclear(&(data->toklst), free_tokel);
+	welding(data);
+	free_toks(data, data->toks);
 	data->toks = lsttotoken(data, data->toklst);
+	ft_lstclear(&(data->toklst), free_tokel);
 	checktokens(data);
 	lexing(data);
 }
 
-	// print_toklst(data->toklst, "printing : ");
 	// print_tokens(d, d->toks);

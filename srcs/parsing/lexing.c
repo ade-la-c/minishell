@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 17:51:07 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 02:06:15 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void	lexing(t_data *d)
 	tokentoprog(d);
 	d->proglen = ft_lstsize(d->proglst);
 	d->progs = lsttoprog(d, d->proglst);
-	// ft_lstclear(&(d->toklst), free_tokel);
+	ft_lstclear(&(d->toklst), free_tokel);
+	free_toks(d, d->toks);
 }

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 17:42:49 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 02:44:05 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	g_glb = 0;
 static void	data_init(t_data *data, char **envp)
 {
 	data->toklst = NULL;
+	data->toklst2 = NULL;
+	data->toklen = 0;
 	data->envlst = NULL;
+	data->envlen = 0;
 	data->proglst = NULL;
 	data->proglen = 0;
 	ft_envpdup(data, envp);
@@ -26,6 +29,7 @@ static void	data_init(t_data *data, char **envp)
 static void	sigint_handler(int sig)
 {
 	(void)sig;
+		// msh_parser_set_retval(1);
 	write(STDOUT_FILENO, "\n", 1);
 	if (g_glb == 0)
 	{
@@ -59,22 +63,19 @@ void	readline_loop(t_data *data)
 	}
 	ft_free(data);
 	free(line);
-	// env_free(data->envlst);
+	env_free(data->envlst);
 }
 
 int	main(int ac, char **av, char **envp)
 {
-	t_data	*data;
+	t_data	data;
 
 	if (ac != 1 || av[1])
 		exit_error("Error : minishell takes no arguments");
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
-		exit_error("malloc error");
-	data_init(data, envp);
-	getenvp(data, envp);
+	data_init(&data, envp);
+	getenvp(&data, envp);
 	signal(SIGINT, &sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
-	readline_loop(data);
+	readline_loop(&data);
 	return (0);
 }

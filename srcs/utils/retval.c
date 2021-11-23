@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   retval.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/18 18:43:25 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 00:45:06 by ade-la-c         ###   ########.fr       */
+/*   Created: 2021/11/22 22:03:18 by ade-la-c          #+#    #+#             */
+/*   Updated: 2021/11/22 22:38:45 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "../../inc/minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+static int	*get_retval(void)
 {
-	t_list	*tmp;
+	static int	retval = 0;
 
-	if (!lst || !del)
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		(*lst) = tmp;
-	}
-	*lst = NULL;
+	return (&retval);
+}
+
+void	msh_parser_set_retval(int retval)
+{
+	*get_retval() = retval;
+}
+
+int	msh_parser_get_retval(void)
+{
+	return (*get_retval());
 }

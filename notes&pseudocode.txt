@@ -25,3 +25,5 @@ RESTE A FAIRE DANS LE PARSING :
 ->	parser les pipes : ecrire l'output du prog avant et l'input du prog apres
 
 ->	gerer les frees
+
+? faire un tableau de token directement en comptant ?

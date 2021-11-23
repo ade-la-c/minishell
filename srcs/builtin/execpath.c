@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execpath.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:21 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/19 17:12:56 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/22 18:41:33 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ static void	execpath_no_pipe(int i, t_cmd *cmd, t_env_l *env)
 		execve(cmd[i].builtin, cmd[i].arg, env->list);
 	else
 		execve_with_path(i, cmd, env);
+	write(2, cmd[i].arg[0], ft_strlen(cmd[i].arg[0]));
+	write(2, ": command not found\n", 20);
 	error_errno(cmd, errno, 1, env);
 }
 
@@ -79,6 +81,8 @@ void	execpath_pipe(t_cmd *cmd, int i, t_env_l *env)
 		execve(cmd[i].builtin, cmd[i].arg, env->list);
 	else
 		execve_with_path(i, cmd, env);
+	write(2, cmd[i].arg[0], ft_strlen(cmd[i].arg[0]));
+	write(2, ": command not found\n", 20);
 	error_errno(cmd, errno, 1, env);
 }
 
