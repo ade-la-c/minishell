@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 17:38:05 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/06/01 17:42:33 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:23:19 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	checkset(char c, const char *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	i;
-	size_t	j;
+	ssize_t	i;
+	ssize_t	j;
 
 	if (!s1 || !set)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:41 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:34:34 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:30:04 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 				add_env_var(env, nb_env(env->list), cmd[i].arg[arg_index]);
 			else
 				g_err = 1;
+			free_token(env);
 		}
 	}
 	else if (count_arg(cmd[i]) == 1)

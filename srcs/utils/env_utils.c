@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:29 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 17:33:42 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:21:30 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	change_env_var(t_env_l *env, int len, int exist, char *change)
 	env->list = malloc(sizeof(char *) * (len + 1));
 	envdup(env->list, tmp);
 	free_env(len, tmp);
-	free_token(env);
 	init_token(env);
 }
 
@@ -107,6 +106,5 @@ void	add_env_var(t_env_l *env, int len, char *add)
 		exit_error("malloc failed");
 	envdup(env->list, tmp);
 	free_env(len + 2, tmp);
-	free_token(env);
 	init_token(env);
 }
