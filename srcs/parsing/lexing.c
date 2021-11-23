@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:04:37 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 19:37:28 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_prog	*init_prog(t_data *d, int index)
 static int	handleredirections(t_data *d, t_prog *p, int i)
 {
 
-	if (d->toks[i + 1].type != WORD)
+	if (d->toklen <= 1 || d->toks[i + 1].type != WORD)
 		exit_error("redirection needs a valid argument");
 	if (d->toks[i].type == MORE)
 		p->fdout = open(d->toks[i + 1].content,

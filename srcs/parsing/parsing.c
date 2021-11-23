@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:44:23 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 19:34:46 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_token	*lsttotoken(t_data *data, t_list *toklst)
 		tokens[i].type = token->type;
 		toklst = toklst->next;
 	}
-	data->toklen = ft_lstsize(data->toklst);
+	data->toklen = i;
+	// data->toklen = ft_lstsize(data->toklst);
 	return (tokens);
 }
 
