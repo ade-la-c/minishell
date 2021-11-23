@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:51:01 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/22 18:07:56 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:14:41 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ int	ft_strclen(const char *str, char c)
 int	wait_forks(pid_t *pid, int nb_pipe)
 {
 	int	i;
+	int	ret;
 
 	i = 0;
 	while (i < nb_pipe - 1)
 	{
-		waitpid(pid[i], NULL, 0);
+		waitpid(pid[i], &ret, 0);
 		i++;
 	}
+	msh_parser_set_retval(ret);
 	free(pid);
 	return (i);
 }

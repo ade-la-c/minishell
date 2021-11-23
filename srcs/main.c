@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 03:55:25 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:13:33 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	data_init(t_data *data, char **envp)
 static void	sigint_handler(int sig)
 {
 	(void)sig;
-		// msh_parser_set_retval(1);
+		msh_parser_set_retval(1);
 	write(STDOUT_FILENO, "\n", 1);
 	if (g_glb == 0)
 	{

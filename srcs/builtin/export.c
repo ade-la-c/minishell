@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:41 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 04:54:50 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:34:34 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	check_env_name(char *cmd)
 	return (0);
 }
 
-void	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
+int	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 {
 	int		exist;
 	int		arg_index;
@@ -139,4 +139,5 @@ void	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 		display_env_ascii(cmd[i], env);
 	if (pipe == 1)
 		exit(1);
+	return (0);		//TODO changer les valeurs de retour
 }

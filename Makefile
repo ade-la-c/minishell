@@ -6,7 +6,7 @@
 #    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/23 05:02:17 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/11/23 18:48:04 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,15 +40,15 @@ SRCS				= srcs/main.c				\
 					srcs/cmd/cmd.c				\
 					srcs/cmd/ft_error.c			\
 					srcs/cmd/pipe.c				\
-					#srcs/utils/retval.c			\
+					srcs/utils/retval.c			\
 
 OBJS				= $(SRCS:.c=.o)
 
-CC					= gcc
+CC					= gcc -g
 
 RM					= rm -f
 
-CFLAGS				= -Wall -Werror -Wextra -I ${RDLINE}/include -g -fsanitize=address
+CFLAGS				= -Wall -Werror -Wextra -I ${RDLINE}/include -fsanitize=address
 
 INC					= -I ${LIBFT} -I ${RDLINE}/include ./inc -lreadline
 

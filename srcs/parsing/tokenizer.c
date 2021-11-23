@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 15:31:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 00:30:16 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 17:54:30 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,3 @@ void	tokenizer(t_data *data, char *line)
 	data->toklen = ft_lstsize(data->toklst);
 }
 
-	// print_toklst(data->toklst, "printing ou quoi");

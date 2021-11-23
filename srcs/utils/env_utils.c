@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:29 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 05:27:00 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 17:33:42 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	free_token(t_env_l *env)
 		j = 0;
 		while (env->token[i][j])
 		{
-				printf("%p - %s\n", env->token[i][j], env->token[i][j]);
 			free(env->token[i][j]);
 			j++;
 		}
@@ -77,13 +76,13 @@ void	change_env_var(t_env_l *env, int len, int exist, char *change)
 	while (env->list[i])
 	{
 		free(env->list[i]);
-		i++;
+		i++;	
 	}
 	free(env->list);
 	env->list = malloc(sizeof(char *) * (len + 1));
 	envdup(env->list, tmp);
 	free_env(len, tmp);
-	// free_token(env);
+	free_token(env);
 	init_token(env);
 }
 
@@ -108,6 +107,6 @@ void	add_env_var(t_env_l *env, int len, char *add)
 		exit_error("malloc failed");
 	envdup(env->list, tmp);
 	free_env(len + 2, tmp);
-	// free_token(env);
+	free_token(env);
 	init_token(env);
 }

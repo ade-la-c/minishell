@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 04:18:24 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:44:23 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ static void	checktokens(t_data *d)
 		}
 		i++;
 	}
+	print_toklst(d->toklst, "printing ou quoi");
 }
 
 void	parsing(t_data *data, char *line)

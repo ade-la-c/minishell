@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 02:06:15 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:04:37 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static int	handleredirections(t_data *d, t_prog *p, int i)
 
 	if (d->toks[i + 1].type != WORD)
 		exit_error("redirection needs a valid argument");
-	if (d->toks[i++].type == MORE)
-		p->fdout = open(d->toks[i].content,
+	if (d->toks[i].type == MORE)
+		p->fdout = open(d->toks[i + 1].content,
 				O_WRONLY | O_TRUNC | O_CREAT, 0777);
-	else if (d->toks[i++].type == LESS)
-		p->fdin = open(d->toks[i].content, O_RDONLY);
-	else if (d->toks[i++].type == DMORE)
-		p->fdout = open(d->toks[i].content,
-				O_WRONLY | O_APPEND | O_CREAT, 0777);
+	else if (d->toks[i].type == LESS)
+		p->fdin = open(d->toks[i + 1].content, O_RDONLY);
+	else if (d->toks[i].type == DMORE)
+		p->fdout = open(d->toks[i + 1].content,
+				O_WRONLY | O_CREAT | O_APPEND, 0777);
 	// TODO else if (d->toks[i].type == DLESS)
 	if (p->fdin < 0 || p->fdout < 0)
 		exit_error("redirection error");

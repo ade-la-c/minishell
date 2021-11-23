@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 02:44:24 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:24:20 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,12 @@ static int	expandword(char **tok, t_list *envlst, int dpos)
 		&& (token[dpos + lim] == '_' || ft_isalnum(token[dpos + lim])))
 		lim++;
 	lim += dpos;
-	// if (token[dpos + 1] == '?')
-	// 	writeexpansion(token, ft_itoa(msh_parser_get_retval()), dpos, lim - 1);
+	if (token[dpos + 1] == '?')
+	{
+		token = writeexpansion(token, ft_itoa(msh_parser_get_retval()), dpos, lim);
+		*tok = token;
+		return (1);
+	}
 	if (!token[dpos + 1] || lim == dpos + 1)
 		return (1);
 	strs = get_env(envlst, &token[dpos + 1], lim - dpos - 1);

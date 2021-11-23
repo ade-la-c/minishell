@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 03:54:59 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:12:56 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int					remove_element(t_list **list, void *todelete);
 char				**get_env(t_list *envlst, char *str, int len);
 char				*strjoinfree(char *s1, char *s2, int x);
 
-// int					msh_parser_get_retval(void);
-// void				msh_parser_set_retval(int retval);
+int					msh_parser_get_retval(void);
+void				msh_parser_set_retval(int retval);
 
 void				print_envlst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);

@@ -6,13 +6,13 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:10 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:46:40 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:34:45 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	builtin_env(int i, t_cmd *cmd, t_env_l *env, int pipe)
+int	builtin_env(int i, t_cmd *cmd, t_env_l *env, int pipe)
 {
 	int	env_index;
 
@@ -33,4 +33,5 @@ void	builtin_env(int i, t_cmd *cmd, t_env_l *env, int pipe)
 	}
 	if (pipe == 1)
 		exit(1);
+	return (0);		//TODO changer les valeurs de retour
 }

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:04 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 03:56:27 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:34:40 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	del_env_var(t_env_l *env, int len, int to_del)
 	free_env(len, tmp);
 }
 
-void	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
+int	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
 {
 	int	to_del;
 	int	index;
@@ -118,4 +118,5 @@ void	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
 	}
 	if (pipe == 1)
 		exit(1);
+	return (0);		//TODO changer les valeurs de retour
 }
