@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 18:36:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 22:17:14 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,38 @@ void	parse_cmd_array(t_cmd *cmd, t_env_l *env, int nb_cmd)
 	}
 }
 
+void	cmd_loop(t_data *data, t_cmd *cmd, int *i, int j)
+{
+	int	l;
+
+	l = 0;
+	while (data->progs[*i].av[l])
+		l++;
+	cmd[*i].arg = malloc(sizeof(char *) * (l + 1));
+	if (!cmd[*i].arg)
+		exit_error("malloc failed");
+	cmd[*i].builtin = ft_strdup(data->progs[*i].av[0]);
+	if (!(cmd[*i].builtin))
+		exit_error("1 strdup failed");
+	j = -1;
+	while (data->progs[*i].av[++j])
+	{
+		cmd[*i].arg[j] = ft_strdup(data->progs[*i].av[j]);
+		if (!cmd[*i].arg[j])
+			exit_error("2 strdup failed");
+	}
+	cmd[*i].arg[j] = NULL;
+	cmd[*i].fdin = data->progs[*i].fdin;
+	cmd[*i].fdout = data->progs[*i].fdout;
+	cmd[*i].pipe = 1;
+	*i += 1;
+}
+
 void	transfer_to_cmd(t_data *data, t_env_l *env)
 {
 	t_cmd	*cmd;
 	int		i;
 	int		j;
-	int		l;
 
 	i = 0;
 	cmd = malloc(sizeof(t_cmd) * (data->proglen + 1));
@@ -80,27 +106,8 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 		exit_error("malloc failed");
 	while (i < data->proglen)
 	{
-		l = 0;
-		while (data->progs[i].av[l])
-			l++;
-		cmd[i].arg = malloc(sizeof(char *) * (l + 1));
-		if (!cmd[i].arg)
-			exit_error("malloc failed");
-		cmd[i].builtin = ft_strdup(data->progs[i].av[0]);
-		if (!cmd[i].builtin)
-			exit_error("strdup failed");
-		j = -1;
-		while (data->progs[i].av[++j])
-		{
-			cmd[i].arg[j] = ft_strdup(data->progs[i].av[j]);
-			if (!cmd[i].arg[j])
-				exit_error("strdup failed");
-		}
-		cmd[i].arg[j] = NULL;
-		cmd[i].fdin = data->progs[i].fdin;
-		cmd[i].fdout = data->progs[i].fdout;
-		cmd[i].pipe = 1;
-		i++;
+		j = 0;
+		cmd_loop(data, cmd, &i, j);
 	}
 	cmd[i].builtin = NULL;
 	cmd[i - 1].pipe = 0;

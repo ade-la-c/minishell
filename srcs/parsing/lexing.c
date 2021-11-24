@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 19:11:53 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 20:03:41 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static t_prog	*init_prog(t_data *d, int index)
 
 static int	handleredirections(t_data *d, t_prog *p, int i)
 {
-
 	if (d->toklen <= 1 || d->toks[i + 1].type != WORD)
 	{
 		write(STDERR_FILENO, "redirection needs a valid argument\n", 36);
@@ -132,11 +131,16 @@ static t_prog	*lsttoprog(t_data *data, t_list *proglst)
 
 int	lexing(t_data *d)
 {
+	int	i;
+
+	i = -1;
 	if (tokentoprog(d) == -1)
 		return (-1);
 	d->proglen = ft_lstsize(d->proglst);
 	d->progs = lsttoprog(d, d->proglst);
 	ft_lstclear(&(d->toklst), free_tokel);
-	free_toks(d, d->toks);
+	while (++i < d->toklen)
+		free(d->toks[i].content);
+	free(d->toks);
 	return (0);
 }

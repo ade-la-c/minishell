@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 19:24:35 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:55:10 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,6 @@ void	exit_error(char *error)
 	ft_putstr_fd(error, STDERR_FILENO);
 	ft_putchar_fd('\n', STDERR_FILENO);
 	exit(0);
-}
-
-int	is_number(char *str, int n)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i] && i < n)
-		if (!ft_isdigit(str[i]))
-			return (0);
-	return (1);
 }
 
 t_list	*new_token(char *content, int type)
@@ -98,7 +87,7 @@ char	*strjoinfree(char *s1, char *s2, int x)
 	return (ret);
 }
 
-// provisoire
+/*// provisoire
 
 void	print_envlst(t_list *lst, char *str)
 {
@@ -178,3 +167,5 @@ void	print_proglst(t_list *lst, char *str)
 	lst = lst->next;
 	printf("}\n");
 }
+
+//*/

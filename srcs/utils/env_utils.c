@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:29 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 18:38:36 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:48:54 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	change_env_var(t_env_l *env, int len, int exist, char *change)
 	while (env->list[i])
 	{
 		free(env->list[i]);
-		i++;	
+		i++;
 	}
 	free(env->list);
 	env->list = malloc(sizeof(char *) * (len + 1));

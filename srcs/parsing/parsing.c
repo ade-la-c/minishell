@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 19:25:10 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 20:03:14 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_token	*lsttotoken(t_data *data, t_list *toklst)
 		toklst = toklst->next;
 	}
 	data->toklen = i;
-	// data->toklen = ft_lstsize(data->toklst);
 	return (tokens);
 }
 
@@ -76,20 +75,20 @@ static int	checktokens(t_data *d)
 	if (d->toks[0].type == PIPE
 		|| (d->toklen > 1 && d->toks[d->toklen - 1].type == PIPE))
 	{
-		return (write(STDERR_FILENO, "pipes must be between valid arguments\n", 39));
+		return (write(2, "pipes must be between valid arguments\n", 39));
 	}
 	while (i < d->toklen)
 	{
 		if (d->toks[i].type <= DLESS && d->toks[i].type >= MORE)
 		{
 			if (++i < d->toklen && (d->toks[i].type <= DLESS
-				&& d->toks[i].type >= MORE))
-				return (write(STDERR_FILENO, "syntax error near unexpected token\n", 36));
+					&& d->toks[i].type >= MORE))
+				return (write(2, "syntax error near unexpected token\n", 36));
 		}
 		else if (d->toks[i].type == PIPE)
 		{
 			if (++i < d->toklen && d->toks[i].type == PIPE)
-				return (write(STDERR_FILENO, "syntax error near unexpected token\n", 36));
+				return (write(2, "syntax error near unexpected token\n", 36));
 		}
 		i++;
 	}
@@ -100,14 +99,16 @@ int	parsing(t_data *data, char *line)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	tokenizer(data, line);
 	wordexpansion(data);
 	data->toks = lsttotoken(data, data->toklst);
 	data->toklen = ft_lstsize(data->toklst);
 	ft_lstclear(&(data->toklst), free_tokel);
 	welding(data);
-	free_toks(data, data->toks);
+	while (++i < data->toklen)
+		free(data->toks[i].content);
+	free(data->toks);
 	data->toks = lsttotoken(data, data->toklst);
 	ft_lstclear(&(data->toklst), free_tokel);
 	if (checktokens(data) == -1)

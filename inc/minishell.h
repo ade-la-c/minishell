@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 18:10:47 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 20:52:48 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include "builtin.h"
 # include "utils.h"
 
-# define SHELL_NAME	"pequeño shell"
+# define SHELL_NAME		"pequeño shell"
 
 extern int		retval;
 
@@ -69,7 +69,6 @@ void				sigint_handler(int sig);
 
 void				exit_error(char *error);
 int					is_esymbol(char c);
-int					is_number(char *str, int n);
 t_list				*new_token(char *content, int type);
 int					remove_element(t_list **list, void *todelete);
 char				**get_env(t_list *envlst, char *str, int len);
@@ -105,7 +104,6 @@ void				ft_free(t_data *data);
 void				env_free(t_list *envlst);
 void				free_tokel(void *ptr);
 void				free_prog(void *ptr);
-void				free_toks(t_data *data, t_token *toks);
 void				free_null(void *ptr);
 void				free_envel(void *content);
 

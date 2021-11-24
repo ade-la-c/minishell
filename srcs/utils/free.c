@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:19:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 18:53:50 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:51:24 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,4 @@ void	env_free(t_list *envlst)
 	free(envlst);
 	printf("exit\n");
 	exit(0);
-}
-
-void	free_toks(t_data *data, t_token *toks)
-{
-	int		i;
-
-	i = -1;
-	while (++i < data->toklen)
-		free(toks[i].content);
-	free(toks);
 }
