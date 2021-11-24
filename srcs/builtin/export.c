@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:41 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 17:31:23 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:29:52 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,17 @@ int	var_already_exist(t_cmd cmd, char **env_list, int a_i, int i)
 	if (a_i < count_arg(cmd))
 	{
 		if (ft_strclen(cmd.arg[a_i], '=') == -1)
+		{
 			tmp = ft_substr(cmd.arg[a_i], 0, ft_strlen(cmd.arg[a_i]));
+			if (!tmp)
+				exit_error("substr failed");
+		}
 		else
+		{
 			tmp = ft_substr(cmd.arg[a_i], 0, ft_strclen(cmd.arg[a_i], '='));
+			if (!tmp)
+				exit_error("substr failed");
+		}
 		env_names = get_env_names(env_list);
 		while (env_names[i])
 		{
@@ -96,9 +104,17 @@ int	check_env_name(char *cmd)
 
 	i = 0;
 	if (ft_strclen(cmd, '=') == -1)
+	{
 		s = ft_strdup(cmd);
+		if (!s)
+			exit_error("substr failed");
+	}
 	else
+	{
 		s = ft_substr(cmd, 0, ft_strclen(cmd, '='));
+		if (!s)
+			exit_error("substr failed");
+	}
 	while (s[i])
 	{
 		if (ft_isalnum(s[i]) == 0 && s[i] != '_')

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 17:40:27 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:36:06 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,15 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 		if (!cmd[i].arg)
 			exit_error("malloc failed");
 		cmd[i].builtin = ft_strdup(data->progs[i].av[0]);
+		if (!cmd[i].builtin)
+			exit_error("strdup failed");
 		j = -1;
 		while (data->progs[i].av[++j])
+		{
 			cmd[i].arg[j] = ft_strdup(data->progs[i].av[j]);
+			if (!cmd[i].arg[j])
+				exit_error("strdup failed");
+		}
 		cmd[i].arg[j] = NULL;
 		cmd[i].fdin = data->progs[i].fdin;
 		cmd[i].fdout = data->progs[i].fdout;

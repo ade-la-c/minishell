@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:37:50 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 20:28:36 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:01:59 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_envpdup(t_data *data, char **envp, int bool)
 	while (envp[++i])
 	{
 		data->envp[i] = ft_strdup(envp[i]);
+		if (!data->envp[i])
+			exit_error("strdup failed");
 		if (bool)
 			free(envp[i]);
 	}
@@ -51,7 +53,7 @@ t_env_l	*envptoenvl(t_data *data)
 	{
 		env->list[i] = ft_strdup(data->envp[i]);
 		if (!env->list[i])
-			exit_error("malloc failed");
+			exit_error("strdup failed");
 		free(data->envp[i]);
 		i++;
 	}
@@ -98,7 +100,11 @@ char	**getenvp2(char *env)
 	while (env[i] && env[i] != '=')
 		i++;
 	strs[0] = ft_substr(env, 0, i);
+	if (!strs[0])
+		exit_error("substr failed");
 	strs[1] = ft_substr(&env[i + 1], 0, ft_strlen(&env[i + 1]));
+	if (!strs[1])
+		exit_error("substr failed");
 	return (strs);
 }
 

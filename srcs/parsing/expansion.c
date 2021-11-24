@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 15:02:09 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:05:52 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	expandword(char **tok, t_list *envlst, int dpos)
 	if (token[dpos + 1] == '?')
 	{
 		retstr = ft_itoa(retval);
+		if (!retstr)
+			exit_error("itoa failed");
 		token = writeexpansion(token, retstr, dpos, lim);
 		free(retstr);
 		*tok = token;

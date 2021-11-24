@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:11:07 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 05:25:57 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:55:57 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static char	**ft_cut_words(char *s, char c, char **tab, int words)
 		while (*s == c)
 			s++;
 		tab[j] = malloc(sizeof(char) * (ft_word_len(s, c) + 2));
+		if (!tab[j])
+			exit_error("malloc failed");
 		if (tab[j] == NULL)
 		{
 			ft_free_words(words, tab);

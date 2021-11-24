@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 15:22:06 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 03:50:19 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:24:35 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	exit_error(char *error)
 {
-	ft_putstr("ERROR : ");
-	ft_putstr(error);
-	ft_putchar('\n');
+	ft_putstr_fd("ERROR : ", STDERR_FILENO);
+	ft_putstr_fd(error, STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
 	exit(0);
 }
 
@@ -36,12 +36,16 @@ t_list	*new_token(char *content, int type)
 	t_token	*token;
 	t_list	*el;
 
+	if (content == NULL)
+		exit_error("malloc failed");
 	token = ft_calloc(sizeof(t_token), 1);
 	if (!token)
 		exit_error("malloc failed");
 	token->content = content;
 	token->type = type;
 	el = ft_lstnew((void *)token);
+	if (!el)
+		exit_error("lstnew failed");
 	return (el);
 }
 
@@ -85,6 +89,8 @@ char	*strjoinfree(char *s1, char *s2, int x)
 	char	*ret;
 
 	ret = ft_strjoin(s1, s2);
+	if (!ret)
+		exit_error("strjoin failed");
 	if (x == 1 || x == 3)
 		free(s1);
 	if (x == 2 || x == 3)

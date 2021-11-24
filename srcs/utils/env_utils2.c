@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:39 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 04:00:17 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:43:48 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ void	envdup_plus(char **env_list, char **tmp, char *plus)
 	while (tmp[i])
 	{
 		env_list[i] = ft_strdup(tmp[i]);
+		if (!env_list[i])
+			exit_error("strdup failed");
 		i++;
 	}
 	env_list[i] = ft_strdup(plus);
+	if (!env_list[i])
+		exit_error("strdup failed");
 	i++;
 	env_list[i] = NULL;
 }
@@ -35,11 +39,15 @@ void	envdup_without(char **env_list, char **tmp, int without)
 	while (i < without)
 	{
 		tmp[i] = ft_strdup(env_list[i]);
+		if (!tmp[i])
+			exit_error("strdup failed");
 		i++;
 	}
 	while (env_list[i + 1])
 	{
 		tmp[i] = ft_strdup(env_list[i + 1]);
+		if (!tmp[i])
+			exit_error("strdup failed");
 		i++;
 	}
 	tmp[i] = NULL;

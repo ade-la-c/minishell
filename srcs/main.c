@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 15:31:33 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:04:41 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	readline_loop(t_data *data)
 	while (1)
 	{
 		g_glb = 0;
-		tmp = readline("pequeño_shell""> ");
+		tmp = readline(SHELL_NAME"> ");
 		g_glb = 1;
 		if (!tmp)
 			env_free(data->envlst);
@@ -72,7 +72,8 @@ void	readline_loop(t_data *data)
 int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
-g_glb = 0;
+
+	g_glb = 0;
 	if (ac != 1 || av[1])
 		exit_error("Error : minishell takes no arguments");
 	data_init(&data, envp);

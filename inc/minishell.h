@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 15:16:23 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:10:47 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # include "cmd.h"
 # include "builtin.h"
 # include "utils.h"
+
+# define SHELL_NAME	"pequeño shell"
 
 extern int		retval;
 

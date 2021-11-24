@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:29 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 17:42:44 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:38:36 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	envdup(char **env_list, char **tmp)
 	while (tmp[i])
 	{
 		env_list[i] = ft_strdup(tmp[i]);
+		if (!env_list[i])
+			exit_error("strdup failed");
 		i++;
 	}
 	env_list[i] = NULL;
@@ -33,13 +35,19 @@ void	envdup_n_change(char **tmp, char **env_list, char *change, int exist)
 	while (i < exist)
 	{
 		tmp[i] = ft_strdup(env_list[i]);
+		if (!tmp[i])
+			exit_error("strdup failed");
 		i++;
 	}
 	tmp[i] = ft_strdup(change);
+	if (!tmp[i])
+		exit_error("strdup failed");
 	i++;
 	while (env_list[i])
 	{
 		tmp[i] = ft_strdup(env_list[i]);
+		if (!tmp[i])
+			exit_error("strdup failed");
 		i++;
 	}
 	tmp[i] = NULL;
@@ -52,6 +60,8 @@ void	change_env_var(t_env_l *env, int len, int exist, char *change)
 
 	i = 0;
 	tmp = malloc(sizeof(char *) * (len + 1));
+	if (!tmp)
+		exit_error("malloc failed");
 	envdup_n_change(tmp, env->list, change, exist);
 	while (env->list[i])
 	{
@@ -60,6 +70,8 @@ void	change_env_var(t_env_l *env, int len, int exist, char *change)
 	}
 	free(env->list);
 	env->list = malloc(sizeof(char *) * (len + 1));
+	if (!env->list)
+		exit_error("malloc failed");
 	envdup(env->list, tmp);
 	free_env(len, tmp);
 }
