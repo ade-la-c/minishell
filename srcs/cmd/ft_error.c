@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 05:22:57 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:41:50 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	free_cmd(t_cmd *cmd)
 void	exit_free_env(t_env_l *env, int nb)
 {
 	int	i;
-	//int	j;
 
 	i = 0;
 	while (env->list[i])
@@ -50,29 +49,12 @@ void	exit_free_env(t_env_l *env, int nb)
 	}
 	free(env->list);
 	i = 0;
-	/*while (env->token[i])
-	{
-		j = 0;
-		while (env->token[i][j])
-		{
-			free(env->token[i][j]);
-			j++;
-		}
-		free(env->token[i]);
-		i++;
-	}*/
-	//free(env->token);
 	exit(nb);
 }
 
 void	error_errno(t_cmd *cmd, int error_code, int exit_bool, t_env_l *env)
 {
-	char	*error_msg;
-
-	(void)cmd;
-	(void)env;
-	(void)exit_bool;
-	error_msg = strerror(error_code);
+	(void)error_code;
 	if (cmd)
 		free_cmd(cmd);
 	if (exit_bool == 1)

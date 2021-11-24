@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 13:26:53 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/24 17:40:27 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ int	retval = 0;
 void	exec_builtin(int i, t_cmd *cmd, t_env_l *env, int pipe)
 {
 	int		len;
-	int		ret;
 
-	ret = 0;
 	if (cmd[i].fdin == -1)
 		return ;
 	len = ft_strlen(cmd[i].builtin);

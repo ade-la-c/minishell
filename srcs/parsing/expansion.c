@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 02:03:51 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/24 15:02:09 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 
 static char	*writeexpansion(char *str, char *expanded, int start, int end)
 {
@@ -68,6 +69,19 @@ static int	expandword(char **tok, t_list *envlst, int dpos)
 	token = writeexpansion(token, strs[1], dpos, lim - 1);
 	*tok = token;
 	return (ft_strlen(strs[1]));
+}
+
+char	*expandheredoc(t_data *d, char *str)
+{
+	int		i;
+
+	i = -1;
+	while (++i < (int)ft_strlen(str))
+		if (str[i] == '$')
+		{
+			i += expandword(&(str), d->envlst, i) - 1;
+		}
+	return (str);
 }
 
 void	wordexpansion(t_data *data)

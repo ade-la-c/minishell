@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:04 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 01:54:15 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/24 17:39:10 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,12 @@ int	var_exist(t_cmd cmd, int w_arg, char **env_list)
 	i = 0;
 	env_names = get_env_names(env_list);
 	if (check_s(cmd.arg[w_arg]))
-		printf("unset: '%s': not a valid identifier\n", cmd.arg[w_arg]);
+	{
+		write(2, "bash: unset: '", 14);
+        write(2, cmd.arg[w_arg], ft_strlen(cmd.arg[w_arg]));
+        write(2, "': not a valid identifier\n", 26);
+        retval = 1;
+    }
 	while (env_names[i])
 	{
 		if (ft_strcmp(cmd.arg[w_arg], env_names[i]) == 0)
@@ -74,7 +79,6 @@ int	var_exist(t_cmd cmd, int w_arg, char **env_list)
 		i++;
 	}
 	free_env(nb_env(env_names), env_names);
-	retval = 1;
 	return (-1);
 }
 
@@ -114,8 +118,6 @@ void	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
 			to_del = var_exist(cmd[i], index, env->list);
 			if (to_del >= 0)
 				del_env_var(env, len, to_del);
-			else
-				retval = 1;
 			index++;
 		}
 	}

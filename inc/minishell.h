@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 13:25:52 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/24 15:16:23 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_data
 	char			**envp;
 }	t_data;
 
+void				sigint_handler(int sig);
+
 //==========================UTILS==========================//
 
 void				exit_error(char *error);
@@ -81,10 +83,10 @@ void				print_proglst(t_list *lst, char *str);
 
 //=========================PARSING=========================//
 
-void				parsing(t_data *data, char *line);
+int					parsing(t_data *data, char *line);
 void				tokenizer(t_data *data, char *line);
 void				wordexpansion(t_data *data);
-void				lexing(t_data *data);
+int					lexing(t_data *data);
 
 void				transfer_to_cmd(t_data *data, t_env_l *env);
 t_env_l				*envptoenvl(t_data *data);
@@ -92,6 +94,8 @@ char				**envltoenvp(t_env_l *env);
 void				ft_envpdup(t_data *data, char **envp, int bool);
 void				getenvp(t_data *data);
 char				**getenvp2(char *env);
+int					heredoc(t_data *d, char *eof);
+char				*expandheredoc(t_data *d, char *str);
 
 //==========================FREEING==========================//
 

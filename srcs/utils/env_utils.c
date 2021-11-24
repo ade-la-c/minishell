@@ -6,31 +6,11 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:29 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 20:21:30 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:42:44 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-void	free_token(t_env_l *env)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (env->token[i])
-	{
-		j = 0;
-		while (env->token[i][j])
-		{
-			free(env->token[i][j]);
-			j++;
-		}
-		free(env->token[i]);
-		i++;
-	}
-	free(env->token);
-}
 
 void	envdup(char **env_list, char **tmp)
 {
@@ -82,7 +62,6 @@ void	change_env_var(t_env_l *env, int len, int exist, char *change)
 	env->list = malloc(sizeof(char *) * (len + 1));
 	envdup(env->list, tmp);
 	free_env(len, tmp);
-	init_token(env);
 }
 
 void	add_env_var(t_env_l *env, int len, char *add)
@@ -106,5 +85,4 @@ void	add_env_var(t_env_l *env, int len, char *add)
 		exit_error("malloc failed");
 	envdup(env->list, tmp);
 	free_env(len + 2, tmp);
-	init_token(env);
 }

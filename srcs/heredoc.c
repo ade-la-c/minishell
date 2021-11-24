@@ -6,11 +6,11 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:09:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/21 19:44:47 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:27:46 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 int	add_char(char **str, char c)
 {
@@ -24,7 +24,7 @@ int	add_char(char **str, char c)
 	tmp = malloc(sizeof(char) * (i + 2));
 	if (!tmp)
 	{
-		ft_putstr_fd(sterror(errno), 2);
+		ft_putstr_fd(strerror(errno), 2);
 		ft_putchar_fd('\n', 2);
 		return (0);
 	}
@@ -36,65 +36,90 @@ int	add_char(char **str, char c)
 	tmp[i] = c;
 	tmp[i + 1] = '\0';
 	*str = tmp;
-	free(tmp);
+	// free(tmp);
 	return (1);
 }
 
 char	*get_arg(char *arg)
 {
 	int		print;
+	int		i;
 	char	c;
 	char	*tmp;
 
 	print = 0;
+	i = 0;
 	c = 0;
 	tmp = NULL;
-	while (*arg)
+	while (arg && arg[i])
 	{
-		if (*arg == '\\' && print == 0)
+		if (arg[i] == '\\' && print == 0)
 			print = 1;
-		else if ((*arg == '\'' || *arg == '\"') && print == 0)
+		else if ((arg[i] == '\'' || arg[i] == '\"') && print == 0)
 		{
-			c = *arg;
+			c = arg[i];
 			print = 1;
 		}
-		else if (print == 1 && *arg == c)
+		else if (print == 1 && arg[i] == c)
 			print = 0;
-		else if (*arg == '$' && c != '\'')
-			tmp = get_value(&arg, tmp); // get $
+		else if (arg[i] == '$' && c != '\'')
+			tmp = getenv(&arg[i]); // get $
 		else
-			add_char(&tmp, *arg);
-		arg++;
+			add_char(&tmp, arg[i]);
+		i++;
 	}
 	return (tmp);
 }
 
-void	heredoc(const char *eof, t_cmd *cmd)
+int	heredoc(const char *eof)
 {
 	int			fd[2];
 	char		*newline;
 	char		*tmp;
+	pid_t		pid;
+	int			ret;
 
-	pipe(fd);
+	if (pipe(fd) == -1)
+		exit_error("pipe error");
+	pid = fork();
 	newline = NULL;
-	while (1)
+	if (pid < 0)
+		exit_error("malloc failed");
+	else if (pid == 0)
 	{
-		if (newline)
+
+		while (1)
 		{
-			free(newline);
-			newline = NULL;
+			// signal(SIGINT, &sigint_handler);
+			signal(SIGINT, SIG_DFL);
+			// signal(SIGQUIT, SIG_DFL);
+			if (newline)
+			{
+				free(newline);
+				newline = NULL;
+			}
+			if (!eof)
+				break ;
+			newline = readline("> "); // soit ça soit "heredoc> "
+			tmp = get_arg(newline); // Gérer les $$
+			if (ft_strncmp(newline, eof, ft_strlen(eof)) == 0)
+				break ;
+			write(fd[1], newline, ft_strlen(newline));
+			write(fd[1], "\n", 1);
 		}
-		if (!eof)
-			break ;
-		newline = readline("> "); // soit ça soit "heredoc> "
-		tmp = get_arg(newline); // Gérer les $$
-		if (ft_strncmp(newline, eof, ft_strlen(eof)) == 0)
-			break ;
-		write(fd[1], newline, ft_strlen(newline));
-		write(fd[1], "\n", 1);
 	}
-	close(fd[1]);
-	free(newline);
-	cmd->fdin = fd[0];
-	free(tmp);
+	else
+	{
+		waitpid(pid, &ret, 0);
+		close(fd[1]);
+		if (ret != 0)
+		{
+			close(fd[0]);
+			return (-1);
+		}
+	}
+	// close(fd[1]);
+	// free(newline);
+	// free(tmp);
+	return (fd[0]);
 }

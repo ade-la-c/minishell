@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tristan <tristan@student.42.fr>            +#+  +:+       +#+         #
+#    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/24 12:53:14 by tristan          ###   ########.fr        #
+#    Updated: 2021/11/24 15:46:35 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME				= minishell
 
 LIBFT				= ./libft
 
-RDLINE				= /Users/$(USER)/
+RDLINE				= /Users/$(USER)/.brew/opt/readline
 
 SRCS				= srcs/main.c				\
 					srcs/env.c					\
@@ -25,10 +25,12 @@ SRCS				= srcs/main.c				\
 					srcs/utils/env_utils2.c		\
 					srcs/utils/env_utils3.c		\
 					srcs/utils/split_slash.c	\
+					srcs/utils/retval.c			\
 					srcs/parsing/parsing.c		\
 					srcs/parsing/tokenizer.c	\
 					srcs/parsing/expansion.c	\
 					srcs/parsing/lexing.c		\
+					srcs/parsing/heredoc.c		\
 					srcs/builtin/cd.c			\
 					srcs/builtin/echo.c			\
 					srcs/builtin/env.c			\
@@ -40,7 +42,6 @@ SRCS				= srcs/main.c				\
 					srcs/cmd/cmd.c				\
 					srcs/cmd/ft_error.c			\
 					srcs/cmd/pipe.c				\
-					srcs/utils/retval.c			\
 
 OBJS				= $(SRCS:.c=.o)
 

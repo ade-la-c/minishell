@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:51:01 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:14:41 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:45:08 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	wait_forks(pid_t *pid, int nb_pipe)
 	int	ret;
 
 	i = 0;
-	while (i < nb_pipe - 1)
+	while (i < nb_pipe)
 	{
 		waitpid(pid[i], &ret, 0);
 		i++;

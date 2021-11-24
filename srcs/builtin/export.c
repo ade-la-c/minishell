@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:41 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 01:47:28 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/24 17:31:23 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ void	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 				add_env_var(env, nb_env(env->list), cmd[i].arg[arg_index]);
 			else
 				retval = 1;
-			free_token(env);
 		}
 	}
 	else if (count_arg(cmd[i]) == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execpath.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:21 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 13:29:42 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/24 17:12:40 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,16 @@ static void	execve_with_path(int index, t_cmd *cmd, t_env_l *env)
 	}
 	while (split[i])
 	{
-		join = ft_strjoin(split[i], cmd[index].builtin);
+		join = ft_strjoin(split[i], cmd[index].builtin); //? possible leak
 		if (stat(join, buf) == 0)
+		{
+			free(buf);
+			if (split)
+				free_split_join(split, join);
 			execve(join, cmd[index].arg, env->list);
+		}
+		// else
+			// free(join);
 		i++;
 	}
 	free(buf);
@@ -107,6 +114,8 @@ void	execpath(int i, t_cmd *cmd, t_env_l *env, int pipe)
 		waitpid(pid, &status, 0);
 		if (ft_strlen(cmd[i].arg[0]) != 0)
 			retval = WEXITSTATUS(status);
+		if (retval == 2)
+			retval = 127;
 	}
 	else if (pipe == 1)
 		execpath_pipe(cmd, i, env);

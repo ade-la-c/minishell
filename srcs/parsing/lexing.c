@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:50:38 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 19:37:28 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 15:18:05 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,18 @@ static int	handleredirections(t_data *d, t_prog *p, int i)
 	else if (d->toks[i].type == DMORE)
 		p->fdout = open(d->toks[i + 1].content,
 				O_WRONLY | O_CREAT | O_APPEND, 0777);
-	// TODO else if (d->toks[i].type == DLESS)
+	else if (d->toks[i].type == DLESS)
+	{
+		p->fdin = heredoc(d, d->toks[i + 1].content);
+		if (p->fdin < 0)
+			return (-1);
+	}
 	if (p->fdin < 0 || p->fdout < 0)
 		exit_error("redirection error");
-	return (2);
+	return (0);
 }
 
-static void	tokentoprog(t_data *d)
+static int	tokentoprog(t_data *d)
 {
 	int		i;
 	int		j;
@@ -67,7 +72,11 @@ static void	tokentoprog(t_data *d)
 		while (i < d->toklen && d->toks[i].type != PIPE)
 		{
 			if (d->toks[i].type >= MORE && d->toks[i].type <= DLESS)
-				i += handleredirections(d, prog, i);
+			{
+				if (handleredirections(d, prog, i) == -1)
+					return (-1);
+				i += 2;
+			}
 			else if (d->toks[i].type == WORD)
 				prog->av[j++] = ft_strdup(d->toks[i++].content);
 		}
@@ -78,6 +87,7 @@ static void	tokentoprog(t_data *d)
 			prog = NULL;
 		}
 	}
+	return (0);
 }
 
 static t_prog	*lsttoprog(t_data *data, t_list *proglst)
@@ -103,11 +113,13 @@ static t_prog	*lsttoprog(t_data *data, t_list *proglst)
 	return (progs);
 }
 
-void	lexing(t_data *d)
+int	lexing(t_data *d)
 {
-	tokentoprog(d);
+	if (tokentoprog(d) == -1)
+		return (-1);
 	d->proglen = ft_lstsize(d->proglst);
 	d->progs = lsttoprog(d, d->proglst);
 	ft_lstclear(&(d->toklst), free_tokel);
 	free_toks(d, d->toks);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 14:19:46 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 21:11:51 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:46:26 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	free_tokel(void *content)
 		return ;
 	el.content = (t_list *)content;
 	token = (t_token *)el.content;
-	// printf("content : %s type : %d\n", token->content, token->type);
 	free(token->content);
 	free(el.content);
 }
@@ -51,7 +50,6 @@ void	free_envel(void *content)
 	free(strs[0]);
 	free(strs[1]);
 	free(strs);
-	// free(content);
 }
 
 void	ft_free(t_data *data)

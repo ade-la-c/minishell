@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:49 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 02:30:34 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/24 16:58:39 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ void	cd_error(int error_code, t_cmd *cmd)
 	char	*error_msg;
 
 	error_msg = strerror(error_code);
-	printf("cd: %s: %s\n", cmd->arg[1], error_msg);
+	write(2, "msh: cd: ", 10);
+    write(2, cmd->arg[1], ft_strlen(cmd->arg[1]));
+    write(2, ": ", 2);
+    write(2, error_msg, ft_strlen(error_msg));
+    write(2, "\n", 1);
+	retval = 1;
 }
 
 void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
@@ -64,7 +69,10 @@ void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 	{
 		check = chdir(ft_getenv("HOME", env->list));
 		if (check == -1)
-			printf("cd: HOME not set\n");
+		{
+			write(2, "msh: cd: HOME not set\n", 23);
+			retval = 1;
+		}
 		check = 0;
 	}
 	else if (ft_strncmp(cmd[i].arg[1], "/", ft_strlen(cmd[i].arg[1]) + 1) == 0)
@@ -82,7 +90,7 @@ void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 	else
 		check = chdir(cmd[i].arg[1]);
 	if (check == -1)
-		printf("cd: %s: %s\n", cmd->arg[1], strerror(errno));
+		cd_error(errno, cmd);
 	if (pipe == 1)
 		exit(1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:10 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 01:41:10 by tristan          ###   ########.fr       */
+/*   Updated: 2021/11/24 17:00:38 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,15 @@ void	builtin_env(int i, t_cmd *cmd, t_env_l *env, int pipe)
 
 	env_index = 0;
 	if (count_arg(cmd[i]) > 1)
-		retval = 127;
+	{
+        retval = 127;
+        write(2, "env: ", 5);
+        write(2, cmd[i].arg[1], ft_strlen(cmd[i].arg[1]));
+        write(2, ": No such file or directory\n", 28);
+        if (pipe == 1)
+            exit (1);
+        return ;
+    }
 	else
 		retval = 0;
 	while (env->list[env_index])
