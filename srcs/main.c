@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 21:11:25 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 01:35:41 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ static void	data_init(t_data *data, char **envp)
 static void	sigint_handler(int sig)
 {
 	(void)sig;
-	msh_parser_set_retval(1);
 	write(STDOUT_FILENO, "\n", 1);
 	if (g_glb == 0)
 	{
 		rl_on_new_line();
-		rl_replace_line("", 0);
+	//	rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }

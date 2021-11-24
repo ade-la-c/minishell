@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:41 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 20:30:04 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 01:47:28 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	check_env_name(char *cmd)
 	return (0);
 }
 
-int	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
+void	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 {
 	int		exist;
 	int		arg_index;
@@ -120,7 +120,7 @@ int	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 
 	arg_index = 0;
 	nb_arg = count_arg(cmd[i]);
-	g_err = 0;
+	retval = 0;
 	if (nb_arg > 1)
 	{
 		while (arg_index++ < nb_arg - 1)
@@ -132,7 +132,7 @@ int	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 			else if (exist < 0 && check_env_name(cmd[i].arg[arg_index]) != -1)
 				add_env_var(env, nb_env(env->list), cmd[i].arg[arg_index]);
 			else
-				g_err = 1;
+				retval = 1;
 			free_token(env);
 		}
 	}
@@ -140,5 +140,4 @@ int	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 		display_env_ascii(cmd[i], env);
 	if (pipe == 1)
 		exit(1);
-	return (0);		//TODO changer les valeurs de retour
 }

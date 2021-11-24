@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execpath.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:21 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 17:15:08 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/24 13:29:42 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-int	g_err = 0;
 
 static int	check_is_path(const char *str)
 {
@@ -108,7 +106,7 @@ void	execpath(int i, t_cmd *cmd, t_env_l *env, int pipe)
 			execpath_no_pipe(i, cmd, env);
 		waitpid(pid, &status, 0);
 		if (ft_strlen(cmd[i].arg[0]) != 0)
-			g_err = WEXITSTATUS(status);
+			retval = WEXITSTATUS(status);
 	}
 	else if (pipe == 1)
 		execpath_pipe(cmd, i, env);

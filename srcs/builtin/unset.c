@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:04 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:34:40 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 01:54:15 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	var_exist(t_cmd cmd, int w_arg, char **env_list)
 		i++;
 	}
 	free_env(nb_env(env_names), env_names);
+	retval = 1;
 	return (-1);
 }
 
@@ -96,7 +97,7 @@ void	del_env_var(t_env_l *env, int len, int to_del)
 	free_env(len, tmp);
 }
 
-int	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
+void	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
 {
 	int	to_del;
 	int	index;
@@ -105,7 +106,7 @@ int	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
 	to_del = 0;
 	index = 1;
 	len = nb_env(env->list);
-	g_err = 0;
+	retval = 0;
 	if (count_arg(cmd[i]) > 1)
 	{
 		while (index < count_arg(cmd[i]))
@@ -113,10 +114,11 @@ int	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
 			to_del = var_exist(cmd[i], index, env->list);
 			if (to_del >= 0)
 				del_env_var(env, len, to_del);
+			else
+				retval = 1;
 			index++;
 		}
 	}
 	if (pipe == 1)
 		exit(1);
-	return (0);		//TODO changer les valeurs de retour
 }

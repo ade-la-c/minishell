@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:49 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:34:18 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 02:30:34 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	cd_error(int error_code, t_cmd *cmd)
 	printf("cd: %s: %s\n", cmd->arg[1], error_msg);
 }
 
-int	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
+void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 {
 	char	*pwd;
 	char	*path;
@@ -85,5 +85,4 @@ int	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 		printf("cd: %s: %s\n", cmd->arg[1], strerror(errno));
 	if (pipe == 1)
 		exit(1);
-	return (0);		//TODO changer les valeurs de retour
 }

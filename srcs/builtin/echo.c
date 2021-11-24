@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:59 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:34:07 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 01:38:10 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,15 @@ static void	display_echo(t_cmd cmd)
 	}
 }
 
-int	builtin_echo(int i, t_cmd *cmd, int pipe)
+void	builtin_echo(int i, t_cmd *cmd, int pipe)
 {
-	g_err = 0;
+	retval = 0;
 	if (pipe == 0)
 	{
 		if (cmd[i].arg[1] == NULL)
 		{
 			write(cmd->fdout, "\n", 1);
-			return (0);		//TODO changer les valeurs de retour
+			return ;
 		}
 		display_echo(cmd[i]);
 	}
@@ -116,5 +116,4 @@ int	builtin_echo(int i, t_cmd *cmd, int pipe)
 		display_echo(cmd[i]);
 		exit(1);
 	}
-	return (0);		//TODO changer les valeurs de retour
 }

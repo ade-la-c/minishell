@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 20:53:27 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 02:03:51 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	expandword(char **tok, t_list *envlst, int dpos)
 	lim += dpos;
 	if (token[dpos + 1] == '?')
 	{
-		retstr = ft_itoa(msh_parser_get_retval());
+		retstr = ft_itoa(retval);
 		token = writeexpansion(token, retstr, dpos, lim);
 		free(retstr);
 		*tok = token;

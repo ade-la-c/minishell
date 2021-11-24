@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:29:29 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 13:26:53 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	retval = 0;
 
 void	exec_builtin(int i, t_cmd *cmd, t_env_l *env, int pipe)
 {
@@ -21,28 +23,25 @@ void	exec_builtin(int i, t_cmd *cmd, t_env_l *env, int pipe)
 	if (cmd[i].fdin == -1)
 		return ;
 	len = ft_strlen(cmd[i].builtin);
-	//if (!cmd[i].builtin)
-	//	return ;
 	if (ft_strncmp(cmd[i].builtin, "echo", len + 1) == 0)
-		ret = builtin_echo(i, cmd, pipe);
+		builtin_echo(i, cmd, pipe);
 	else if (ft_strncmp(cmd[i].builtin, "cd", len + 1) == 0)
-		ret = builtin_cd(i, cmd, pipe, env);
+		builtin_cd(i, cmd, pipe, env);
 	else if (ft_strncmp(cmd[i].builtin, "pwd", len + 1) == 0)
-		ret = builtin_pwd(i, cmd, pipe);
+		builtin_pwd(i, cmd, pipe);
 	else if (ft_strncmp(cmd[i].builtin, "export", len + 1) == 0)
-		ret = builtin_export(i, cmd, env, pipe);
+		builtin_export(i, cmd, env, pipe);
 	else if (ft_strncmp(cmd[i].builtin, "unset", len + 1) == 0)
-		ret = builtin_unset(i, cmd, env, pipe);
+		builtin_unset(i, cmd, env, pipe);
 	else if (ft_strncmp(cmd[i].builtin, "env", len + 1) == 0)
-		ret = builtin_env(i, cmd, env, pipe);
+		builtin_env(i, cmd, env, pipe);
 	else if (ft_strncmp(cmd[i].builtin, "exit", len + 1) == 0)
-		ret = builtin_exit(i, cmd, pipe, env);
+		builtin_exit(i, cmd, pipe, env);
 	else
 	{
 		execpath(i, cmd, env, pipe);
 		return ;
 	}
-	msh_parser_set_retval(ret);
 }
 
 void	parse_cmd_array(t_cmd *cmd, t_env_l *env, int nb_cmd)
@@ -103,6 +102,6 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 	cmd[i - 1].pipe = 0;
 	parse_cmd_array(cmd, env, i);
 	data->envp = envltoenvp(env);
-	free(env); //? a mettre dans free_to_cmd
+	free(env);
 	free_cmd(cmd);
 }

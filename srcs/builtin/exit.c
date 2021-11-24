@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tristan <tristan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:31 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/23 18:35:06 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/24 01:48:25 by tristan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	get_arg_size(int i, t_cmd *cmd)
 	return (size);
 }
 
-int	builtin_exit(int i, t_cmd *cmd, int pipe, t_env_l *env)
+void	builtin_exit(int i, t_cmd *cmd, int pipe, t_env_l *env)
 {
 	int		size;
 
@@ -35,7 +35,8 @@ int	builtin_exit(int i, t_cmd *cmd, int pipe, t_env_l *env)
 	if (size > 2 && ft_str_isdigit(cmd[i].arg[1]) == 1)
 	{
 		write (2, "exit\nToo many arguments\n", 25);
-		return (0);		//TODO changer les valeurs de retour
+		retval = 1;
+		return ;
 	}
 	if (pipe == 0)
 		printf("%s\n", cmd[i].builtin);
@@ -48,5 +49,4 @@ int	builtin_exit(int i, t_cmd *cmd, int pipe, t_env_l *env)
 		exit_free_env(env, 255 - (ft_atoi(cmd[i].arg[1]) * -1) + 1);
 	else
 		exit_free_env(env, ft_atoi(cmd[i].arg[1]));
-	return (0);		//TODO changer les valeurs de retour
 }
