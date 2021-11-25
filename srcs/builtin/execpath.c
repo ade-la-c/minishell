@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execpath.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:21 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 15:29:51 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/25 19:15:46 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_is_path(const char *str)
 	return (0);
 }
 
-static void	execve_with_path(int index, t_cmd *cmd, t_env_l *env)
+void	execve_with_path(int index, t_cmd *cmd, t_env_l *env)
 {
 	int			i;
 	char		**split;
@@ -36,35 +36,24 @@ static void	execve_with_path(int index, t_cmd *cmd, t_env_l *env)
 	struct stat	*buf;
 
 	i = 0;
-	buf = malloc(sizeof(struct stat));
-	if (!buf)
-		exit_error("malloc failed");
+	join = NULL;
+	splinter_shell(&buf, NULL, join, 1);
 	split = ft_split_slash(ft_getenv("PATH", env->list), ':');
 	if (split == NULL)
-	{
-		join = ft_strdup("");
-		execve(join, cmd[index].arg, env->list);
-		error_errno(cmd, errno, 1, env);
-	}
+		no_is_b(index, join, env, cmd);
 	while (split[i])
 	{
-		join = ft_strjoin(split[i], cmd[index].builtin);
-		if (!join)
-			exit_error("malloc failed");
+		join = strjoinfree(split[i], cmd[index].builtin, 0);
 		if (stat(join, buf) == 0)
 		{
-			free(buf);
-			if (split)
-				free_split_join(split, NULL);
+			splinter_shell(&buf, split, NULL, 0);
 			execve(join, cmd[index].arg, env->list);
 			free(join);
 			return ;
 		}
 		i++;
 	}
-	free(buf);
-	if (split)
-		free_split_join(split, join);
+	splinter_shell(&buf, split, join, 0);
 }
 
 static void	execpath_no_pipe(int i, t_cmd *cmd, t_env_l *env)

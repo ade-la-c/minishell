@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   split_slash.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:11:07 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 19:57:14 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:46:09 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static	void	ft_free_words(int word, char **tabword)
+static	void	*ft_free_words(int word, char **tabword)
 {
 	int	i;
 
@@ -23,6 +23,7 @@ static	void	ft_free_words(int word, char **tabword)
 		i++;
 	}
 	free(tabword);
+	return (NULL);
 }
 
 static	int	ft_is_word(const char *str, char c)
@@ -75,10 +76,7 @@ static char	**ft_cut_words(char *s, char c, char **tab, int words)
 		if (!tab[j])
 			exit_error("malloc failed");
 		if (tab[j] == NULL)
-		{
-			ft_free_words(words, tab);
-			return (NULL);
-		}
+			return (ft_free_words(words, tab));
 		k = 0;
 		while (*s && *s != c)
 			tab[j][k++] = *s++;

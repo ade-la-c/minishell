@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+         #
+#    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/25 14:18:53 by tzerates         ###   ########.fr        #
+#    Updated: 2021/11/25 19:20:47 by ade-la-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,15 +29,18 @@ SRCS				= srcs/main.c				\
 					srcs/parsing/tokenizer.c	\
 					srcs/parsing/expansion.c	\
 					srcs/parsing/lexing.c		\
-					srcs/parsing/heredoc.c		\
+					srcs/parsing/redirections.c	\
 					srcs/builtin/cd.c			\
+					srcs/builtin/cd_utils.c		\
 					srcs/builtin/echo.c			\
 					srcs/builtin/env.c			\
 					srcs/builtin/execpath.c		\
 					srcs/builtin/exit.c			\
 					srcs/builtin/export.c		\
+					srcs/builtin/export_utils.c	\
 					srcs/builtin/pwd.c			\
 					srcs/builtin/unset.c		\
+					srcs/builtin/unset_utils.c	\
 					srcs/cmd/cmd.c				\
 					srcs/cmd/ft_error.c			\
 					srcs/cmd/pipe.c				\
@@ -48,7 +51,7 @@ CC					= gcc -g
 
 RM					= rm -f
 
-CFLAGS				= -Wall -Werror -Wextra -I ${RDLINE}/include -fsanitize=address
+CFLAGS				= -Wall -Werror -Wextra -I ${RDLINE}/include #-fsanitize=address
 
 INC					= -I ${LIBFT} -I ${RDLINE}/include ./inc -lreadline
 
@@ -68,7 +71,7 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 					@echo "$(CL_GREEN)-> COMPILING LIBFT$(CL_RESET)"
 					@echo "$(CL_GREY)"
-					$(MAKE) -C $(LIBFT)
+					$(MAKE) -j -C $(LIBFT)
 					@echo "$(CL_RESET)"
 					@echo "$(CL_GREEN)-> COMPILING MINISHELL$(CL_RESET)"
 					@echo "$(CL_GREY)"
@@ -78,14 +81,14 @@ $(NAME):		$(OBJS)
 clean:
 					@echo "$(CL_GREEN)-> CLEAN$(CL_RESET)"
 					@echo "$(CL_GREY)"
-					@$(MAKE) -C $(LIBFT) clean
+					@$(MAKE) -j -C $(LIBFT) clean
 					$(RM) $(OBJS)
 					@echo "$(CL_RESET)"
 
 fclean:			clean
 					@echo "$(CL_GREEN)-> FCLEAN$(CL_RESET)"
 					@echo "$(CL_GREY)"
-					@$(MAKE) -C $(LIBFT) fclean
+					@$(MAKE) -j -C $(LIBFT) fclean
 					$(RM) $(NAME)
 					@echo "$(CL_RESET)"
 

@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 20:03:14 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:52:05 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ t_token	*lsttotoken(t_data *data, t_list *toklst)
 	return (tokens);
 }
 
-static void	welding(t_data *d)
+static void	welding(t_data *d, int i)
 {
-	int		i;
 	t_list	*el;
 	char	*buffer;
 
-	i = 0;
 	while (i < d->toklen)
 	{
 		if (d->toks[i].type >= WORD && d->toks[i].type <= SQUOTE_STR)
@@ -105,15 +103,21 @@ int	parsing(t_data *data, char *line)
 	data->toks = lsttotoken(data, data->toklst);
 	data->toklen = ft_lstsize(data->toklst);
 	ft_lstclear(&(data->toklst), free_tokel);
-	welding(data);
+	welding(data, 0);
 	while (++i < data->toklen)
 		free(data->toks[i].content);
 	free(data->toks);
 	data->toks = lsttotoken(data, data->toklst);
 	ft_lstclear(&(data->toklst), free_tokel);
 	if (checktokens(data) == -1)
+	{
+		ft_lstclear(&(data->envlst), free_envel);
 		return (-1);
+	}
 	if (lexing(data) == -1)
+	{
+		ft_lstclear(&(data->envlst), free_envel);
 		return (-1);
+	}
 	return (0);
 }

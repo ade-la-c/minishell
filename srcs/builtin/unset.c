@@ -6,7 +6,7 @@
 /*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:04 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 14:23:03 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:27:23 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	**get_env_names(char **env_list)
 {
 	int		i;
 	char	**env_names;
-	int		stop;
 
 	i = 0;
 	env_names = malloc(sizeof(char *) * (nb_env(env_list) + 1));
@@ -46,19 +45,7 @@ char	**get_env_names(char **env_list)
 		exit_error("malloc failed");
 	while (env_list[i])
 	{
-		stop = ft_strclen(env_list[i], '=');
-		if (stop != -1)
-		{
-			env_names[i] = ft_substr(env_list[i], 0, stop);
-			if (!env_names[i])
-				exit_error("substr failed");
-		}
-		else
-		{
-			env_names[i] = ft_substr(env_list[i], 0, ft_strlen(env_list[i]));
-			if (!env_names[i])
-				exit_error("substr failed");
-		}
+		env_names[i] = ft_25(env_list[i], env_names[i]);
 		i++;
 	}
 	env_names[i] = NULL;
@@ -73,12 +60,7 @@ int	var_exist(t_cmd cmd, int w_arg, char **env_list)
 	i = 0;
 	env_names = get_env_names(env_list);
 	if (check_s(cmd.arg[w_arg]))
-	{
-		write(2, SHELL_NAME": unset: '", ft_strlen(SHELL_NAME) + 10);
-        write(2, cmd.arg[w_arg], ft_strlen(cmd.arg[w_arg]));
-        write(2, ": not a valid identifier\n", 26);
-        g_glb[1] = 1;
-    }
+		ft_print_unset(cmd.arg[w_arg]);
 	while (env_names[i])
 	{
 		if (ft_strcmp(cmd.arg[w_arg], env_names[i]) == 0)
@@ -112,7 +94,7 @@ void	del_env_var(t_env_l *env, int len, int to_del)
 	if (!env->list)
 		exit_error("malloc failed");
 	envdup(env->list, tmp);
-	free_env(len, tmp);
+	free_env_unset(tmp);
 }
 
 void	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)

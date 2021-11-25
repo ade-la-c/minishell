@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:54:12 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 14:23:57 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/25 19:05:28 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 # define SHELL_NAME		"pequeño shell"
 
-extern int g_glb[2];
+extern int	g_glb[2];
 
 typedef struct s_token
 {
@@ -74,7 +74,6 @@ int					remove_element(t_list **list, void *todelete);
 char				**get_env(t_list *envlst, char *str, int len);
 char				*strjoinfree(char *s1, char *s2, int x);
 
-
 void				print_envlst(t_list *lst, char *str);
 void				print_toklst(t_list *toklst, char *str);
 void				print_tokens(t_data *data, t_token *tokens);
@@ -86,6 +85,9 @@ int					parsing(t_data *data, char *line);
 void				tokenizer(t_data *data, char *line);
 void				wordexpansion(t_data *data);
 int					lexing(t_data *data);
+int					heredoc(t_data *d, char *eof);
+char				*expandheredoc(t_data *d, char *str);
+int					handleredirections(t_data *d, t_prog *p, int i);
 
 void				transfer_to_cmd(t_data *data, t_env_l *env);
 t_env_l				*envptoenvl(t_data *data);
@@ -93,8 +95,6 @@ char				**envltoenvp(t_env_l *env);
 void				ft_envpdup(t_data *data, char **envp, int bool);
 void				getenvp(t_data *data);
 char				**getenvp2(char *env);
-int					heredoc(t_data *d, char *eof);
-char				*expandheredoc(t_data *d, char *str);
 
 //==========================FREEING==========================//
 

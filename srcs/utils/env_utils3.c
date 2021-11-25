@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:54:53 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 18:54:56 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 19:18:01 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ int	nb_env(char **env_list)
 	while (env_list[i])
 		i++;
 	return (i);
+}
+
+void	free_env_unset(char **env_list)
+{
+	int	i;
+
+	i = 0;
+	while (env_list[i])
+	{
+		free(env_list[i]);
+		env_list[i] = NULL;
+		i++;
+	}
+	free(env_list);
 }
 
 void	free_env(int nb_env, char **env_list)

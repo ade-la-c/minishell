@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 15:28:24 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:42:55 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ void	parse_cmd_array(t_cmd *cmd, t_env_l *env, int nb_cmd)
 	i = 0;
 	while (i < nb_cmd)
 	{
-		if (cmd[i].builtin == NULL)
-		{
-			i++;
-			continue;
-		}
+		if (cmd[i++].builtin == NULL)
+			continue ;
+		i--;
 		nb_pipe = 0;
 		if (cmd[i].pipe == 1)
 		{
@@ -72,12 +70,9 @@ void	parse_cmd_array(t_cmd *cmd, t_env_l *env, int nb_cmd)
 
 void	cmd_loop(t_data *data, t_cmd *cmd, int *i, int j)
 {
-	int	l;
-
-	l = 0;
-	while (data->progs[*i].av[l])
-		l++;
-	cmd[*i].arg = malloc(sizeof(char *) * (l + 1));
+	while (data->progs[*i].av[j])
+		j++;
+	cmd[*i].arg = malloc(sizeof(char *) * (j + 1));
 	if (!cmd[*i].arg)
 		exit_error("malloc failed");
 	if (data->progs[*i].av[0] == NULL)
@@ -106,7 +101,6 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 {
 	t_cmd	*cmd;
 	int		i;
-	int		j;
 
 	i = 0;
 	cmd = malloc(sizeof(t_cmd) * (data->proglen + 1));
@@ -114,8 +108,7 @@ void	transfer_to_cmd(t_data *data, t_env_l *env)
 		exit_error("malloc failed");
 	while (i < data->proglen)
 	{
-		j = 0;
-		cmd_loop(data, cmd, &i, j);
+		cmd_loop(data, cmd, &i, 0);
 	}
 	cmd[i].builtin = NULL;
 	cmd[i - 1].pipe = 0;

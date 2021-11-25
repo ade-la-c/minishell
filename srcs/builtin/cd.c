@@ -6,13 +6,13 @@
 /*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:49 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 14:24:19 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:45:35 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-static char	*go_back(char *pwd)
+char	*go_back(char *pwd)
 {
 	int	i;
 	int	count;
@@ -68,6 +68,35 @@ void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 	check = 0;
 	res = check_file(cmd[i].arg[1]);
 	if (cmd[i].arg[1] == NULL)
+		check = vive_la_norme(env, check);
+	else if (ft_strncmp(cmd[i].arg[1], "/", ft_strlen(cmd[i].arg[1]) + 1) == 0)
+		chdir("/");
+	else if (ft_strncmp(cmd[i].arg[1], "..", 2)
+		== 0 && cmd[i].arg[1][2] == '\0')
+		ft_point_point(pwd, path);
+	else if (res > 0)
+		cd_error(res, cmd);
+	else
+		check = chdir(cmd[i].arg[1]);
+	if (check == -1)
+		cd_error(errno, cmd);
+	if (pipe == 1)
+		exit(1);
+}
+
+/*
+void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
+{
+	char	*pwd;
+	char	*path;
+	int		res;
+	int		check;
+
+	pwd = NULL;
+	path = NULL;
+	check = 0;
+	res = check_file(cmd[i].arg[1]);
+	if (cmd[i].arg[1] == NULL)
 	{
 		check = chdir(ft_getenv("HOME", env->list));
 		if (check == -1)
@@ -100,3 +129,4 @@ void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 	if (pipe == 1)
 		exit(1);
 }
+// */

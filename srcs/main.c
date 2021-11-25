@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 14:26:27 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/25 19:04:57 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	sigint_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_glb[1] = 130;
 	}
 }
 
@@ -56,10 +57,7 @@ void	readline_loop(t_data *data)
 			continue ;
 		getenvp(data);
 		if (parsing(data, line) == -1)
-		{
-			ft_lstclear(&(data->envlst), free_envel);
 			continue ;
-		}
 		transfer_to_cmd(data, envptoenvl(data));
 		ft_free(data);
 		free(line);
