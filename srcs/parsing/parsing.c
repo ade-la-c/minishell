@@ -6,7 +6,7 @@
 /*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:05:33 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 16:52:05 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 19:31:58 by ade-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	parsing(t_data *data, char *line)
 	free(data->toks);
 	data->toks = lsttotoken(data, data->toklst);
 	ft_lstclear(&(data->toklst), free_tokel);
-	if (checktokens(data) == -1)
+	if (checktokens(data) != 0)
 	{
 		ft_lstclear(&(data->envlst), free_envel);
 		return (-1);
