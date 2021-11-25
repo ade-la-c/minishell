@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/24 15:46:35 by ade-la-c         ###   ########.fr        #
+#    Updated: 2021/11/25 13:36:02 by tzerates         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ CC					= gcc -g
 
 RM					= rm -f
 
-CFLAGS				= -Wall -Werror -Wextra -I ${RDLINE}/include #-fsanitize=address
+CFLAGS				= -Wall -Werror -Wextra -I ${RDLINE}/include -fsanitize=address
 
 INC					= -I ${LIBFT} -I ${RDLINE}/include ./inc -lreadline
 

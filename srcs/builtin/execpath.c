@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execpath.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:21 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 18:52:43 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:52:27 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ static void	execve_with_path(int index, t_cmd *cmd, t_env_l *env)
 		{
 			free(buf);
 			if (split)
-				free_split_join(split, join);
+				free_split_join(split, NULL);
 			execve(join, cmd[index].arg, env->list);
+			free(join);
+			return ;
 		}
 		i++;
 	}
