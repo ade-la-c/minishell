@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:54 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/17 18:48:38 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:11:51 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static void	pipe_stdout(int i, t_cmd *cmd, int *fds, t_env_l *env)
 {
-	close (fds[0]);
-	dup2(fds[1], 1);
-	close (fds[1]);
+		close (fds[0]);
+		dup2(fds[1], 1);
+		close (fds[1]);
 	exec_builtin(i, cmd, env, 1);
 }
 
 static void	pipe_stdin(int i, t_cmd *cmd, int *fds, t_env_l *env)
 {
-	close (fds[1]);
-	dup2(fds[0], 0);
-	close (fds[0]);
+		close (fds[1]);
+		dup2(fds[0], 0);
+		close (fds[0]);
 	exec_builtin(i + 1, cmd, env, 1);
 }
 

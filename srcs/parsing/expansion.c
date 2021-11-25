@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 17:42:28 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 20:49:29 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:28:01 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ret_var(char *str, char **tok, int start, int end)
 {
 	char	*retstr;
 
-	retstr = ft_itoa(retval);
+	retstr = ft_itoa(g_glb[1]);
 	if (!retstr)
 		exit_error("itoa failed");
 	str = writeexpansion(str, retstr, start, end);

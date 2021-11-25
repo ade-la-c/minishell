@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:41 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 18:29:52 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:30:07 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 
 	arg_index = 0;
 	nb_arg = count_arg(cmd[i]);
-	retval = 0;
+	g_glb[1] = 0;
 	if (nb_arg > 1)
 	{
 		while (arg_index++ < nb_arg - 1)
@@ -148,7 +148,7 @@ void	builtin_export(int i, t_cmd *cmd, t_env_l *env, int pipe)
 			else if (exist < 0 && check_env_name(cmd[i].arg[arg_index]) != -1)
 				add_env_var(env, nb_env(env->list), cmd[i].arg[arg_index]);
 			else
-				retval = 1;
+				g_glb[1] = 1;
 		}
 	}
 	else if (count_arg(cmd[i]) == 1)

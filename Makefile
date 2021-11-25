@@ -6,7 +6,7 @@
 #    By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/15 16:42:21 by ade-la-c          #+#    #+#              #
-#    Updated: 2021/11/25 13:36:02 by tzerates         ###   ########.fr        #
+#    Updated: 2021/11/25 14:18:53 by tzerates         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRCS				= srcs/main.c				\
 					srcs/utils/env_utils2.c		\
 					srcs/utils/env_utils3.c		\
 					srcs/utils/split_slash.c	\
-					srcs/utils/retval.c			\
 					srcs/parsing/parsing.c		\
 					srcs/parsing/tokenizer.c	\
 					srcs/parsing/expansion.c	\

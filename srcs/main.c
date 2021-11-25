@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 16:53:56 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 19:04:41 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:26:27 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int		g_glb;
+int		g_glb[2] = {0, 0};
 
 static void	data_init(t_data *data, char **envp)
 {
@@ -29,7 +29,7 @@ void	sigint_handler(int sig)
 {
 	(void)sig;
 	write(STDOUT_FILENO, "\n", 1);
-	if (g_glb == 0)
+	if (g_glb[0] == 0)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -44,9 +44,9 @@ void	readline_loop(t_data *data)
 
 	while (1)
 	{
-		g_glb = 0;
+		g_glb[0] = 0;
 		tmp = readline(SHELL_NAME"> ");
-		g_glb = 1;
+		g_glb[0] = 1;
 		if (!tmp)
 			env_free(data->envlst);
 		add_history(tmp);
@@ -73,7 +73,6 @@ int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
 
-	g_glb = 0;
 	if (ac != 1 || av[1])
 		exit_error("Error : minishell takes no arguments");
 	data_init(&data, envp);

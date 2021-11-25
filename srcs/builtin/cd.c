@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:36:49 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 19:37:18 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:24:19 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	cd_error(int error_code, t_cmd *cmd)
 
 	error_msg = strerror(error_code);
 	write(2, SHELL_NAME": cd: ", ft_strlen(SHELL_NAME) + 6);
-    write(2, cmd->arg[1], ft_strlen(cmd->arg[1]));
-    write(2, ": ", 2);
-    write(2, error_msg, ft_strlen(error_msg));
-    write(2, "\n", 1);
-	retval = 1;
+	write(2, cmd->arg[1], ft_strlen(cmd->arg[1]));
+	write(2, ": ", 2);
+	write(2, error_msg, ft_strlen(error_msg));
+	write(2, "\n", 1);
+	g_glb[1] = 1;
 }
 
 void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
@@ -74,7 +74,7 @@ void	builtin_cd(int i, t_cmd *cmd, int pipe, t_env_l *env)
 		{
 			write(2, SHELL_NAME": cd: HOME not set\n",
 				ft_strlen(SHELL_NAME) + 20);
-			retval = 1;
+			g_glb[1] = 1;
 		}
 		check = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 18:51:01 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 13:05:05 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:27:20 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	wait_forks(pid_t *pid, int nb_pipe)
 		waitpid(pid[i], &ret, 0);
 		i++;
 	}
-	msh_parser_set_retval(ret);
+	//msh_parser_set_retval(ret);
 	free(pid);
 	return (i);
 }

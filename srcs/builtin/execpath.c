@@ -6,7 +6,7 @@
 /*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:37:21 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 13:52:27 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:29:51 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,9 @@ void	execpath(int i, t_cmd *cmd, t_env_l *env, int pipe)
 			execpath_no_pipe(i, cmd, env);
 		waitpid(pid, &status, 0);
 		if (ft_strlen(cmd[i].arg[0]) != 0)
-			retval = WEXITSTATUS(status);
-		if (retval == 2)
-			retval = 127;
+			g_glb[1] = WEXITSTATUS(status);
+		if (g_glb[1] == 2)
+			g_glb[1] = 127;
 	}
 	else if (pipe == 1)
 		execpath_pipe(cmd, i, env);

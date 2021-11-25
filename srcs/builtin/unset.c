@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-la-c <ade-la-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:04 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/24 18:34:43 by ade-la-c         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:23:03 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	var_exist(t_cmd cmd, int w_arg, char **env_list)
 		write(2, SHELL_NAME": unset: '", ft_strlen(SHELL_NAME) + 10);
         write(2, cmd.arg[w_arg], ft_strlen(cmd.arg[w_arg]));
         write(2, ": not a valid identifier\n", 26);
-        retval = 1;
+        g_glb[1] = 1;
     }
 	while (env_names[i])
 	{
@@ -124,7 +124,7 @@ void	builtin_unset(int i, t_cmd *cmd, t_env_l *env, int pipe)
 	to_del = 0;
 	index = 1;
 	len = nb_env(env->list);
-	retval = 0;
+	g_glb[1] = 0;
 	if (count_arg(cmd[i]) > 1)
 	{
 		while (index < count_arg(cmd[i]))

@@ -6,13 +6,11 @@
 /*   By: tzerates <tzerates@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 17:38:36 by ade-la-c          #+#    #+#             */
-/*   Updated: 2021/11/25 13:52:03 by tzerates         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:28:24 by tzerates         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-int	retval = 0;
 
 void	exec_builtin(int i, t_cmd *cmd, t_env_l *env, int pipe)
 {
